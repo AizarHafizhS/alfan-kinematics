@@ -1,7 +1,7 @@
 #ifndef KINEMATICS_HPP
 #define KINEMATICS_HPP
 
-#include <Eigen/Dense>
+#include <eigen3/Eigen/Dense>
 #include <string>
 #include <vector>
 
@@ -71,14 +71,19 @@ public:
      * @param jointAngles A vector of 6 joint angles.
      * @param leg The leg (Left or Right) to update.
      */
-    void setJointAngles(const Eigen::VectorXd& jointAngles, Leg leg);
+    void setJointAngles(const Eigen::VectorXd jointAngles, Leg leg);
 
     /**
      * @brief Adjusts the foot position for the specified leg.
      * @param desiredFootPos The desired change in foot position (in meters).
      * @param leg The leg (Left or Right) to update.
      */
-    void setFootPos(const Eigen::Vector3d& desiredFootPos, Leg leg);
+    void setFootPos(const Eigen::Vector3d desiredFootPos, Leg leg);
+
+    /**
+     * @brief print foot positions.
+     */
+    void printPositions();
 
 private:
     std::vector<Link> uLINK;  ///< Vector storing all robot links.

@@ -1,4 +1,4 @@
-#include "kinematics.hpp"
+#include "../include/kinematics.hpp"
 #include <iostream>
 #include <cmath>
 #include <algorithm>
@@ -45,9 +45,9 @@ Eigen::VectorXd KinematicsSolver::computeIK(Leg leg) {
     double C = r.norm();
 
     // Compute the knee joint angle using the cosine law.
-    double c5 = (C * C - A * A - B * B) / (2.0 * A * B);
+    double c5 = (A * A + B * B - C * C) / (2.0 * A * B);
     c5 = std::max(-1.0, std::min(1.0, c5));  // Clamp to [-1, 1] for numerical safety.
-    double q5 = acos(c5);
+    double q5 = -acos(c5) + M_PI;
 
     double q6a = asin((A / C) * sin(M_PI - q5));
     double q7 = atan2(r.y(), r.z());
@@ -55,9 +55,7 @@ Eigen::VectorXd KinematicsSolver::computeIK(Leg leg) {
         q7 -= M_PI;
     else if (q7 < -M_PI / 2)
         q7 += M_PI;
-    double q6 = -atan2(r.x(),
-                        copysign(sqrt(r.y() * r.y() + r.z() * r.z()), r.z()))
-                - q6a;
+    double q6 = -atan2(r.x(), copysign(sqrt(r.y() * r.y() + r.z() * r.z()), r.z())) - q6a;
 
     // Compute orientation differences for the hip joints.
     Eigen::Matrix3d R = body.R.transpose() * foot.R *
@@ -73,23 +71,23 @@ Eigen::VectorXd KinematicsSolver::computeIK(Leg leg) {
     return angles;
 }
 
-void KinematicsSolver::setJointAngles(const Eigen::VectorXd& jointAngles, Leg leg) {
+void KinematicsSolver::setJointAngles(const Eigen::VectorXd jointAngles, Leg leg) {
     if (jointAngles.size() != 6) {
         std::cerr << "Error: Expected 6 joint angles." << std::endl;
         return;
     }
     if (leg == Leg::Left) {
         for (int i = 2; i <= 7; ++i) {
-            uLINK[i].q = jointAngles(i - 1);
+            uLINK[i].q = jointAngles(i - 2);
         }
     } else { // Leg::Right
         for (int i = 8; i <= 13; ++i) {
-            uLINK[i].q = jointAngles(i - 7);
+            uLINK[i].q = jointAngles(i - 8);
         }
     }
 }
 
-void KinematicsSolver::setFootPos(const Eigen::Vector3d& desiredFootPos, Leg leg) {
+void KinematicsSolver::setFootPos(const Eigen::Vector3d desiredFootPos, Leg leg) {
     if (leg == Leg::Left) {
         uLINK[7].p += desiredFootPos;
     } else { // Leg::Right
@@ -205,4 +203,22 @@ void KinematicsSolver::traverseTree(int id, int depth) {
     std::cout << std::string(depth * 2, ' ') << "- " << uLINK[id].name << "\n";
     traverseTree(uLINK[id].child, depth + 1);
     traverseTree(uLINK[id].sister, depth);
+}
+
+void KinematicsSolver::printPositions(){
+    std::cout << "\nEnd Effector (Foot) Positions:\n";
+    std::cout << "LFOOT: " << uLINK[7].p.transpose() << "\n";
+    std::cout << "RFOOT: " << uLINK[13].p.transpose() << "\n";
+}
+
+int main() {
+    KinematicsSolver ks;
+
+    ks.setFootPos(Eigen::Vector3d(0.127, 0, 0), Leg::Right);
+    Eigen::VectorXd angles = ks.computeIK(Leg::Right);
+    std::cout << "desired angles: " << angles.transpose() * (180/M_PI)<< std::endl;
+    ks.setJointAngles(angles, Leg::Right);
+    ks.computeFK(1);
+
+    ks.printPositions();
 }
