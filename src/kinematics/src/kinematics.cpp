@@ -69,7 +69,7 @@ Eigen::VectorXd KinematicsSolver::computeIK(double x, double y, double z, Leg le
     double q4 = atan2(-R(2, 0), R(2, 2));
 
     Eigen::VectorXd angles(6);
-    angles << q2, q4, q3, q5, q6, q7;
+    angles << q2, q3, q4, q5, q6, q7;
 
     KinematicsSolver::setJointAngles(angles, leg);
     return angles;
@@ -175,18 +175,19 @@ void KinematicsSolver::initLinks(std::vector<Link>& uLINK) {
                   Eigen::Vector3d::UnitZ(),
                   0 };
     
-    uLINK[9] = { "RHIP_PITCH", 0, 10, 8,
-                  Eigen::Vector3d(0, -HIP_OFFSET_Y, HIP_HEIGHT),
-                  Eigen::Matrix3d::Identity(),
-                  Eigen::Vector3d::Zero(),
-                  Eigen::Vector3d::UnitY(),
-                  0 };
-    uLINK[10]  = { "RHIP_ROLL", 0, 11, 9,
+    uLINK[9]  = { "RHIP_ROLL", 0, 10, 8,
                   Eigen::Vector3d(0, -HIP_OFFSET_Y, HIP_HEIGHT),
                   Eigen::Matrix3d::Identity(),
                   Eigen::Vector3d::Zero(),
                   Eigen::Vector3d::UnitX(),
                   0 };
+    
+    uLINK[10] = { "RHIP_PITCH", 0, 11, 9,
+                  Eigen::Vector3d(0, -HIP_OFFSET_Y, HIP_HEIGHT),
+                  Eigen::Matrix3d::Identity(),
+                  Eigen::Vector3d::Zero(),
+                  Eigen::Vector3d::UnitY(),
+                  0 }; 
     uLINK[11] = { "RKNEE", 0, 12, 10,
                   Eigen::Vector3d(0, -HIP_OFFSET_Y, KNEE_HEIGHT),
                   Eigen::Matrix3d::Identity(),
