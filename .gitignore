@@ -37,7 +37,6 @@ ehthumbs.db
 Thumbs.db
 
 ### VisualStudioCode ###
-.vscode/* 
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
