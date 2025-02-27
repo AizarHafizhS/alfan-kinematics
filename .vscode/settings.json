@@ -72,5 +72,21 @@
         "typeindex": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp"
-    }
+    },
+    "python.autoComplete.extraPaths": [
+        "/home/aizar/ALFAN/alfan_ws/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages",
+        "/home/aizar/ros2_ws/install/tutorial_interfaces/local/lib/python3.10/dist-packages",
+        "/home/aizar/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages",
+        "/home/aizar/ros2_ws/install/action_tutorial_interfaces/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/aizar/ALFAN/alfan_ws/install/dynamixel_sdk_custom_interfaces/local/lib/python3.10/dist-packages",
+        "/home/aizar/ros2_ws/install/tutorial_interfaces/local/lib/python3.10/dist-packages",
+        "/home/aizar/ros2_ws/install/more_interfaces/local/lib/python3.10/dist-packages",
+        "/home/aizar/ros2_ws/install/action_tutorial_interfaces/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
 }
