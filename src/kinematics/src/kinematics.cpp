@@ -4,7 +4,7 @@
 #include <algorithm>
 
 KinematicsSolver::KinematicsSolver() {
-    uLINK.resize(15);
+    uLINK = std::vector<Link>(15);
     initLinks(uLINK);
 }
 
@@ -26,12 +26,16 @@ void KinematicsSolver::computeFK(int j) {
     computeFK(uLINK[j].child);
 }
 
-Eigen::VectorXd KinematicsSolver::computeIK(double x, double y, double z, Leg leg) {
+Eigen::VectorXd KinematicsSolver::computeIK(std::vector<double> legPosition, Leg leg) {
     const Link& body = uLINK[1];
     double A = THIGH_LENGTH;
     double B = SHIN_LENGTH;
 
-    KinematicsSolver::setFootPos(Eigen::Vector3d(x, y, z), leg);
+    double x = legPosition[0];
+    double y = legPosition[1];
+    double z = legPosition[2];
+
+    setFootPos(Eigen::Vector3d(x, y, z), leg);
 
     Link foot;
     double D = 0.0;
@@ -48,7 +52,7 @@ Eigen::VectorXd KinematicsSolver::computeIK(double x, double y, double z, Leg le
 
     // Compute the knee joint angle using the cosine law.
     double c5 = (C * C - A * A - B * B) / (2.0 * A * B);
-    c5 = std::max(-1.0, std::min(1.0, c5));  // Clamp to [-1, 1] for numerical safety.
+    c5 = std::clamp(c5, -1.0, 1.0);  // Clamp to [-1, 1] for numerical safety.
     double q5 = acos(c5);
 
     double q6a = asin((A / C) * sin(M_PI - q5));
@@ -68,17 +72,24 @@ Eigen::VectorXd KinematicsSolver::computeIK(double x, double y, double z, Leg le
     double q3 = atan2(R(2, 1), -R(0, 1) * sz + R(1, 1) * cz);
     double q4 = atan2(-R(2, 0), R(2, 2));
 
+
+    double hip_yaw      = q2;
+    double hip_roll     = q3;
+    double hip_pitch    = q4;
+    double knee_pitch   = q5;
+    double ankle_pitch  = q6;
+    double ankle_roll   = q7;
+
     Eigen::VectorXd angles(6);
-    angles << q2, q3, q4, q5, q6, q7;
+    angles << hip_yaw, hip_roll, hip_pitch, knee_pitch, ankle_pitch, ankle_roll;
 
     KinematicsSolver::setJointAngles(angles, leg);
     return angles;
 }
 
-void KinematicsSolver::setJointAngles(const Eigen::VectorXd jointAngles, Leg leg) {
+void KinematicsSolver::setJointAngles(const Eigen::VectorXd& jointAngles, Leg leg) {
     if (jointAngles.size() != 6) {
-        std::cerr << "Error: Expected 6 joint angles." << std::endl;
-        return;
+        throw std::invalid_argument("Error: Expected 6 joint angles.");
     }
     if (leg == Leg::Left) {
         for (int i = 2; i <= 7; ++i) {
@@ -120,8 +131,13 @@ Eigen::Matrix3d KinematicsSolver::rodrigues(const Eigen::Vector3d& w, double the
            (1 - cos(theta)) * (skew * skew);
 }
 
-void KinematicsSolver::initLinks(std::vector<Link>& uLINK) {
-    // Body link initialization.
+void KinematicsSolver::initLinks(std::vector<Link>& uLINK) {    
+    // Initialize the body link.
+    // The body link is the root of the kinematic chain and does not have a parent.
+    // It has a child link (LHIP_YAW) and no sister link.
+    // The position is set to the hip height, and the orientation is the identity matrix.
+    // The joint axis is along the Z-axis.
+    // The joint angle is initialized to 0.
     uLINK[1] = { "BODY", 0, 2, 0,
                  Eigen::Vector3d(0, 0, HIP_HEIGHT),
                  Eigen::Matrix3d::Identity(),
@@ -129,7 +145,11 @@ void KinematicsSolver::initLinks(std::vector<Link>& uLINK) {
                  Eigen::Vector3d::UnitZ(),
                  0 };
 
-    // Left Leg links.
+    // Initialize the left leg links.
+    // Each link in the left leg is connected in a chain from the hip to the ankle.
+    // The position and orientation of each link are initialized based on the previous link.
+    // The joint axes are set according to the type of joint (yaw, roll, pitch).
+    // The joint angles are initialized to 0.
     uLINK[2] = { "LHIP_YAW", 8, 3, 1,
                  Eigen::Vector3d(0, HIP_OFFSET_Y, HIP_HEIGHT),
                  Eigen::Matrix3d::Identity(),
@@ -148,6 +168,8 @@ void KinematicsSolver::initLinks(std::vector<Link>& uLINK) {
                  Eigen::Vector3d::Zero(),
                  Eigen::Vector3d::UnitY(),
                  0 };
+    
+    
     uLINK[5] = { "LKNEE", 0, 6, 4,
                  Eigen::Vector3d(0, HIP_OFFSET_Y, KNEE_HEIGHT),
                  Eigen::Matrix3d::Identity(),
@@ -167,27 +189,29 @@ void KinematicsSolver::initLinks(std::vector<Link>& uLINK) {
                  Eigen::Vector3d::UnitX(),
                  0 };
 
-    // Right Leg links.
+    // Initialize the right leg links.
+    // Each link in the right leg is connected in a chain from the hip to the ankle.
+    // The position and orientation of each link are initialized based on the previous link.
+    // The joint axes are set according to the type of joint (yaw, roll, pitch).
+    // The joint angles are initialized to 0.
     uLINK[8]  = { "RHIP_YAW", 0, 9, 1,
                   Eigen::Vector3d(0, -HIP_OFFSET_Y, HIP_HEIGHT),
                   Eigen::Matrix3d::Identity(),
                   Eigen::Vector3d(0, -HIP_OFFSET_Y, 0),
                   Eigen::Vector3d::UnitZ(),
                   0 };
-    
     uLINK[9]  = { "RHIP_ROLL", 0, 10, 8,
-                  Eigen::Vector3d(0, -HIP_OFFSET_Y, HIP_HEIGHT),
-                  Eigen::Matrix3d::Identity(),
-                  Eigen::Vector3d::Zero(),
-                  Eigen::Vector3d::UnitX(),
-                  0 };
-    
+                    Eigen::Vector3d(0, -HIP_OFFSET_Y, HIP_HEIGHT),
+                    Eigen::Matrix3d::Identity(),
+                    Eigen::Vector3d::Zero(),
+                    Eigen::Vector3d::UnitX(),
+                    0 };
     uLINK[10] = { "RHIP_PITCH", 0, 11, 9,
                   Eigen::Vector3d(0, -HIP_OFFSET_Y, HIP_HEIGHT),
                   Eigen::Matrix3d::Identity(),
                   Eigen::Vector3d::Zero(),
                   Eigen::Vector3d::UnitY(),
-                  0 }; 
+                  0 };
     uLINK[11] = { "RKNEE", 0, 12, 10,
                   Eigen::Vector3d(0, -HIP_OFFSET_Y, KNEE_HEIGHT),
                   Eigen::Matrix3d::Identity(),
@@ -203,7 +227,7 @@ void KinematicsSolver::initLinks(std::vector<Link>& uLINK) {
     uLINK[13] = { "RANKLE_ROLL", 0, 0, 12,
                   Eigen::Vector3d(0, -HIP_OFFSET_Y, ANKLE_HEIGHT),
                   Eigen::Matrix3d::Identity(),
-                  Eigen::Vector3d(0, 0, 0),
+                  Eigen::Vector3d(0, 0, -FOOT_HEIGHT),
                   Eigen::Vector3d::UnitX(),
                   0 };
 }

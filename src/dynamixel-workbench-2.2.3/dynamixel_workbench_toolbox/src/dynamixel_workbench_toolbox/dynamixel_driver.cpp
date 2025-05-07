@@ -120,6 +120,22 @@ bool DynamixelDriver::init(const char *device_name, uint32_t baud_rate, const ch
   return result;
 }
 
+bool DynamixelDriver::myInit(const char *device_name, uint32_t baud_rate, const char **log, float protocol_version)
+{
+  bool result = false;
+
+  result = setPortHandler(device_name, log);
+  if (result == false) return false;
+
+  result = setBaudrate(baud_rate, log);
+  if (result == false) return false;
+
+  result = setPacketHandler(protocol_version, log);
+  if (result == false) return false;
+
+  return result;
+}
+
 bool DynamixelDriver::begin(const char *device_name, uint32_t baud_rate, const char **log)
 {
   return init(device_name, baud_rate, log);

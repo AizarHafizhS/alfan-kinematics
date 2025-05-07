@@ -11,6 +11,7 @@ find_package(rclcpp REQUIRED)
 find_package(dynamixel_workbench_toolbox REQUIRED)
 find_package(kinematics REQUIRED)
 
+# Sync Read Write Node
 add_executable(Sync_Read_Write src/Sync_Read_Write.cpp)
 ament_target_dependencies(Sync_Read_Write
   dynamixel_workbench_toolbox

@@ -87,6 +87,11 @@ class DynamixelDriver
   bool init(const char* device_name = "/dev/ttyUSB0", 
             uint32_t baud_rate = 57600, 
             const char **log = NULL);
+  
+  // Init buatan sendiri
+  bool myInit(const char* device_name = "/dev/ttyUSB0", 
+            uint32_t baud_rate = 1000000, 
+            const char **log = NULL, float protocol_version=1.0f);
 
   bool begin(const char* device_name = "/dev/ttyUSB0", 
             uint32_t baud_rate = 57600, 

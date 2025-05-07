@@ -57,7 +57,7 @@ public:
      * @param leg The leg (Left or Right) for which IK is computed.
      * @return A 6-element vector containing the computed joint angles.
      */
-    Eigen::VectorXd computeIK(double x, double y, double z, Leg leg);
+    Eigen::VectorXd computeIK(std::vector<double> legPosition, Leg leg);
 
     /**
      * @brief Recursively traverses and prints the kinematic tree.
@@ -71,7 +71,7 @@ public:
      * @param jointAngles A vector of 6 joint angles.
      * @param leg The leg (Left or Right) to update.
      */
-    void setJointAngles(const Eigen::VectorXd jointAngles, Leg leg);
+    void setJointAngles(const Eigen::VectorXd& jointAngles, Leg leg);
 
     /**
      * @brief print foot positions.
@@ -82,13 +82,22 @@ private:
     std::vector<Link> uLINK;  ///< Vector storing all robot links.
 
     // Robot geometry parameters (in meters) declared as compile-time constants.
-    static constexpr double HIP_OFFSET_Y = 0.044;
-    static constexpr double HIP_HEIGHT   = 0.221;
-    static constexpr double KNEE_HEIGHT  = 0.127;
-    static constexpr double ANKLE_HEIGHT = 0.034;
-    static constexpr double THIGH_LENGTH = 0.094;
-    static constexpr double SHIN_LENGTH  = 0.093;
-    static constexpr double FOOT_HEIGHT  = 0.034;
+    static constexpr double HIP_OFFSET_Y = 4.4;
+    static constexpr double HIP_HEIGHT   = 22.1;
+    static constexpr double KNEE_HEIGHT  = 12.7;
+    static constexpr double ANKLE_HEIGHT = 3.4;
+    static constexpr double THIGH_LENGTH = 9.4;
+    static constexpr double SHIN_LENGTH  = 9.3;
+    static constexpr double FOOT_HEIGHT  = 3.4;
+
+    // Robot geometry parameters (in meters) declared as compile-time constants.
+    // static constexpr double HIP_OFFSET_Y = 4.1;
+    // static constexpr double HIP_HEIGHT   = 21.0;
+    // static constexpr double KNEE_HEIGHT  = 13.0;
+    // static constexpr double ANKLE_HEIGHT = 3.2;
+    // static constexpr double THIGH_LENGTH = 8.0;
+    // static constexpr double SHIN_LENGTH  = 9.8;
+    // static constexpr double FOOT_HEIGHT  = 3.2;
 
     /**
      * @brief Computes a rotation matrix using Rodrigues' formula.
