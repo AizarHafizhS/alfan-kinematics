@@ -39,7 +39,7 @@ public:
         return true;
     }
 
-    void setupServos(int32_t velocity, int32_t acceleration) {
+    void setupServos() {
         const char* log;
         uint16_t model_number;
 
@@ -50,16 +50,22 @@ public:
                 RCLCPP_INFO(this->get_logger(), "SUCCEED to ping ID: %d, Model Number: %d", id, model_number);
             }
 
-            if (!dxl_wb.jointMode(id, velocity, acceleration, &log)) {
-                RCLCPP_ERROR(this->get_logger(), "FAILED to change joint mode for ID %d: %s", id, log);
+            if (!dxl_wb.torqueOn(id, &log)) {
+                RCLCPP_ERROR(this->get_logger(), "FAILED to turn on torque for ID %d: %s", id, log);
             } else {
-                RCLCPP_INFO(this->get_logger(), "SUCCEED to change joint mode for ID %d", id);
+                RCLCPP_INFO(this->get_logger(), "SUCCEED to turn on torque for ID %d", id);
             }
         }
     }
 
     void setupSyncHandlers() {
         const char* log;
+
+        if (!dxl_wb.addSyncWriteHandler(dxl_ids[0], "Profile_Velocity", &log)) {
+            RCLCPP_ERROR(this->get_logger(), "FAILED to add sync write handler: %s", log);
+        } else {
+            RCLCPP_INFO(this->get_logger(), "Added sync write handler");
+        }
 
         if (!dxl_wb.addSyncWriteHandler(dxl_ids[0], "Goal_Position", &log)) {
             RCLCPP_ERROR(this->get_logger(), "FAILED to add sync write handler: %s", log);
@@ -86,23 +92,24 @@ public:
         }
     }
 
-    void moveJoints(std::vector<int32_t>& goal_position) {
+    void moveJoints(std::vector<int32_t>& goal_position, std::vector<int32_t>& moving_speed) {
         const char* log;
-        const uint8_t handler_index = 0;
+        const uint8_t handler_profile_velocity = 0;
+        const uint8_t handler_goal_position = 1;
+        
+        // Sync write speed/profile velocity
+        if (!dxl_wb.syncWrite(handler_profile_velocity, dxl_ids.data(), dxl_ids.size(), moving_speed.data(), 1, &log)) {
+            RCLCPP_ERROR(this->get_logger(), "FAILED to sync write velocity: %s", log);
+        } else {
+            RCLCPP_INFO(this->get_logger(), "SUCCEED sync write velocity!");
+        }
 
-        if (!dxl_wb.syncWrite(handler_index, goal_position.data(), &log)) {
+        // Sync write position
+        if (!dxl_wb.syncWrite(handler_goal_position, dxl_ids.data(), dxl_ids.size(), goal_position.data(), 1, &log)) {
             RCLCPP_ERROR(this->get_logger(), "FAILED to sync write position: %s", log);
         } else {
             RCLCPP_INFO(this->get_logger(), "SUCCEED sync write position!");
         }
-
-        // for (size_t i = 0; i < dxl_ids.size(); i++) {
-        //     if (!dxl_wb.goalPosition(dxl_ids[i], goal_position[i], &log)) {
-        //         RCLCPP_ERROR(this->get_logger(), "FAILED to write position for ID %d: %s", dxl_ids[i], log);
-        //     } else {
-        //         RCLCPP_INFO(this->get_logger(), "SUCCEED write position for ID %d", dxl_ids[i]);
-        //     }
-        // }
     }
 
     std::vector<int32_t> readPresentPosition() {
@@ -127,7 +134,7 @@ public:
 
     std::vector<int32_t> getGoalPosition(Eigen::VectorXd joint_angles) {
         std::vector<int32_t> goal_position(dxl_ids.size(), 0);
-        double RAD2VALUE = (180 / M_PI) * (4095 / 360);
+        double RAD2VALUE = (180.0 / M_PI) * (4095.0 / 360.0);
 
         for (size_t i = 0; i < dxl_ids.size(); i++) {
             bool isReversedID = (dxl_ids[i] == 1) || (dxl_ids[i] == 2) || (dxl_ids[i] == 5) || (dxl_ids[i] == 7) || (dxl_ids[i] == 8) || (dxl_ids[i] == 9) || (dxl_ids[i] == 10);
@@ -143,8 +150,29 @@ public:
         return goal_position;
     }
 
-    void moveLeg(std::vector<double> rightLegPosition, std::vector<double> leftLegPosition, std::vector<int32_t>& present_position) {
+    std::vector<int32_t> getMovingSpeed(std::vector<int32_t>& goal_position, std::vector<int32_t>& present_position, double movingTime, int32_t baseSpeed) {
+        std::vector<int32_t> positionDifference(dxl_ids.size(), 0);  // Position abs difference between present and goal
+        std::vector<int32_t> movingSpeed(dxl_ids.size(), 0);         // Moving speed for each servo in value
+
+        double VAL2RADIAN = (360.0/4095.0) * (M_PI/180.0);    // Converter value to radian
+        double valueRPM = 0.229;                              // 0.229 RPM = 1 value (dari spesifikasi MX28)
+
+        for (size_t i = 0; i < dxl_ids.size(); i++){
+            // calc difference absolute
+            positionDifference[i] = abs(goal_position[i] - present_position[i]);
+
+            // calculate moving speed (from position to value)
+            movingSpeed[i] = baseSpeed + (positionDifference[i] * (VAL2RADIAN) *  (1/movingTime) * (60.0 /2*M_PI)  * (1/valueRPM) );
+            // VAL2RADIAN untuk ubah posisi ke radian; kemudian ubah ke rad/s dengan (1/movingTime), kemudian rad/s ke RPM, kemudian ke value speed.
+            
+        }
+
+        return movingSpeed;
+    }
+
+    void moveLeg(std::vector<double> rightLegPosition, std::vector<double> leftLegPosition, std::vector<int32_t>& present_position, double movingTime, int32_t base_speed = 0) {
         std::vector<int32_t> goal_position(dxl_ids.size(), 0);
+        std::vector<int32_t> moving_speed(dxl_ids.size(), 0);
 
         present_position = readPresentPosition();
         printPresentPosition(present_position);
@@ -157,8 +185,11 @@ public:
 
         goal_position = getGoalPosition(angles);
         printGoalPosition(goal_position);
+        
+        moving_speed = getMovingSpeed(goal_position, present_position, movingTime, base_speed);
+        printProfileVelocity(moving_speed);
 
-        moveJoints(goal_position);
+        moveJoints(goal_position, moving_speed);
 
         present_position = goal_position;
     }
@@ -166,6 +197,12 @@ public:
     void printGoalPosition(std::vector<int32_t> goal_position) {
         for (size_t i = 0; i < dxl_ids.size(); i++) {
             RCLCPP_INFO(this->get_logger(), "[ID %d] Goal: %d", dxl_ids[i], goal_position[i]);
+        }
+    }
+
+    void printProfileVelocity(std::vector<int32_t> moving_speed) {
+        for (size_t i = 0; i < dxl_ids.size(); i++) {
+            RCLCPP_INFO(this->get_logger(), "[ID %d] Velocity: %d", dxl_ids[i], moving_speed[i]);
         }
     }
 
@@ -185,44 +222,58 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    node->setupServos(50, 0);
+    node->setupServos();
     getchar();
     node->setupSyncHandlers();
     getchar();
 
+    // initialize variables
     int countID = 12;
     std::vector<double> leftLegCoordinates(3, 0);
     std::vector<double> rightLegCoordinates(3, 0);
     std::vector<int32_t> present_position(countID, 0);
+    std::vector<int32_t> goal_position(countID, 0);
+    double move_time = 0;
+    double base_speed = 0;
 
-    RCLCPP_INFO(node->get_logger(), "Press enter: move to DEFAULT POSITION...");
+    // set time and base speed (if needed)
+    move_time = 5;
+    base_speed = 0;
+
+    // 1. DEFAULT
+    RCLCPP_INFO(node->get_logger(), "\nPress enter: move to DEFAULT POSITION...");
     getchar();
-    node->moveLeg(rightLegCoordinates, leftLegCoordinates, present_position);
+    node->moveLeg(rightLegCoordinates, leftLegCoordinates, present_position, move_time, base_speed);
 
-    RCLCPP_INFO(node->get_logger(), "Press enter: SHIFT LEFT...");
-    getchar();
-    rightLegCoordinates = {0.0, 0.0, 1.0};
-    leftLegCoordinates = {0.0, 0.0, 1.0};
-    node->moveLeg(rightLegCoordinates, leftLegCoordinates, present_position);
-
-    RCLCPP_INFO(node->get_logger(), "Press enter: move to DEFAULT POSITION...");
-    getchar();
-    rightLegCoordinates = {0.0, 0.0, 0.0};
-    leftLegCoordinates = {0.0, 0.0, 0.0};
-    node->moveLeg(rightLegCoordinates, leftLegCoordinates, present_position);
-
-    RCLCPP_INFO(node->get_logger(), "Press enter: SHIFT RIGHT...");
+    // 2. 
+    RCLCPP_INFO(node->get_logger(), "\n!!! NEXT MOVE !!!");
     getchar();
     rightLegCoordinates = {0.0, 0.0, 2.0};
     leftLegCoordinates = {0.0, 0.0, 2.0};
-    node->moveLeg(rightLegCoordinates, leftLegCoordinates, present_position);
+    node->moveLeg(rightLegCoordinates, leftLegCoordinates, present_position, move_time, base_speed);
 
+    // 3.
+    RCLCPP_INFO(node->get_logger(), "Press enter: move to DEFAULT POSITION...");
+    getchar();
+    rightLegCoordinates = {0.0, 3.0, 2.0};
+    leftLegCoordinates = {0.0, 3.0, 2.0};
+    node->moveLeg(rightLegCoordinates, leftLegCoordinates, present_position, move_time, base_speed);
+
+    // 4.
+    RCLCPP_INFO(node->get_logger(), "!!! NEXT MOVE !!!");
+    getchar();
+    rightLegCoordinates = {0.0, 0.0, 2.0};
+    leftLegCoordinates = {0.0, 0.0, 2.0};
+    node->moveLeg(rightLegCoordinates, leftLegCoordinates, present_position, move_time, base_speed);
+
+    // 5.
     RCLCPP_INFO(node->get_logger(), "Press enter: move to DEFAULT POSITION...");
     getchar();
     rightLegCoordinates = {0.0, 0.0, 0.0};
     leftLegCoordinates = {0.0, 0.0, 0.0};
-    node->moveLeg(rightLegCoordinates, leftLegCoordinates, present_position);
+    node->moveLeg(rightLegCoordinates, leftLegCoordinates, present_position, move_time, base_speed);
 
+    // 6.
     RCLCPP_INFO(node->get_logger(), "Press enter to END move...");
     getchar();
     node->torqueOff();
