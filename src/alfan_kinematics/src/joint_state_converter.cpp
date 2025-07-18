@@ -11,25 +11,28 @@ JointStateConverter::JointStateConverter() {
     // For now, manual initialization
     // Constants for gait control
     STEP_DURATION_     = 0.8;
-    DSP_DURATION_      = 0.2;
+    DSP_DURATION_      = 0.5;
     SSP_DURATION_      = STEP_DURATION_ - DSP_DURATION_;
     CONTROL_TIMESTEP_  = 0.01;
-    WAIST_HEIGHT_      = 0.186;
+    WAIST_HEIGHT_      = 0.1868;
     HEIGHT_LEG_LIFT_   = 0.025;
-    WAIST_WIDTH_       = 0.1;
+    WAIST_WIDTH_       = 0.044;
+    INITIAL_HEIGHT_    = 0.01;  // 0 untuk kaki lurus. Angka yang lebih besar untuk kaki menekuk/terangkat. Sehingga hasilnya, initial heightnya lebih pendek.
 }
 
 JointStateConverter::~JointStateConverter() {
     // Destructor
 }
-std::vector<Eigen::VectorXd> JointStateConverter::convertGait2JointState(
+
+JointState JointStateConverter::convertGait2JointState(
             const WalkControl& controlled_gait, 
             const std::vector<FootPosition>& foot_position, 
             const int& step,
             const int& control_step,
             const double& t) 
 {
-    std::vector<Eigen::VectorXd> joint_states;
+    // Declare final output joint state
+    JointState joint_states;
 
     // Decide gait phase
     GaitPhase phase = decideGaitPhase(foot_position, step);
@@ -50,32 +53,63 @@ std::vector<Eigen::VectorXd> JointStateConverter::convertGait2JointState(
     // Create joint state vectors
     std::vector<double> left_leg_pos;
     std::vector<double> right_leg_pos;
-    std::vector<double> left_leg_vel;
-    std::vector<double> right_leg_vel;
+    Eigen::VectorXd left_leg_vel;
+    Eigen::VectorXd right_leg_vel;
 
-    // HElper variables for foot positions
+    // Helper variables for foot positions
+    FootPosition curr_foot_pos = foot_position[step];
+    FootPosition next_foot_pos = foot_position[step + 1];
+    FootPosition prev_foot_pos = foot_position[step - 1];
 
     // Set left and right leg positions based on support and swing foot positions
     if(phase == GaitPhase::START || phase == GaitPhase::END) {
         // For START and END phases, use the next or previous foot position
-        FootPosition ref_foot_pos = (phase == GaitPhase::START) ? foot_position[step + 1] : foot_position[step - 1];
+        FootPosition ref_foot_pos = (phase == GaitPhase::START) ? next_foot_pos: prev_foot_pos;
         if (ref_foot_pos.y >= 0) { // Left foot support
             left_leg_pos = {support_foot_pos.x(), support_foot_pos.y(), support_foot_pos.z()};
             right_leg_pos = {swing_foot_pos.x(), swing_foot_pos.y(), swing_foot_pos.z()};
             // TODO: Jacobian calculation for velocity
-            left_leg_vel = {support_foot_vel.x(), support_foot_vel.y(), support_foot_vel.z()};
-            right_leg_vel = {swing_foot_vel.x(), swing_foot_vel.y(), swing_foot_vel.z()};
+            left_leg_vel = support_foot_vel;
+            right_leg_vel = swing_foot_vel;
 
         } else { // Right foot support
             left_leg_pos = {swing_foot_pos.x(), swing_foot_pos.y(), swing_foot_pos.z()};        
             right_leg_pos = {support_foot_pos.x(), support_foot_pos.y(), support_foot_pos.z()};
             // TODO: Jacobian calculation for velocity
-            left_leg_vel = {swing_foot_vel.x(), swing_foot_vel.y(), swing_foot_vel.z()};
-            right_leg_vel = {support_foot_vel.x(), support_foot_vel.y(), support_foot_vel.z()};
+            left_leg_vel = swing_foot_vel;
+            right_leg_vel = support_foot_vel;
         }
-    } else if (foot_position[step].y > 0) {
-        
+    } 
+    else if (curr_foot_pos.y > 0) {
+        left_leg_pos = {support_foot_pos.x(), support_foot_pos.y(), support_foot_pos.z()};
+        right_leg_pos = {swing_foot_pos.x(), swing_foot_pos.y(), swing_foot_pos.z()};
+        // TODO: Jacobian calculation for velocity
+        left_leg_vel = support_foot_vel;
+        right_leg_vel = swing_foot_vel;
+    } 
+    else if (curr_foot_pos.y < 0) {
+        left_leg_pos = {swing_foot_pos.x(), swing_foot_pos.y(), swing_foot_pos.z()};
+        right_leg_pos = {support_foot_pos.x(), support_foot_pos.y(), support_foot_pos.z()};
+        // TODO: Jacobian calculation for velocity
+        left_leg_vel = swing_foot_vel;
+        right_leg_vel = support_foot_vel;
     }
+
+    // Calculate inverse kinematics for left and right leg positions
+    KinematicsSolver kin;
+    Eigen::VectorXd left_leg_angles(6);
+    Eigen::VectorXd right_leg_angles(6);
+
+    left_leg_angles = kin.computeIK(left_leg_pos, Leg::LEFT);
+    right_leg_angles = kin.computeIK(right_leg_pos, Leg::RIGHT);
+
+    // Set the joint states
+    joint_states.left_leg_angles = left_leg_angles;
+    joint_states.right_leg_angles = right_leg_angles;
+    joint_states.left_leg_velocities = left_leg_vel;
+    joint_states.right_leg_velocities = right_leg_vel;
+
+    return joint_states;
 }
 
 JointStateConverter::GaitPhase JointStateConverter::decideGaitPhase(
@@ -146,23 +180,23 @@ std::pair<Eigen::Vector3d, Eigen::Vector3d> JointStateConverter::calculateFootPo
                 support_foot_pos = {
                     curr_zmp_x - com_x,
                     WAIST_WIDTH_ - com_y,
-                    0
+                    INITIAL_HEIGHT_
                 };
                 swing_foot_pos = {
                     curr_zmp_x - com_x,
                     -WAIST_WIDTH_ - com_y,
-                    0
+                    INITIAL_HEIGHT_
                 };
             } else { // Right foot support
                 support_foot_pos = {
                     curr_zmp_x - com_x,
                     -WAIST_WIDTH_ - com_y,
-                    0
+                    INITIAL_HEIGHT_
                 };
                 swing_foot_pos = {
                     curr_zmp_x - com_x,
                     WAIST_WIDTH_ - com_y,
-                    0
+                    INITIAL_HEIGHT_
                 };
             }
             break;
@@ -172,26 +206,26 @@ std::pair<Eigen::Vector3d, Eigen::Vector3d> JointStateConverter::calculateFootPo
             support_foot_pos = {
                 curr_zmp_x - com_x,
                 curr_zmp_y - com_y,
-                0
+                INITIAL_HEIGHT_
             };
 
             if (t <= start_ssp) {  // In first half of double support phase
                 swing_foot_pos = {
                     prev_zmp_x - com_x,
                     next_zmp_y - com_y,  // CHECKME: Maybe need interpolation?
-                    0
+                    INITIAL_HEIGHT_
                 };
             } else if (t >= end_ssp) {  // In second half of double support phase
                 swing_foot_pos = {
                     next_zmp_x - com_x,
                     next_zmp_y - com_y,
-                    0
+                    INITIAL_HEIGHT_
                 };
             } else {  // In single support phase
                 swing_foot_pos = {
                     (next_zmp_x - prev_zmp_x) * (t - start_ssp) / SSP_DURATION_,
                     next_zmp_y - com_y,
-                    swing_trajectory
+                    INITIAL_HEIGHT_ + swing_trajectory
                 };
             }
             break;
@@ -201,26 +235,26 @@ std::pair<Eigen::Vector3d, Eigen::Vector3d> JointStateConverter::calculateFootPo
             support_foot_pos = {
                 curr_zmp_x - com_x,
                 curr_zmp_y - com_y,
-                0
+                INITIAL_HEIGHT_
             };
 
             if (t <= start_ssp) {  // In first half of double support phase
                 swing_foot_pos = {
                     prev_zmp_x - com_x,
                     prev_zmp_y - com_y,
-                    0
+                    INITIAL_HEIGHT_
                 };
             } else if (t >= end_ssp) {  // In second half of double support phase
                 swing_foot_pos = {
                     next_zmp_x - com_x,
                     prev_zmp_y - com_y,
-                    0
+                    INITIAL_HEIGHT_
                 };
             } else {  // In single support phase
                 swing_foot_pos = {
                     (next_zmp_x - prev_zmp_x) * (t - start_ssp) / SSP_DURATION_ - (next_zmp_x - prev_zmp_x),
                     prev_zmp_y - com_y,
-                    swing_trajectory
+                    INITIAL_HEIGHT_ + swing_trajectory
                 };
             }
             break;
@@ -230,26 +264,26 @@ std::pair<Eigen::Vector3d, Eigen::Vector3d> JointStateConverter::calculateFootPo
             support_foot_pos = {
                 curr_zmp_x - com_x,
                 curr_zmp_y - com_y,
-                0
+                INITIAL_HEIGHT_
             };
 
             if (t <= start_ssp) {  // In first half of double support phase
                 swing_foot_pos = {
                     prev_zmp_x - com_x,
                     prev_zmp_y + ((next_zmp_y - prev_zmp_y) * t/STEP_DURATION_) - com_y,
-                    0
+                    INITIAL_HEIGHT_
                 };
             } else if (t >= end_ssp) {  // In second half of double support phase
                 swing_foot_pos = {
                     next_zmp_x - com_x,
                     prev_zmp_y + ((next_zmp_y - prev_zmp_y) * t/STEP_DURATION_) - com_y,
-                    0
+                    INITIAL_HEIGHT_
                 };
             } else {  // In single support phase
                 swing_foot_pos = {
                     ((next_zmp_x - prev_zmp_x) * (t - start_ssp) / SSP_DURATION_) - (next_zmp_x - prev_zmp_x)/2,
                     prev_zmp_y + ((next_zmp_y - prev_zmp_y) * t/STEP_DURATION_) - com_y,
-                    swing_trajectory
+                    INITIAL_HEIGHT_ + swing_trajectory
                 };
             }
             break;
@@ -264,22 +298,19 @@ std::pair<Eigen::VectorXd, Eigen::VectorXd> JointStateConverter::calculateFootVe
     Eigen::VectorXd support_foot_vel(6);
     Eigen::VectorXd swing_foot_vel(6);
 
-    support_foot_vel = {
-        controlled_gait.com_velocity_fix[control_step].x(),
-        controlled_gait.com_velocity_fix[control_step].y(),
-        0.0,  // z velocity is assumed to be zero
-        0.0,  // roll velocity is assumed to be zero
-        0.0,  // pitch velocity is assumed to be zero
-        0.0   // yaw velocity is assumed to be zero
-    };
-    swing_foot_vel = {
-        controlled_gait.com_velocity_fix[control_step].x(),
-        controlled_gait.com_velocity_fix[control_step].y(),
-        calculateSwingTrajectoryVelocity(t),  // z velocity based on swing trajectory
-        0.0,  // roll velocity is assumed to be zero
-        0.0,  // pitch velocity is assumed to be zero
-        0.0   // yaw velocity is assumed to be zero
-    };
+    support_foot_vel << controlled_gait.com_velocity_fix[control_step].x(),
+                    controlled_gait.com_velocity_fix[control_step].y(),
+                    0.0,  // z velocity is assumed to be zero
+                    0.0,  // roll velocity is assumed to be zero
+                    0.0,  // pitch velocity is assumed to be zero
+                    0.0;  // yaw velocity is assumed to be zero
+
+    swing_foot_vel << controlled_gait.com_velocity_fix[control_step].x(),
+                    controlled_gait.com_velocity_fix[control_step].y(),
+                    calculateSwingTrajectoryVelocity(t),  // z velocity based on swing trajectory
+                    0.0,  // roll velocity is assumed to be zero
+                    0.0,  // pitch velocity is assumed to be zero
+                    0.0;  // yaw velocity is assumed to be zero
     return {support_foot_vel, swing_foot_vel};
 }
 

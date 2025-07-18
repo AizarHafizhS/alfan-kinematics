@@ -6,12 +6,20 @@
 #include "alfan_kinematics/alfan_kinematics.hpp"
 #include <utility>
 
+struct JointState {
+    Eigen::VectorXd left_leg_angles;
+    Eigen::VectorXd right_leg_angles;
+
+    Eigen::VectorXd left_leg_velocities;
+    Eigen::VectorXd right_leg_velocities;
+};
+
 class JointStateConverter {
     public:
         JointStateConverter();
         ~JointStateConverter();
 
-        std::vector<Eigen::VectorXd> convertGait2JointState(
+        JointState convertGait2JointState(
             const WalkControl& controlled_gait, 
             const std::vector<FootPosition>& foot_position, 
             const int& step_idx,
@@ -27,6 +35,7 @@ class JointStateConverter {
         double WAIST_HEIGHT_;       // CoM height in z axis (Assume CoM is at waist point)
         double HEIGHT_LEG_LIFT_;    // Height of leg lift during swing
         double WAIST_WIDTH_;        // Width of the waist for foot position calculation
+        double INITIAL_HEIGHT_;     // Initial waist height for calculations
 
         // Phase definition
         enum class GaitPhase {START, END, FIRST_STEP, LAST_STEP, REGULAR};
@@ -48,8 +57,6 @@ class JointStateConverter {
         double calculateSwingTrajectoryPosition(double t);
         double calculateSwingTrajectoryVelocity(double t);
         std::pair<Eigen::VectorXd, Eigen::VectorXd> calculateFootVelocity(const WalkControl& controlled_gait, int control_step, double t);
-
-
 
 };
 
