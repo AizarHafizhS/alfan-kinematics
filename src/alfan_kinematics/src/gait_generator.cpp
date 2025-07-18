@@ -10,14 +10,13 @@ GaitGenerator::GaitGenerator() {
 
     // For now, manual initialization
     STEP_DURATION_ = 0.8;
-    CONTROL_TIMESTEP_ = 0.01;
-    WAIST_HEIGHT_ = 0.186;
-
+    double epsilon = 1e-9; // Small value to avoid floating point errors
+    CONTROL_TIMESTEP_ = 0.01 + epsilon;
+    WAIST_HEIGHT_ = 0.1868;
 }
 
 GaitGenerator::~GaitGenerator() {}
 
-// TODO: Make several helper function to make this modular and easy to understand.
 WalkParameter GaitGenerator::generateGait(const std::vector<FootPosition>& foot_position) {
     
     WalkParameter planned_walk;  // Output.
@@ -40,7 +39,7 @@ WalkParameter GaitGenerator::generateGait(const std::vector<FootPosition>& foot_
     );
 
     // Calculating position for full walk movement (not just one step)
-    while (full_walk_elapsed_time <= full_walk_duration) {
+    while (full_walk_elapsed_time < full_walk_duration) {
         // Constants
         const double g = 9.81;  // Gravity (m/s^2)
         double Tc = std::sqrt(WAIST_HEIGHT_/g); // Time constant
@@ -59,16 +58,18 @@ WalkParameter GaitGenerator::generateGait(const std::vector<FootPosition>& foot_
             ((com_init_pos.y() - planned_walk.next_foot_position[step].y()) / Tc) * S + com_init_vel.y() * C
         });
 
-        if (t >= STEP_DURATION_) {  // Completed 1 step
+        if (t > STEP_DURATION_) {  // Completed 1 step
             step += 1;  // Update step index
-            t = 0.0;  // Reset timer
-
+            
+            // Update Center of Mass (CoM) initial state
             updateComInitialState(planned_walk, com_init_pos, com_init_vel);
-
+            
             // Update next modified landing position
             planned_walk.next_foot_position.push_back(
                 calculateModifiedFootPosition(planned_walk, foot_position, com_init_pos, com_init_vel, step, pos_weight, vel_weight)
             );
+            
+            t = 0.0;  // Reset timer
 
         } else {  // Still stepping
             // Update step timer
