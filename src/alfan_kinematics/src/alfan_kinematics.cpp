@@ -104,12 +104,14 @@ void KinematicsSolver::setJointAngles(const Eigen::VectorXd& jointAngles, Leg le
 
 void KinematicsSolver::setFootPos(const Eigen::Vector3d desiredFootPos, Leg leg) {
     if (leg == Leg::LEFT) {
-        Eigen::Vector3d groundFootPosition (0, HIP_OFFSET_Y, 0);
-        uLINK[7].p = groundFootPosition + desiredFootPos;
+        // Eigen::Vector3d groundFootPosition (0, HIP_OFFSET_Y, 0);
+        // uLINK[7].p = groundFootPosition + desiredFootPos;
+        uLINK[7].p = desiredFootPos;
 
     } else { // Leg::RIGHT
-        Eigen::Vector3d groundFootPosition (0, -HIP_OFFSET_Y, 0);
-        uLINK[13].p = groundFootPosition + desiredFootPos;
+        // Eigen::Vector3d groundFootPosition (0, -HIP_OFFSET_Y, 0);
+        // uLINK[13].p = groundFootPosition + desiredFootPos;
+        uLINK[13].p = desiredFootPos;
     }
 }
 
