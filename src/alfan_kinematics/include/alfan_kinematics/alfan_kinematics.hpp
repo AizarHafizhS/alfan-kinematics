@@ -60,6 +60,13 @@ public:
     Eigen::VectorXd computeIK(std::vector<double> legPosition, Leg leg);
 
     /**
+     * @brief Computes the Jacobian matrix for the specified leg.
+     * @param leg The leg (Left or Right) for which the Jacobian is computed.
+     * @return A 6x6 matrix representing the Jacobian.
+     */
+    Eigen::Matrix<double, 6, 6> computeJacobian(Leg leg);
+
+    /**
      * @brief Recursively traverses and prints the kinematic tree (for DEBUG).
      * @param id The starting link index.
      * @param depth The current depth in the tree (default is 0).

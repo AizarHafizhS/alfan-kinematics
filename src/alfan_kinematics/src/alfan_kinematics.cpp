@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cmath>
 #include <algorithm>
+#include <vector>
 
 KinematicsSolver::KinematicsSolver() {
     uLINK = std::vector<Link>(15);
@@ -85,6 +86,44 @@ Eigen::VectorXd KinematicsSolver::computeIK(std::vector<double> legPosition, Leg
 
     setJointAngles(angles, leg);
     return angles;
+}
+
+Eigen::Matrix<double, 6, 6> KinematicsSolver::computeJacobian(Leg leg) {
+    Eigen::Matrix<double, 6, 6> J;
+    J.setZero();
+
+    // Determine the start and end joint indices for the specified leg
+    int start_joint_idx = (leg == Leg::LEFT) ? 2 : 8;
+    int end_effector_idx = (leg == Leg::LEFT) ? 7 : 13;
+
+    // Get the position of the foot (end-effector)
+    Eigen::Vector3d p_foot = uLINK[end_effector_idx].p;
+
+    // Loop through the 6 joints of the leg
+    for (int i = 0; i < 6; ++i) {
+        int current_joint_idx = start_joint_idx + i;
+        const Link& current_joint = uLINK[current_joint_idx];
+        
+        // Get the joint's position in world coordinates
+        Eigen::Vector3d p_joint = current_joint.p;
+
+        // Get the joint's rotation axis in world coordinates
+        // The axis 'a' is stored in the parent's frame, so we rotate it by the parent's orientation
+        const Link& parent_joint = uLINK[current_joint.mother];
+        Eigen::Vector3d z_axis = parent_joint.R * current_joint.a;
+
+        // Calculate the linear velocity component (top 3 rows of the column)
+        Eigen::Vector3d linear_component = z_axis.cross(p_foot - p_joint);
+
+        // The angular velocity component is just the joint's axis (bottom 3 rows)
+        Eigen::Vector3d angular_component = z_axis;
+
+        // Populate the i-th column of the Jacobian matrix
+        J.block<3, 1>(0, i) = linear_component;
+        J.block<3, 1>(3, i) = angular_component;
+    }
+
+    return J;
 }
 
 void KinematicsSolver::setJointAngles(const Eigen::VectorXd& jointAngles, Leg leg) {
