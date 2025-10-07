@@ -1,0 +1,1517 @@
+#VRML_SIM R2025a utf8
+# license: Apache License 2.0
+# license url: http://www.apache.org/licenses/LICENSE-2.0
+# This is a proto file for Webots for the alfan_2025
+# Extracted from: /home/aizar/ROBOTICS/robot-design/alfan_2025_urdf/robot.urdf
+
+PROTO alfan_2025 [
+  field  SFVec3f     translation     0 0 0
+  field  SFRotation  rotation        0 0 1 0
+  field  SFString    name            "caca"  # Is `Robot.name`.
+  field  SFString    controller      "extern"        # Is `Robot.controller`.
+  field  MFString    controllerArgs  []            # Is `Robot.controllerArgs`.
+  field  SFString    customData      ""            # Is `Robot.customData`.
+  field  SFBool      supervisor      FALSE         # Is `Robot.supervisor`.
+  field  SFBool      synchronization TRUE          # Is `Robot.synchronization`.
+  field  SFBool      selfCollision   FALSE         # Is `Robot.selfCollision`.
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    controller IS controller
+    controllerArgs IS controllerArgs
+    customData IS customData
+    supervisor IS supervisor
+    synchronization IS synchronization
+    selfCollision IS selfCollision
+    children [
+      Pose {
+        translation 0.036783 0.002389 0.039461
+        children [
+          Shape {
+            appearance DEF body_material PBRAppearance {
+              baseColor 0.917647 0.917647 0.917647
+              roughness 1.000000
+              metalness 0
+            }
+            geometry DEF body Mesh {
+              url "alfan_2025/assets/body.stl"
+            }
+            # castShadows FALSE
+          }
+        ]
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          axis 0.000516 -1.000000 -0.000000
+          anchor 0.015466 0.061446 0.014214
+        }
+        device [
+          RotationalMotor {
+            name "r_hand_21"
+            maxVelocity 10.0
+            minPosition -1.5708
+            maxPosition 1.5708
+            maxTorque 10.0
+          }
+          PositionSensor {
+            name "r_hand_21_sensor"
+          }
+        ]
+        endPoint Solid {
+          translation 0.015466 0.061446 0.014214
+          rotation 0.577249 0.577550 -0.577252 2.094099
+          children [
+            Pose {
+              translation -0.000000 -0.000000 0.000000
+              rotation -1.000000 -0.000000 -0.000000 3.141590
+              children [
+                Shape {
+                  appearance DEF r_shoulder_connector_material PBRAppearance {
+                    baseColor 0.956863 0.956863 0.964706
+                    roughness 1.000000
+                    metalness 0
+                  }
+                  geometry DEF r_shoulder_connector Mesh {
+                    url "alfan_2025/assets/r_shoulder_connector.stl"
+                  }
+                }
+              ]
+            }
+            HingeJoint {
+              jointParameters HingeJointParameters {
+                axis -0.000004 -1.000000 0.000000
+                anchor 0.016000 -0.015950 -0.018000
+              }
+              device [
+                RotationalMotor {
+                  name "r_hand_22"
+                  maxVelocity 10.0
+                  minPosition -1.22173
+                  maxPosition 1.309
+                  maxTorque 10.0
+                }
+                PositionSensor {
+                  name "r_hand_22_sensor"
+                }
+              ]
+              endPoint Solid {
+                translation 0.016000 -0.015950 -0.018000
+                rotation 0.577350 0.577350 -0.577352 2.094399
+                children [
+                  Pose {
+                    translation 0.007966 -0.010500 -0.013928
+                    rotation 0.577696 0.577176 -0.577178 2.093880
+                    children [
+                      Shape {
+                        appearance DEF r_arm_pitch_material PBRAppearance {
+                          baseColor 0.917647 0.917647 0.917647
+                          roughness 1.000000
+                          metalness 0
+                        }
+                        geometry DEF r_arm_pitch Mesh {
+                          url "alfan_2025/assets/r_arm_pitch.stl"
+                        }
+                      }
+                    ]
+                  }
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      axis -1.000000 -0.000003 0.000004
+                      anchor 0.029000 0.000000 -0.014500
+                    }
+                    device [
+                      RotationalMotor {
+                        name "r_hand_23"
+                        maxVelocity 10.0
+                        minPosition -1.5708
+                        maxPosition 1.5708
+                        maxTorque 10.0
+                      }
+                      PositionSensor {
+                        name "r_hand_23_sensor"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 0.029000 0.000000 -0.014500
+                      rotation 0.707105 0.000001 -0.707108 3.141591
+                      children [
+                        Pose {
+                          translation 0.000000 0.009000 -0.015000
+                          rotation -1.000000 0.000446 0.000446 1.570800
+                          children [
+                            Shape {
+                              appearance DEF r_elbow_block_material PBRAppearance {
+                                baseColor 0.917647 0.917647 0.917647
+                                roughness 1.000000
+                                metalness 0
+                              }
+                              geometry DEF r_elbow_block Mesh {
+                                url "alfan_2025/assets/r_elbow_block.stl"
+                              }
+                            }
+                          ]
+                        }
+                        HingeJoint {
+                          jointParameters HingeJointParameters {
+                            axis 1.000000 -0.000000 -0.000004
+                            anchor -0.014400 0.000000 -0.040000
+                          }
+                          device [
+                            RotationalMotor {
+                              name "r_hand_24"
+                              maxVelocity 10.0
+                              minPosition -1.38556e-07
+                              maxPosition 1.74533
+                              maxTorque 10.0
+                            }
+                            PositionSensor {
+                              name "r_hand_24_sensor"
+                            }
+                          ]
+                          endPoint Solid {
+                            translation -0.014400 0.000000 -0.040000
+                            rotation 0.000000 1.000000 -0.000000 1.570800
+                            children [
+                              Pose {
+                                translation 0.026000 0.012000 0.015450
+                                rotation -0.577773 -0.577138 -0.577140 2.093764
+                                children [
+                                  Shape {
+                                    appearance DEF r_wrist_roll_material PBRAppearance {
+                                      baseColor 0.917647 0.917647 0.917647
+                                      roughness 1.000000
+                                      metalness 0
+                                    }
+                                    geometry DEF r_wrist_roll Mesh {
+                                      url "alfan_2025/assets/r_wrist_roll.stl"
+                                    }
+                                  }
+                                ]
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  axis -1.000000 0.000000 -0.000004
+                                  anchor 0.041000 0.003000 0.015450
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "r_hand_25"
+                                    maxVelocity 10.0
+                                    minPosition -1.5708
+                                    maxPosition 1.5708
+                                    maxTorque 10.0
+                                  }
+                                  PositionSensor {
+                                    name "r_hand_25_sensor"
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation 0.041000 0.003000 0.015450
+                                  rotation -0.000000 -1.000000 -0.000000 1.570800
+                                  children [
+                                    Pose {
+                                      translation -0.001572 0.010500 -0.021034
+                                      rotation -1.000000 0.000548 0.000548 1.570800
+                                      children [
+                                        Shape {
+                                          appearance DEF r_wrist_pitch_material PBRAppearance {
+                                            baseColor 0.917647 0.917647 0.917647
+                                            roughness 1.000000
+                                            metalness 0
+                                          }
+                                          geometry DEF r_wrist_pitch Mesh {
+                                            url "alfan_2025/assets/r_wrist_pitch.stl"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                    HingeJoint {
+                                      jointParameters HingeJointParameters {
+                                        axis -1.000000 0.000003 0.000004
+                                        anchor -0.015400 -0.000000 -0.029000
+                                      }
+                                      device [
+                                        RotationalMotor {
+                                          name "r_hand_26"
+                                          maxVelocity 10.0
+                                          minPosition -2.61799
+                                          maxPosition 2.61799
+                                          maxTorque 10.0
+                                        }
+                                        PositionSensor {
+                                          name "r_hand_26_sensor"
+                                        }
+                                      ]
+                                      endPoint Solid {
+                                        translation -0.015400 -0.000000 -0.029000
+                                        rotation -0.707105 0.000001 0.707108 3.141591
+                                        children [
+                                          Pose {
+                                            translation 0.014247 -0.013500 -0.015450
+                                            rotation 0.577750 0.577149 -0.577151 2.093799
+                                            children [
+                                              Shape {
+                                                appearance DEF r_palm_material PBRAppearance {
+                                                  baseColor 0.952941 0.815686 0.705882
+                                                  roughness 1.000000
+                                                  metalness 0
+                                                }
+                                                geometry DEF r_palm Mesh {
+                                                  url "alfan_2025/assets/r_palm.stl"
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                        name "r_palm"
+                                        boundingObject Pose {
+                                          translation 0.034000 0.003622 -0.015630
+                                          rotation -0.000000 -1.000000 -0.000000 1.570800
+                                          children [
+                                            Box {
+                                               size 0.037049 0.035266 0.086000
+                                            }
+                                          ]
+                                        }
+                                        physics Physics {
+                                          density -1
+                                          mass 0.027000
+                                          centerOfMass [ 0.032474 0.003429 -0.013464 ]
+                                          inertiaMatrix [
+                                            4.520600e-06 1.181750e-05 9.927620e-06
+                                            6.587450e-07 -2.428190e-07 -1.679670e-07
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  ]
+                                  name "r_wrist_pitch"
+                                  boundingObject Pose {
+                                    translation 0.000221 0.000012 -0.019000
+                                    children [
+                                      Box {
+                                         size 0.031340 0.024317 0.038000
+                                      }
+                                    ]
+                                  }
+                                  physics Physics {
+                                    density -1
+                                    mass 0.021000
+                                    centerOfMass [ -0.000563 -0.000000 -0.020888 ]
+                                    inertiaMatrix [
+                                      2.943290e-06 3.385780e-06 2.021850e-06
+                                      -2.336350e-13 -3.693120e-08 -3.527950e-13
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                            name "r_wrist_roll"
+                            boundingObject Pose {
+                              translation 0.015961 -0.009000 0.015471
+                              rotation -0.577773 -0.577138 -0.577140 2.093764
+                              children [
+                                Box {
+                                   size 0.034198 0.050073 0.042000
+                                }
+                              ]
+                            }
+                            physics Physics {
+                              density -1
+                              mass 0.024000
+                              centerOfMass [ 0.024451 -0.004219 0.015315 ]
+                              inertiaMatrix [
+                                3.253850e-06 3.023310e-06 3.929340e-06
+                                -1.338490e-07 -8.985040e-08 1.366220e-08
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                      name "r_elbow_block"
+                      boundingObject Pose {
+                        translation 0.001172 -0.010500 -0.025995
+                        rotation -1.000000 0.000446 0.000446 1.570800
+                        children [
+                          Box {
+                             size 0.031123 0.052068 0.039000
+                          }
+                        ]
+                      }
+                      physics Physics {
+                        density -1
+                        mass 0.041000
+                        centerOfMass [ 0.000188 -0.007294 -0.027656 ]
+                        inertiaMatrix [
+                          1.175140e-05 1.014170e-05 5.624710e-06
+                          1.553980e-08 9.534640e-08 -1.831840e-07
+                        ]
+                      }
+                    }
+                  }
+                ]
+                name "r_arm_pitch"
+                boundingObject Pose {
+                  translation 0.010000 0.000037 -0.014230
+                  rotation -0.707105 -0.000001 -0.707108 3.141591
+                  children [
+                    Box {
+                       size 0.028612 0.024143 0.038000
+                    }
+                  ]
+                }
+                physics Physics {
+                  density -1
+                  mass 0.021000
+                  centerOfMass [ 0.008290 -0.000000 -0.014539 ]
+                  inertiaMatrix [
+                    1.970430e-06 3.333370e-06 2.958600e-06
+                    -3.236620e-13 6.600170e-08 2.111570e-13
+                  ]
+                }
+              }
+            }
+          ]
+          name "r_shoulder_connector"
+          boundingObject Pose {
+            translation 0.008007 0.000006 -0.014500
+            children [
+              Box {
+                 size 0.038152 0.036060 0.029000
+              }
+            ]
+          }
+          physics Physics {
+            density -1
+            mass 0.011114
+            centerOfMass [ 0.004924 -0.001826 -0.008825 ]
+            inertiaMatrix [
+              3.109630e-06 1.778700e-06 3.555670e-06
+              1.677560e-07 2.997320e-07 -2.984800e-07
+            ]
+          }
+        }
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          axis -0.000514 1.000000 0.000000
+          anchor 0.015527 -0.056520 0.014214
+        }
+        device [
+          RotationalMotor {
+            name "l_hand_31"
+            maxVelocity 10.0
+            minPosition -1.5708
+            maxPosition 1.5708
+            maxTorque 10.0
+          }
+          PositionSensor {
+            name "l_hand_31_sensor"
+          }
+        ]
+        endPoint Solid {
+          translation 0.015527 -0.056520 0.014214
+          rotation -0.577448 0.577153 0.577450 2.094694
+          children [
+            Pose {
+              translation -0.000000 0.000000 -0.000000
+              rotation -1.000000 -0.000000 0.000000 3.141590
+              children [
+                Shape {
+                  appearance DEF l_shoulder_connector_material PBRAppearance {
+                    baseColor 0.956863 0.956863 0.964706
+                    roughness 1.000000
+                    metalness 0
+                  }
+                  geometry DEF l_shoulder_connector Mesh {
+                    url "alfan_2025/assets/l_shoulder_connector.stl"
+                  }
+                }
+              ]
+            }
+            HingeJoint {
+              jointParameters HingeJointParameters {
+                axis -0.000004 1.000000 0.000000
+                anchor 0.016000 0.015950 -0.018000
+              }
+              device [
+                RotationalMotor {
+                  name "l_hand_32"
+                  maxVelocity 10.0
+                  minPosition -1.309
+                  maxPosition 1.22173
+                  maxTorque 10.0
+                }
+                PositionSensor {
+                  name "l_hand_32_sensor"
+                }
+              ]
+              endPoint Solid {
+                translation 0.016000 0.015950 -0.018000
+                rotation -0.577350 0.577350 0.577352 2.094399
+                children [
+                  Pose {
+                    translation 0.007966 0.010500 -0.013928
+                    rotation -0.577954 0.577047 0.577049 2.093493
+                    children [
+                      Shape {
+                        appearance DEF l_arm_pitch_material PBRAppearance {
+                          baseColor 0.917647 0.917647 0.917647
+                          roughness 1.000000
+                          metalness 0
+                        }
+                        geometry DEF l_arm_pitch Mesh {
+                          url "alfan_2025/assets/l_arm_pitch.stl"
+                        }
+                      }
+                    ]
+                  }
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      axis -1.000000 0.000003 0.000004
+                      anchor 0.029000 -0.000000 -0.014500
+                    }
+                    device [
+                      RotationalMotor {
+                        name "l_hand_33"
+                        maxVelocity 10.0
+                        minPosition -1.5708
+                        maxPosition 1.5708
+                        maxTorque 10.0
+                      }
+                      PositionSensor {
+                        name "l_hand_33_sensor"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 0.029000 -0.000000 -0.014500
+                      rotation -0.707105 0.000001 0.707108 3.141591
+                      children [
+                        Pose {
+                          translation 0.000000 -0.009000 -0.015000
+                          rotation 0.999999 0.000783 -0.000783 1.570801
+                          children [
+                            Shape {
+                              appearance DEF l_elbow_block_material PBRAppearance {
+                                baseColor 0.917647 0.917647 0.917647
+                                roughness 1.000000
+                                metalness 0
+                              }
+                              geometry DEF l_elbow_block Mesh {
+                                url "alfan_2025/assets/l_elbow_block.stl"
+                              }
+                            }
+                          ]
+                        }
+                        HingeJoint {
+                          jointParameters HingeJointParameters {
+                            axis 1.000000 0.000000 -0.000004
+                            anchor -0.014400 -0.000000 -0.040000
+                          }
+                          device [
+                            RotationalMotor {
+                              name "l_hand_34"
+                              maxVelocity 10.0
+                              minPosition -1.74533
+                              maxPosition 1.70264e-07
+                              maxTorque 10.0
+                            }
+                            PositionSensor {
+                              name "l_hand_34_sensor"
+                            }
+                          ]
+                          endPoint Solid {
+                            translation -0.014400 -0.000000 -0.040000
+                            rotation -0.000000 1.000000 0.000000 1.570800
+                            children [
+                              Pose {
+                                translation 0.026000 -0.012000 0.015450
+                                rotation 0.578035 -0.577007 0.577009 2.093372
+                                children [
+                                  Shape {
+                                    appearance DEF l_wrist_roll_material PBRAppearance {
+                                      baseColor 0.917647 0.917647 0.917647
+                                      roughness 1.000000
+                                      metalness 0
+                                    }
+                                    geometry DEF l_wrist_roll Mesh {
+                                      url "alfan_2025/assets/l_wrist_roll.stl"
+                                    }
+                                  }
+                                ]
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  axis -1.000000 -0.000000 -0.000004
+                                  anchor 0.040900 -0.003000 0.015450
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "l_hand_35"
+                                    maxVelocity 10.0
+                                    minPosition -3.40339
+                                    maxPosition 1.8326
+                                    maxTorque 10.0
+                                  }
+                                  PositionSensor {
+                                    name "l_hand_35_sensor"
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation 0.040900 -0.003000 0.015450
+                                  rotation 0.000000 -1.000000 0.000000 1.570800
+                                  children [
+                                    Pose {
+                                      translation -0.001572 -0.010500 -0.021034
+                                      rotation 0.999999 0.000884 -0.000884 1.570801
+                                      children [
+                                        Shape {
+                                          appearance DEF l_wrist_pitch_material PBRAppearance {
+                                            baseColor 0.917647 0.917647 0.917647
+                                            roughness 1.000000
+                                            metalness 0
+                                          }
+                                          geometry DEF l_wrist_pitch Mesh {
+                                            url "alfan_2025/assets/l_wrist_pitch.stl"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                    HingeJoint {
+                                      jointParameters HingeJointParameters {
+                                        axis 1.000000 0.000000 -0.000004
+                                        anchor -0.015400 0.000000 -0.029000
+                                      }
+                                      device [
+                                        RotationalMotor {
+                                          name "l_hand_36"
+                                          maxVelocity 10.0
+                                          minPosition -2.61799
+                                          maxPosition 2.61799
+                                          maxTorque 10.0
+                                        }
+                                        PositionSensor {
+                                          name "l_hand_36_sensor"
+                                        }
+                                      ]
+                                      endPoint Solid {
+                                        translation -0.015400 0.000000 -0.029000
+                                        rotation -0.000000 1.000000 0.000000 1.570800
+                                        children [
+                                          Pose {
+                                            translation 0.014247 -0.013500 0.015450
+                                            rotation 0.578008 -0.577020 0.577022 2.093412
+                                            children [
+                                              Shape {
+                                                appearance DEF l_palm_material PBRAppearance {
+                                                  baseColor 0.952941 0.815686 0.705882
+                                                  roughness 1.000000
+                                                  metalness 0
+                                                }
+                                                geometry DEF l_palm Mesh {
+                                                  url "alfan_2025/assets/l_palm.stl"
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                        name "l_palm"
+                                        boundingObject Pose {
+                                          translation 0.034000 0.003644 0.015382
+                                          rotation -0.000000 -1.000000 -0.000000 1.570800
+                                          children [
+                                            Box {
+                                               size 0.037339 0.035474 0.086000
+                                            }
+                                          ]
+                                        }
+                                        physics Physics {
+                                          density -1
+                                          mass 0.027000
+                                          centerOfMass [ 0.032728 0.003449 0.013378 ]
+                                          inertiaMatrix [
+                                            4.503170e-06 1.231800e-05 1.043460e-05
+                                            6.890440e-07 3.315170e-07 1.529210e-07
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  ]
+                                  name "l_wrist_pitch"
+                                  boundingObject Pose {
+                                    translation 0.000198 0.000019 -0.019000
+                                    children [
+                                      Box {
+                                         size 0.031332 0.024186 0.038000
+                                      }
+                                    ]
+                                  }
+                                  physics Physics {
+                                    density -1
+                                    mass 0.021000
+                                    centerOfMass [ -0.000563 -0.000000 -0.020888 ]
+                                    inertiaMatrix [
+                                      2.943290e-06 3.385780e-06 2.021850e-06
+                                      -3.782830e-14 -3.693210e-08 -3.711730e-14
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                            name "l_wrist_roll"
+                            boundingObject Pose {
+                              translation 0.015970 0.009000 0.015425
+                              rotation 0.578035 -0.577007 0.577009 2.093372
+                              children [
+                                Box {
+                                   size 0.034041 0.050019 0.042000
+                                }
+                              ]
+                            }
+                            physics Physics {
+                              density -1
+                              mass 0.024000
+                              centerOfMass [ 0.024435 0.004226 0.015315 ]
+                              inertiaMatrix [
+                                3.254670e-06 3.019020e-06 3.924720e-06
+                                1.311220e-07 -8.988340e-08 -1.369840e-08
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                      name "l_elbow_block"
+                      boundingObject Pose {
+                        translation 0.001097 0.010500 -0.026038
+                        rotation 0.999999 0.000783 -0.000783 1.570801
+                        children [
+                          Box {
+                             size 0.031246 0.052197 0.039000
+                          }
+                        ]
+                      }
+                      physics Physics {
+                        density -1
+                        mass 0.041000
+                        centerOfMass [ 0.000188 0.007294 -0.027656 ]
+                        inertiaMatrix [
+                          1.175140e-05 1.014170e-05 5.624710e-06
+                          -1.553950e-08 9.534610e-08 1.831830e-07
+                        ]
+                      }
+                    }
+                  }
+                ]
+                name "l_arm_pitch"
+                boundingObject Pose {
+                  translation 0.010000 0.000002 -0.014211
+                  rotation 0.707105 -0.000001 0.707108 3.141591
+                  children [
+                    Box {
+                       size 0.028610 0.024045 0.038000
+                    }
+                  ]
+                }
+                physics Physics {
+                  density -1
+                  mass 0.021000
+                  centerOfMass [ 0.008290 -0.000000 -0.014539 ]
+                  inertiaMatrix [
+                    1.970430e-06 3.333370e-06 2.958610e-06
+                    -4.585440e-14 6.600270e-08 2.915790e-14
+                  ]
+                }
+              }
+            }
+          ]
+          name "l_shoulder_connector"
+          boundingObject Pose {
+            translation 0.007992 -0.000005 -0.014500
+            children [
+              Box {
+                 size 0.038113 0.036000 0.029000
+              }
+            ]
+          }
+          physics Physics {
+            density -1
+            mass 0.011114
+            centerOfMass [ 0.004924 0.001826 -0.008825 ]
+            inertiaMatrix [
+              3.109630e-06 1.778700e-06 3.555670e-06
+              -1.677560e-07 2.997320e-07 2.984800e-07
+            ]
+          }
+        }
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          axis 0.010430 0.000005 0.999946
+          anchor 0.021545 0.046866 -0.095843
+        }
+        device [
+          RotationalMotor {
+            name "r_hip_yaw"
+            maxVelocity 10.0
+            minPosition -3.14159
+            maxPosition 3.14159
+            maxTorque 10.0
+          }
+          PositionSensor {
+            name "r_hip_yaw_sensor"
+          }
+        ]
+        endPoint Solid {
+          translation 0.021545 0.046866 -0.095843
+          rotation -0.000513 1.000000 -0.000003 0.010430
+          children [
+            Pose {
+              translation -0.159489 -0.048929 -0.183920
+              rotation 0.000340 -1.000000 0.000005 0.026815
+              children [
+                Shape {
+                  appearance DEF hip_connector_material PBRAppearance {
+                    baseColor 0.270588 0.270588 0.270588
+                    roughness 1.000000
+                    metalness 0
+                  }
+                  geometry DEF hip_connector Mesh {
+                    url "alfan_2025/assets/hip_connector.stl"
+                  }
+                }
+              ]
+            }
+            HingeJoint {
+              jointParameters HingeJointParameters {
+                axis -1.000000 -0.000516 -0.000004
+                anchor 0.028000 0.000014 -0.031798
+              }
+              device [
+                RotationalMotor {
+                  name "r_hip_roll"
+                  maxVelocity 10.0
+                  minPosition -3.14159
+                  maxPosition 3.14159
+                  maxTorque 10.0
+                }
+                PositionSensor {
+                  name "r_hip_roll_sensor"
+                }
+              ]
+              endPoint Solid {
+                translation 0.028000 0.000014 -0.031798
+                rotation 0.581193 -0.569889 -0.580897 2.105173
+                children [
+                  Pose {
+                    translation 0.000712 0.012000 0.023050
+                    rotation -0.577550 0.577249 0.577252 2.094099
+                    children [
+                      Shape {
+                        appearance DEF r_hip_mx28_block_material PBRAppearance {
+                          baseColor 0.647059 0.647059 0.647059
+                          roughness 1.000000
+                          metalness 0
+                        }
+                        geometry DEF r_hip_mx28_block Mesh {
+                          url "alfan_2025/assets/r_hip_mx28_block.stl"
+                        }
+                      }
+                    ]
+                  }
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      axis 1.000000 -0.000000 -0.000004
+                      anchor 0.019950 -0.000000 0.023050
+                    }
+                    device [
+                      RotationalMotor {
+                        name "r_hip_pitch"
+                        maxVelocity 10.0
+                        minPosition -3.14159
+                        maxPosition 3.14159
+                        maxTorque 10.0
+                      }
+                      PositionSensor {
+                        name "r_hip_pitch_sensor"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 0.019950 -0.000000 0.023050
+                      rotation 0.000000 1.000000 -0.000000 1.570800
+                      children [
+                        Pose {
+                          translation 0.000000 -0.049498 -0.020500
+                          rotation -1.000000 -0.000256 -0.000256 1.570800
+                          children [
+                            Shape {
+                              appearance DEF r_hip_to_knee_material PBRAppearance {
+                                baseColor 0.647059 0.647059 0.647059
+                                roughness 1.000000
+                                metalness 0
+                              }
+                              geometry DEF r_hip_to_knee Mesh {
+                                url "alfan_2025/assets/r_hip_to_knee.stl"
+                              }
+                            }
+                          ]
+                        }
+                        HingeJoint {
+                          jointParameters HingeJointParameters {
+                            axis -0.000000 -0.000003 -1.000000
+                            anchor 0.000000 -0.093837 -0.000550
+                          }
+                          device [
+                            RotationalMotor {
+                              name "r_knee_pitch"
+                              maxVelocity 10.0
+                              minPosition -3.14159
+                              maxPosition 3.14159
+                              maxTorque 10.0
+                            }
+                            PositionSensor {
+                              name "r_knee_pitch_sensor"
+                            }
+                          ]
+                          endPoint Solid {
+                            translation 0.000000 -0.093837 -0.000550
+                            rotation 1.000000 -0.000000 -0.000000 3.141590
+                            children [
+                              Pose {
+                                translation -0.166768 0.053832 -0.027848
+                                rotation 1.000000 0.000256 -0.000256 1.570790
+                                children [
+                                  Shape {
+                                    appearance DEF tibia_material PBRAppearance {
+                                      baseColor 0.270588 0.270588 0.270588
+                                      roughness 1.000000
+                                      metalness 0
+                                    }
+                                    geometry DEF tibia Mesh {
+                                      url "alfan_2025/assets/tibia.stl"
+                                    }
+                                  }
+                                ]
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  axis -0.000000 0.000003 -1.000000
+                                  anchor -0.002494 0.092967 -0.000000
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "r_ankle_pitch"
+                                    maxVelocity 10.0
+                                    minPosition -3.14159
+                                    maxPosition 3.14159
+                                    maxTorque 10.0
+                                  }
+                                  PositionSensor {
+                                    name "r_ankle_pitch_sensor"
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation -0.002494 0.092967 -0.000000
+                                  rotation -1.000000 -0.000000 0.000000 3.141590
+                                  children [
+                                    Pose {
+                                      translation -0.000000 0.033000 -0.019950
+                                      rotation -1.000000 -0.000256 -0.000256 1.570800
+                                      children [
+                                        Shape {
+                                          appearance DEF r_ankle_mx28_block_material PBRAppearance {
+                                            baseColor 0.647059 0.647059 0.647059
+                                            roughness 1.000000
+                                            metalness 0
+                                          }
+                                          geometry DEF r_ankle_mx28_block Mesh {
+                                            url "alfan_2025/assets/r_ankle_mx28_block.stl"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                    HingeJoint {
+                                      jointParameters HingeJointParameters {
+                                        axis 1.000000 -0.000003 0.000004
+                                        anchor 0.023050 -0.000000 -0.019950
+                                      }
+                                      device [
+                                        RotationalMotor {
+                                          name "r_ankle_roll"
+                                          maxVelocity 10.0
+                                          minPosition -3.14159
+                                          maxPosition 3.14159
+                                          maxTorque 10.0
+                                        }
+                                        PositionSensor {
+                                          name "r_ankle_roll_sensor"
+                                        }
+                                      ]
+                                      endPoint Solid {
+                                        translation 0.023050 -0.000000 -0.019950
+                                        rotation 0.707105 -0.000001 0.707108 3.141591
+                                        children [
+                                          Pose {
+                                            translation -0.013045 0.031798 -0.025250
+                                            rotation 0.577550 -0.577249 0.577252 2.094099
+                                            children [
+                                              Shape {
+                                                appearance DEF r_foot_material PBRAppearance {
+                                                  baseColor 0.647059 0.647059 0.647059
+                                                  roughness 1.000000
+                                                  metalness 0
+                                                }
+                                                geometry DEF r_foot Mesh {
+                                                  url "alfan_2025/assets/r_foot.stl"
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                        name "r_foot"
+                                        boundingObject Group {
+                                          children [
+                                            Pose {
+                                              translation 0.000011 0.009899 -0.027000
+                                              children [
+                                                Box {
+                                                   size 0.027233 0.043866 0.054000
+                                                }
+                                              ]
+                                            }
+                                            Pose {
+                                              translation -0.012938 0.033298 -0.025295
+                                              rotation 0.577550 -0.577249 0.577252 2.094099
+                                              children [
+                                                Box {
+                                                   size 0.120686 0.080481 0.002750
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                        physics Physics {
+                                          density -1
+                                          mass 0.068074
+                                          centerOfMass [ -0.009583 0.028072 -0.027322 ]
+                                          inertiaMatrix [
+                                            7.246570e-05 9.321000e-05 3.590970e-05
+                                            3.083200e-06 1.351930e-06 -3.971530e-06
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  ]
+                                  name "r_ankle_mx28_block"
+                                  boundingObject Pose {
+                                    translation 0.020333 0.013500 -0.018687
+                                    rotation 1.000000 -0.000256 0.000256 1.570800
+                                    children [
+                                      Box {
+                                         size 0.084021 0.043283 0.051000
+                                      }
+                                    ]
+                                  }
+                                  physics Physics {
+                                    density -1
+                                    mass 0.171000
+                                    centerOfMass [ 0.020231 0.011359 -0.019964 ]
+                                    inertiaMatrix [
+                                      4.751780e-05 1.092190e-04 1.221280e-04
+                                      -2.041250e-06 -4.791590e-08 3.250890e-07
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                            name "tibia"
+                            boundingObject Pose {
+                              translation -0.003201 0.042570 0.020500
+                              children [
+                                Box {
+                                   size 0.039957 0.106395 0.045000
+                                }
+                              ]
+                            }
+                            physics Physics {
+                              density -1
+                              mass 0.033398
+                              centerOfMass [ -0.007909 0.035649 0.020500 ]
+                              inertiaMatrix [
+                                4.024460e-05 1.762310e-05 3.176800e-05
+                                -4.875150e-06 1.788540e-11 2.021150e-11
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                      name "r_hip_to_knee"
+                      boundingObject Pose {
+                        translation 0.000008 -0.051837 -0.020376
+                        rotation 1.000000 -0.000256 0.000256 1.570800
+                        children [
+                          Box {
+                             size 0.035752 0.045425 0.108000
+                          }
+                        ]
+                      }
+                      physics Physics {
+                        density -1
+                        mass 0.100000
+                        centerOfMass [ 0.000020 -0.076140 -0.020525 ]
+                        inertiaMatrix [
+                          5.823810e-05 2.075310e-05 4.998820e-05
+                          -4.397090e-08 -4.880360e-11 3.323610e-07
+                        ]
+                      }
+                    }
+                  }
+                ]
+                name "r_hip_mx28_block"
+                boundingObject Pose {
+                  translation 0.001264 -0.013500 0.003704
+                  rotation -0.577550 0.577249 0.577252 2.094099
+                  children [
+                    Box {
+                       size 0.086166 0.043316 0.051000
+                    }
+                  ]
+                }
+                physics Physics {
+                  density -1
+                  mass 0.172000
+                  centerOfMass [ -0.000014 -0.011279 0.003118 ]
+                  inertiaMatrix [
+                    1.243550e-04 1.113070e-04 4.769150e-05
+                    -3.248820e-07 4.713790e-08 -2.619350e-06
+                  ]
+                }
+              }
+            }
+          ]
+          name "hip_connector"
+          boundingObject Pose {
+            translation 0.002709 0.000022 -0.017500
+            children [
+              Box {
+                 size 0.050739 0.027253 0.035000
+              }
+            ]
+          }
+          physics Physics {
+            density -1
+            mass 0.012397
+            centerOfMass [ 0.002780 0.000001 -0.009950 ]
+            inertiaMatrix [
+              1.867790e-06 6.451450e-06 5.695070e-06
+              -2.351340e-09 -3.273940e-09 -1.679480e-12
+            ]
+          }
+        }
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          axis 0.010430 0.000005 0.999946
+          anchor 0.021590 -0.041934 -0.095843
+        }
+        device [
+          RotationalMotor {
+            name "l_hip_yaw"
+            maxVelocity 10.0
+            minPosition -3.14159
+            maxPosition 3.14159
+            maxTorque 10.0
+          }
+          PositionSensor {
+            name "l_hip_yaw_sensor"
+          }
+        ]
+        endPoint Solid {
+          translation 0.021590 -0.041934 -0.095843
+          rotation -0.000513 1.000000 -0.000003 0.010430
+          children [
+            Pose {
+              translation -0.159489 -0.048929 -0.183920
+              rotation 0.000340 -1.000000 0.000005 0.026815
+              children [
+                Shape {
+                  appearance DEF hip_connector_2_material PBRAppearance {
+                    baseColor 0.270588 0.270588 0.270588
+                    roughness 1.000000
+                    metalness 0
+                  }
+                  geometry USE hip_connector
+                }
+              ]
+            }
+            HingeJoint {
+              jointParameters HingeJointParameters {
+                axis -1.000000 -0.000516 -0.000004
+                anchor 0.028000 0.000014 -0.031798
+              }
+              device [
+                RotationalMotor {
+                  name "l_hip_roll"
+                  maxVelocity 10.0
+                  minPosition -3.14159
+                  maxPosition 3.14159
+                  maxTorque 10.0
+                }
+                PositionSensor {
+                  name "l_hip_roll_sensor"
+                }
+              ]
+              endPoint Solid {
+                translation 0.028000 0.000014 -0.031798
+                rotation 0.581193 -0.569889 -0.580897 2.105173
+                children [
+                  Pose {
+                    translation -0.000712 0.012000 0.023050
+                    rotation -0.577550 0.577249 0.577252 2.094099
+                    children [
+                      Shape {
+                        appearance DEF l_hip_mx28_block_material PBRAppearance {
+                          baseColor 0.647059 0.647059 0.647059
+                          roughness 1.000000
+                          metalness 0
+                        }
+                        geometry DEF l_hip_mx28_block Mesh {
+                          url "alfan_2025/assets/l_hip_mx28_block.stl"
+                        }
+                      }
+                    ]
+                  }
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      axis 1.000000 0.000000 -0.000004
+                      anchor -0.019950 -0.000000 0.023050
+                    }
+                    device [
+                      RotationalMotor {
+                        name "l_hip_pitch"
+                        maxVelocity 10.0
+                        minPosition -3.14159
+                        maxPosition 3.14159
+                        maxTorque 10.0
+                      }
+                      PositionSensor {
+                        name "l_hip_pitch_sensor"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation -0.019950 -0.000000 0.023050
+                      rotation -0.000000 1.000000 0.000000 1.570800
+                      children [
+                        Pose {
+                          translation 0.000000 -0.049498 0.020500
+                          rotation -1.000000 -0.000256 -0.000256 1.570800
+                          children [
+                            Shape {
+                              appearance DEF l_hip_to_knee_material PBRAppearance {
+                                baseColor 0.647059 0.647059 0.647059
+                                roughness 1.000000
+                                metalness 0
+                              }
+                              geometry DEF l_hip_to_knee Mesh {
+                                url "alfan_2025/assets/l_hip_to_knee.stl"
+                              }
+                            }
+                          ]
+                        }
+                        HingeJoint {
+                          jointParameters HingeJointParameters {
+                            axis 0.000000 0.000000 1.000000
+                            anchor 0.000000 -0.093837 0.000550
+                          }
+                          device [
+                            RotationalMotor {
+                              name "l_knee_pitch"
+                              maxVelocity 10.0
+                              minPosition -3.14159
+                              maxPosition 3.14159
+                              maxTorque 10.0
+                            }
+                            PositionSensor {
+                              name "l_knee_pitch_sensor"
+                            }
+                          ]
+                          endPoint Solid {
+                            translation 0.000000 -0.093837 0.000550
+                            children [
+                              Pose {
+                                translation -0.166768 -0.053832 0.068848
+                                rotation -1.000000 -0.000256 -0.000256 1.570800
+                                children [
+                                  Shape {
+                                    appearance DEF tibia_2_material PBRAppearance {
+                                      baseColor 0.270588 0.270588 0.270588
+                                      roughness 1.000000
+                                      metalness 0
+                                    }
+                                    geometry USE tibia
+                                  }
+                                ]
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  axis -0.000000 -0.000003 -1.000000
+                                  anchor -0.002494 -0.092967 0.000000
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "l_ankle_pitch"
+                                    maxVelocity 10.0
+                                    minPosition -3.14159
+                                    maxPosition 3.14159
+                                    maxTorque 10.0
+                                  }
+                                  PositionSensor {
+                                    name "l_ankle_pitch_sensor"
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation -0.002494 -0.092967 0.000000
+                                  rotation 1.000000 -0.000000 -0.000000 3.141590
+                                  children [
+                                    Pose {
+                                      translation -0.000000 -0.033000 -0.019950
+                                      rotation 1.000000 0.000256 -0.000256 1.570800
+                                      children [
+                                        Shape {
+                                          appearance DEF l_ankle_mx28_block_material PBRAppearance {
+                                            baseColor 0.647059 0.647059 0.647059
+                                            roughness 1.000000
+                                            metalness 0
+                                          }
+                                          geometry DEF l_ankle_mx28_block Mesh {
+                                            url "alfan_2025/assets/l_ankle_mx28_block.stl"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                    HingeJoint {
+                                      jointParameters HingeJointParameters {
+                                        axis -1.000000 0.000003 0.000004
+                                        anchor 0.023050 -0.000000 -0.019950
+                                      }
+                                      device [
+                                        RotationalMotor {
+                                          name "l_ankle_roll"
+                                          maxVelocity 10.0
+                                          minPosition -3.14159
+                                          maxPosition 3.14159
+                                          maxTorque 10.0
+                                        }
+                                        PositionSensor {
+                                          name "l_ankle_roll_sensor"
+                                        }
+                                      ]
+                                      endPoint Solid {
+                                        translation 0.023050 -0.000000 -0.019950
+                                        rotation -0.707105 0.000001 0.707108 3.141591
+                                        children [
+                                          Pose {
+                                            translation 0.013045 -0.031798 0.025250
+                                            rotation -0.577550 0.577249 0.577252 2.094099
+                                            children [
+                                              Shape {
+                                                appearance DEF l_foot_material PBRAppearance {
+                                                  baseColor 0.647059 0.647059 0.647059
+                                                  roughness 1.000000
+                                                  metalness 0
+                                                }
+                                                geometry DEF l_foot Mesh {
+                                                  url "alfan_2025/assets/l_foot.stl"
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                        name "l_foot"
+                                        boundingObject Group {
+                                          children [
+                                            Pose {
+                                              translation 0.013000 -0.033298 0.025239
+                                              rotation -0.577550 0.577249 0.577252 2.094099
+                                              children [
+                                                Box {
+                                                   size 0.119957 0.080061 0.002750
+                                                }
+                                              ]
+                                            }
+                                            Pose {
+                                              translation -0.000007 -0.009843 0.027000
+                                              rotation -0.000001 1.000000 -0.000001 3.141593
+                                              children [
+                                                Box {
+                                                   size 0.027112 0.043850 0.054000
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                        physics Physics {
+                                          density -1
+                                          mass 0.068074
+                                          centerOfMass [ 0.009583 -0.028072 0.027322 ]
+                                          inertiaMatrix [
+                                            7.246570e-05 9.321000e-05 3.590970e-05
+                                            3.083200e-06 1.351930e-06 -3.971530e-06
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  ]
+                                  name "l_ankle_mx28_block"
+                                  boundingObject Pose {
+                                    translation 0.020437 -0.013500 -0.018697
+                                    rotation -1.000000 0.000256 0.000256 1.570800
+                                    children [
+                                      Box {
+                                         size 0.084154 0.043397 0.051000
+                                      }
+                                    ]
+                                  }
+                                  physics Physics {
+                                    density -1
+                                    mass 0.171000
+                                    centerOfMass [ 0.020231 -0.011359 -0.019964 ]
+                                    inertiaMatrix [
+                                      4.751780e-05 1.092190e-04 1.221280e-04
+                                      2.041250e-06 -4.790480e-08 -3.250870e-07
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                            name "tibia_2"
+                            boundingObject Pose {
+                              translation -0.003201 -0.042570 0.020500
+                              rotation 1.000000 -0.000000 -0.000000 3.141590
+                              children [
+                                Box {
+                                   size 0.039957 0.106395 0.045000
+                                }
+                              ]
+                            }
+                            physics Physics {
+                              density -1
+                              mass 0.033398
+                              centerOfMass [ -0.007909 -0.035649 0.020500 ]
+                              inertiaMatrix [
+                                4.024460e-05 1.762310e-05 3.176800e-05
+                                4.875150e-06 -1.788540e-11 2.021150e-11
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                      name "l_hip_to_knee"
+                      boundingObject Pose {
+                        translation -0.000008 -0.051837 0.020333
+                        rotation 1.000000 -0.000256 0.000256 1.570800
+                        children [
+                          Box {
+                             size 0.035760 0.045441 0.108000
+                          }
+                        ]
+                      }
+                      physics Physics {
+                        density -1
+                        mass 0.100000
+                        centerOfMass [ 0.000020 -0.076140 0.020525 ]
+                        inertiaMatrix [
+                          5.823810e-05 2.075310e-05 4.998820e-05
+                          -4.397290e-08 5.176750e-11 -3.323780e-07
+                        ]
+                      }
+                    }
+                  }
+                ]
+                name "l_hip_mx28_block"
+                boundingObject Pose {
+                  translation -0.001747 -0.013500 0.003731
+                  rotation -0.577550 0.577249 0.577252 2.094099
+                  children [
+                    Box {
+                       size 0.086005 0.042263 0.051000
+                    }
+                  ]
+                }
+                physics Physics {
+                  density -1
+                  mass 0.172000
+                  centerOfMass [ -0.000137 -0.011367 0.002962 ]
+                  inertiaMatrix [
+                    1.245360e-04 1.110960e-04 4.734870e-05
+                    6.171410e-07 4.647450e-07 -2.335470e-06
+                  ]
+                }
+              }
+            }
+          ]
+          name "hip_connector_2"
+          boundingObject Pose {
+            translation 0.002709 0.000022 -0.017500
+            children [
+              Box {
+                 size 0.050739 0.027253 0.035000
+              }
+            ]
+          }
+          physics Physics {
+            density -1
+            mass 0.012397
+            centerOfMass [ 0.002780 0.000001 -0.009950 ]
+            inertiaMatrix [
+              1.867790e-06 6.451450e-06 5.695070e-06
+              -2.351340e-09 -3.273940e-09 -1.679480e-12
+            ]
+          }
+        }
+      }
+    ]
+    name IS name
+    boundingObject Group {
+      children [
+        Pose {
+          translation 0.034922 0.046874 -0.077882
+          rotation 0.999986 -0.000000 -0.005215 3.141590
+          children [
+            Box {
+               size 0.051779 0.036098 0.041900
+            }
+          ]
+        }
+        Pose {
+          translation 0.035017 -0.041916 -0.077882
+          rotation 0.999986 -0.000000 -0.005215 3.141590
+          children [
+            Box {
+               size 0.051622 0.035888 0.041900
+            }
+          ]
+        }
+        Pose {
+          translation 0.032079 0.002602 -0.009158
+          rotation 0.579151 0.579446 0.573434 2.100727
+          children [
+            Box {
+               size 0.124406 0.098224 0.065000
+            }
+          ]
+        }
+      ]
+    }
+    physics Physics {
+      density -1
+      mass 0.464000
+      centerOfMass [ 0.030817 0.002465 -0.023235 ]
+      inertiaMatrix [
+        1.691020e-03 1.070440e-03 8.594590e-04
+        3.243730e-07 3.641820e-05 8.652520e-08
+      ]
+    }
+  }
+}

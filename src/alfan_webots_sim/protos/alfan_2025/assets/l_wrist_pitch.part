@@ -1,0 +1,14 @@
+{
+    "configuration": "default",
+    "documentId": "30ebcde67ad9b9d01819a295",
+    "documentMicroversion": "b11f259e674aba3883f9b27d",
+    "documentVersion": "17bd4c873620421d7625e632",
+    "elementId": "016682581708bb80afdaf62f",
+    "fullConfiguration": "default",
+    "id": "MX2/oQvRgX/Mbdfcd",
+    "isStandardContent": false,
+    "name": "l_wrist_pitch <1>",
+    "partId": "JFD",
+    "suppressed": false,
+    "type": "Part"
+}

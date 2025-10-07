@@ -17,8 +17,12 @@ void KinematicsSolver::computeFK(int j = 1) {
 
     // For non-root links, update the position and orientation based on the parent's state.
     if (j != 1) {
-        int parent = uLINK[j].mother;
+        int parent = uLINK[j].mother;  // i
+
+        // pj = pi + Ri * bj
         uLINK[j].p = uLINK[parent].R * uLINK[j].b + uLINK[parent].p;
+
+        // Rj = Ri * rodrigues(aj, qj)
         uLINK[j].R = uLINK[parent].R * rodrigues(uLINK[j].a, uLINK[j].q);
     }
 

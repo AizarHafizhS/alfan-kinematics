@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+     <arg name="robot_name" default="chaca" description="The name of the robot" />
+     <arg name="void_controller" default="false" description="If set to true, the robot is not controllable"/>
+     <arg name="robot_type" default="wolfgang" description="What type of robot should be used"/>
+     <arg name="sim_port" default="1234" description="Port used for the simulator communication. Relevant if multiple simulations are run at the same time"/>
+
+     <arg name="void_flag" default="$(eval '\'--void-controller\' if \'$(var void_controller)\'==\'true\' else \'\'')" description="do not set, used internally"/>
+
+     <node pkg="alfan_webots_sim" exec="single_robot" name="webots_ros_interface" respawn="true" output="screen" args="--robot_name $(var robot_name) $(var void_flag) --robot-type $(var robot_type) --sim-port $(var sim_port)">
+     </node>
+</launch>

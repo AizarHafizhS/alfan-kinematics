@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="sim_port" default="1234" description="Port used for the simulator communication. Relevant if multiple simulations are run at the same time"/>
+    <arg name="robot_type" default="alfan" description="What type of robot should be used"/>
+
+    <!-- source nessessary files for webots -->
+    <set_env name="WEBOTS_HOME" value="$(env WEBOTS_HOME /usr/local/webots)"/>
+    <set_env name="LD_LIBRARY_PATH" value="$(env LD_LIBRARY_PATH):$(env WEBOTS_HOME)/lib/controller"/>
+    <!-- Change the python version here if you want to use a different version of python -->
+    <set_env name="PYTHONPATH" value="$(env PYTHONPATH):$(env WEBOTS_HOME)/lib/controller/python310"/>
+
+    <include file="$(find-pkg-share alfan_webots_sim)/launch/single_robot.launch">
+        <arg name="sim_port" value="$(var sim_port)"/>
+        <arg name="robot_type" value="$(var robot_type)"/>
+    </include>
+    
+    <!-- start simulation and supervisor either with or without gui -->
+    <node pkg="alfan_webots_sim" exec="sim_launcher" name="webots_sim" output="screen" args="--sim-port $(var sim_port) --robot-type $(var robot_type)"/>
+
+
+</launch>

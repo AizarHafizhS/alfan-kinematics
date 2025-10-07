@@ -1,0 +1,1 @@
+Package ini dibuat untuk melakukan simulasi Alfan menggunakan Webots. Untuk awalan, ini hanya digunakan untuk mensimulasikan robot saat berjalan tanpa menari.
