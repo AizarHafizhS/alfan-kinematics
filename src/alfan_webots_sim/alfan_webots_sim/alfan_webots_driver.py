@@ -8,8 +8,8 @@ from geometry_msgs.msg import PointStamped
 from rclpy.node import Node as RclpyNode
 from rclpy.time import Time
 from sensor_msgs.msg import JointState
-
-# TODO: Make a package for alfan_msgs and import it here
+from alfan_msgs.msg import JointCommand
+import traceback
 
 class RobotDriver():
     def __init__(
@@ -144,7 +144,7 @@ class RobotDriver():
 
         
         self.pub_js = self.ros_node.create_publisher(JointState, "joint_states", 1)
-        # self.ros_node.create_subscription(JointCommand, base_ns + "DynamixelController/command", self.command_cb, 1)
+        self.ros_node.create_subscription(JointCommand, "DynamixelController/command", self.command_cb, 10)
 
         # needed to run this one time to initialize current position, otherwise velocity will be nan
         self.get_joint_values(self.motor_names)
@@ -198,18 +198,23 @@ class RobotDriver():
             except ValueError:
                 print(f"invalid motor specified ({joint_names[i]})")
 
-    # def command_cb(self, command: JointCommand):
-    #     if len(command.positions) != 0:
-    #         # position control
-    #         # todo maybe needs to match external motor names to interal ones fist?
-    #         self.set_joint_goals_position(command.joint_names, command.positions, command.velocities)
-    #     else:
-    #         # torque control
-    #         for i, name in enumerate(command.joint_names):
-    #             try:
-    #                 self.motors_dict[name].setTorque(command.accelerations[i])
-    #             except ValueError:
-    #                 print(f"invalid motor specified ({name})")
+    def command_cb(self, command: JointCommand):
+        try:
+            self.ros_node.get_logger().info(f"Moving joint in progress...")
+            if len(command.positions) != 0:
+                # position control
+                # todo maybe needs to match external motor names to interal ones fist?
+                self.set_joint_goals_position(command.joint_names, command.positions, command.velocities)
+            else:
+                # torque control
+                for i, name in enumerate(command.joint_names):
+                    try:
+                        self.motors_dict[name].setTorque(command.accelerations[i])
+                    except ValueError:
+                        print(f"invalid motor specified ({name})")
+        except Exception as e:
+            self.ros_node.get_logger().error(f"Something occured: {traceback.format_exc()}")
+
 
     def set_head_tilt(self, pos):
         self.motors[-1].setPosition(pos)

@@ -1241,7 +1241,8 @@ PROTO alfan_2025_fixed [
                             RotationalMotor {
                               name "l_hand_34"
                               maxVelocity 10.0
-                              maxPosition 1.74533
+                              minPosition -1.74533
+                              maxPosition 0.0
                               maxTorque 10.0
                             }
                             PositionSensor {
