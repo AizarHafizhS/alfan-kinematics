@@ -16,6 +16,7 @@
     
     <!-- start simulation and supervisor either with or without gui -->
     <node pkg="alfan_webots_sim" exec="sim_launcher" name="webots_sim" output="screen" args="--sim-port $(var sim_port) --robot-type $(var robot_type)"/>
+    <node pkg="alfan_walking" exec="simple_pub" name="simple_pub" output="screen" />
 
 
 </launch>
