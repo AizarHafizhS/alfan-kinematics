@@ -38,7 +38,7 @@ class JointPublisher : public rclcpp::Node {
 				cmd.velocities = {5.0, 5.0};
 				// cmd.accelerations = {}
 				pub_->publish(cmd);
-			} else if (msg.position[5] >= -0.01) {
+			} else if (msg.position[5] >= -0.001) {
 				auto cmd = alfan_msgs::msg::JointCommand();
 				cmd.joint_names = {"r_hand_24", "l_hand_34"};
 				cmd.positions = {-1.57, -1.57};
