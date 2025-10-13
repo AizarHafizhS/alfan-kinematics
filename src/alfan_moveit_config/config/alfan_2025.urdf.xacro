@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="alfan_2025">
+    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+
+    <!-- Import alfan_2025 urdf file -->
+    <xacro:include filename="$(find alfan_robot_description)/urdf/alfan.urdf" />
+
+    <!-- Import control_xacro -->
+    <xacro:include filename="alfan_2025.ros2_control.xacro" />
+
+
+    <xacro:alfan_2025_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/>
+
+</robot>
