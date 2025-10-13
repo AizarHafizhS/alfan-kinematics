@@ -1,0 +1,889 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape https://cad.onshape.com/documents/8cbf7271d634c29c967e8abb/w/69ee037ca6e75b04c62f3a0c/e/52ef5a2e9e2916901e209032 -->
+<robot name="alfan_2025">
+  <!-- Dummy base link -->
+  <link name="base_link"></link>
+
+  <!-- Link body -->
+  <link name="body">
+    <inertial>
+      <origin xyz="0.000411267 0.0353498 0.302557" rpy="0 0 0"/>
+      <mass value="0.776"/>
+      <inertia ixx="0.00203499" ixy="-1.25756e-06" ixz="9.38892e-06" iyy="0.00237683" iyz="0.000151309" izz="0.00128127"/>
+    </inertial>
+    <!-- Part body -->
+    <collision>
+      <origin xyz="-1.31293e-05 0.0322451 0.34124" rpy="5.10735e-16 2.03322e-15 5.27298e-13"/>
+      <geometry>
+        <box size="0.113618 0.0647698 0.097"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="2.31657e-05 0.0394829 0.270436" rpy="1.5708 1.07144e-09 -3.14159"/>
+      <geometry>
+        <box size="0.124589 0.0459933 0.113"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="3.47065e-06 0.0114153 0.38874" rpy="1.15071e-09 -1.07144e-09 5.27298e-13"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/body.stl"/>
+      </geometry>
+      <material name="body_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link hip_connector -->
+  <link name="hip_connector">
+    <inertial>
+      <origin xyz="-0.00277951 3.46945e-18 0.00995004" rpy="0 0 0"/>
+      <mass value="0.0123061"/>
+      <inertia ixx="1.85406e-06" ixy="8.00236e-46" ixz="-3.24987e-09" iyy="6.40402e-06" iyz="3.03674e-49" izz="5.65319e-06"/>
+    </inertial>
+    <!-- Part hip_connector -->
+    <collision>
+      <origin xyz="-0.00275466 4.61869e-07 0.01715" rpy="-3.14159 1.70298e-32 3.14159"/>
+      <geometry>
+        <box size="0.0505652 0.0271414 0.0343"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.0249111 0.0104111 0" rpy="-1.5708 -1.70298e-32 -1.75665e-40"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/hip_connector.stl"/>
+      </geometry>
+      <material name="hip_connector_material">
+        <color rgba="0.286275 0.286275 0.286275 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link r_hip_mx28_block -->
+  <link name="r_hip_mx28_block">
+    <inertial>
+      <origin xyz="-1.37558e-05 -0.011279 0.00311794" rpy="0 0 0"/>
+      <mass value="0.172"/>
+      <inertia ixx="0.000124355" ixy="-3.24882e-07" ixz="4.71379e-08" iyy="0.000111307" iyz="-2.61935e-06" izz="4.76915e-05"/>
+    </inertial>
+    <!-- Part r_hip_mx28_block -->
+    <collision>
+      <origin xyz="0.00126368 -0.0135 0.00370412" rpy="-1.5708 1.57028 6.01977e-28"/>
+      <geometry>
+        <box size="0.086166 0.0433161 0.051"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.000712109 0.012 0.02305" rpy="-1.5708 1.57028 6.01977e-28"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/r_hip_mx28_block.stl"/>
+      </geometry>
+      <material name="r_hip_mx28_block_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link r_hip_to_knee -->
+  <link name="r_hip_to_knee">
+    <inertial>
+      <origin xyz="1.98623e-05 -0.07614 -0.0205254" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="5.82381e-05" ixy="-4.39709e-08" ixz="-4.88036e-11" iyy="2.07531e-05" iyz="3.32361e-07" izz="4.99882e-05"/>
+    </inertial>
+    <!-- Part r_hip_to_knee -->
+    <collision>
+      <origin xyz="7.98659e-06 -0.0518372 -0.0203764" rpy="1.5708 -0.000512983 6.25151e-12"/>
+      <geometry>
+        <box size="0.0357519 0.0454254 0.108"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="1.04083e-17 -0.0494982 -0.0205" rpy="-1.5708 -0.000512983 3.94431e-31"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/r_hip_to_knee.stl"/>
+      </geometry>
+      <material name="r_hip_to_knee_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link tibia -->
+  <link name="tibia">
+    <inertial>
+      <origin xyz="0.0358486 -0.00695074 -0.0205" rpy="0 0 0"/>
+      <mass value="0.0331521"/>
+      <inertia ixx="1.77691e-05" ixy="-5.4342e-06" ixz="-1.7794e-11" iyy="3.96731e-05" iyz="-1.99428e-11" izz="3.15344e-05"/>
+    </inertial>
+    <!-- Part tibia -->
+    <collision>
+      <origin xyz="0.042763 -0.00188569 -0.0205" rpy="-3.95075e-22 7.29933e-24 -1.70683e-31"/>
+      <geometry>
+        <box size="0.105526 0.0398408 0.045"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.01 -0.0217982 -0.0399111" rpy="-3.14159 -8.07435e-17 -1.70683e-31"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/tibia.stl"/>
+      </geometry>
+      <material name="tibia_material">
+        <color rgba="0.286275 0.286275 0.286275 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link r_ankle_mx28_block -->
+  <link name="r_ankle_mx28_block">
+    <inertial>
+      <origin xyz="0.0202313 0.0113587 -0.0199638" rpy="0 0 0"/>
+      <mass value="0.171"/>
+      <inertia ixx="4.75178e-05" ixy="-2.04125e-06" ixz="-4.79159e-08" iyy="0.000109219" iyz="3.25089e-07" izz="0.000122128"/>
+    </inertial>
+    <!-- Part r_ankle_mx28_block -->
+    <collision>
+      <origin xyz="0.0203326 0.0135 -0.0186868" rpy="1.5708 -0.000512983 -2.95823e-31"/>
+      <geometry>
+        <box size="0.0840214 0.0432827 0.051"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0.033 -0.01995" rpy="-1.5708 -0.000512983 -2.95823e-31"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/r_ankle_mx28_block.stl"/>
+      </geometry>
+      <material name="r_ankle_mx28_block_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link r_foot -->
+  <link name="r_foot">
+    <inertial>
+      <origin xyz="-0.00958302 -0.028072 0.0273224" rpy="0 0 0"/>
+      <mass value="0.068074"/>
+      <inertia ixx="7.24657e-05" ixy="-3.0832e-06" ixz="-1.35193e-06" iyy="9.321e-05" iyz="-3.97153e-06" izz="3.59097e-05"/>
+    </inertial>
+    <!-- Part r_foot -->
+    <collision>
+      <origin xyz="1.08572e-05 -0.00989888 0.027" rpy="3.14159 -1.28014e-10 -1.69082e-13"/>
+      <geometry>
+        <box size="0.0272329 0.0438661 0.054"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0129381 -0.0327982 0.0252954" rpy="-1.5708 1.57028 1.063e-25"/>
+      <geometry>
+        <box size="0.120686 0.080481 0.002"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.0130455 -0.0317982 0.02525" rpy="-1.5708 1.57028 1.063e-25"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/r_foot.stl"/>
+      </geometry>
+      <material name="r_foot_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Joint from r_ankle_mx28_block to r_foot -->
+  <joint name="r_ankle_roll" type="revolute">
+    <origin xyz="0.02305 -2.60209e-15 -0.01995" rpy="-7.45549e-13 -1.5708 0"/>
+    <parent link="r_ankle_mx28_block"/>
+    <child link="r_foot"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.14159" upper="3.14159"/>
+  </joint>
+  <!-- Joint from tibia to r_ankle_mx28_block -->
+  <joint name="r_ankle_pitch" type="revolute">
+    <origin xyz="0.093 0 1.38778e-17" rpy="-2.22045e-16 -6.13031e-17 1.5708"/>
+    <parent link="tibia"/>
+    <child link="r_ankle_mx28_block"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.14159" upper="3.14159"/>
+  </joint>
+  <!-- Joint from r_hip_to_knee to tibia -->
+  <joint name="r_knee" type="revolute">
+    <origin xyz="2.70121e-13 -0.0938373 -0.000550036" rpy="2.24345e-20 2.22045e-16 -1.5708"/>
+    <parent link="r_hip_to_knee"/>
+    <child link="tibia"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.14159" upper="3.14159"/>
+  </joint>
+  <!-- Joint from r_hip_mx28_block to r_hip_to_knee -->
+  <joint name="r_hip_pitch" type="revolute">
+    <origin xyz="0.01995 -4.28185e-13 0.02305" rpy="2.15155e-11 1.5708 0"/>
+    <parent link="r_hip_mx28_block"/>
+    <child link="r_hip_to_knee"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.14159" upper="3.14159"/>
+  </joint>
+  <!-- Joint from hip_connector to r_hip_mx28_block -->
+  <joint name="r_hip_roll" type="revolute">
+    <origin xyz="-0.028 -2.77556e-17 0.0317982" rpy="-1.5708 3.58391e-14 -1.5708"/>
+    <parent link="hip_connector"/>
+    <child link="r_hip_mx28_block"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.14159" upper="3.14159"/>
+  </joint>
+  <!-- Joint from body to hip_connector -->
+  <joint name="r_hip_yaw" type="revolute">
+    <origin xyz="-0.0444 0.0225 0.250434" rpy="3.14159 -2.83277e-16 -1.5708"/>
+    <parent link="body"/>
+    <child link="hip_connector"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.14159" upper="3.14159"/>
+  </joint>
+  <!-- Link hip_connector_2 -->
+  <link name="hip_connector_2">
+    <inertial>
+      <origin xyz="-0.00277951 1.04083e-17 0.00995004" rpy="0 0 0"/>
+      <mass value="0.0123061"/>
+      <inertia ixx="1.85406e-06" ixy="1.52861e-41" ixz="-3.24987e-09" iyy="6.40402e-06" iyz="3.5317e-39" izz="5.65319e-06"/>
+    </inertial>
+    <!-- Part hip_connector_2 -->
+    <collision>
+      <origin xyz="-0.00275466 4.6187e-07 0.01715" rpy="3.14159 2.19107e-41 3.14159"/>
+      <geometry>
+        <box size="0.0505652 0.0271414 0.0343"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.0249111 0.0104111 0" rpy="-1.5708 -2.19107e-41 -1.36696e-41"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/hip_connector.stl"/>
+      </geometry>
+      <material name="hip_connector_2_material">
+        <color rgba="0.286275 0.286275 0.286275 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link l_hip_mx28_block -->
+  <link name="l_hip_mx28_block">
+    <inertial>
+      <origin xyz="-0.000137008 -0.0113671 0.00296229" rpy="0 0 0"/>
+      <mass value="0.172"/>
+      <inertia ixx="0.000124536" ixy="6.17141e-07" ixz="4.64745e-07" iyy="0.000111096" iyz="-2.33547e-06" izz="4.73487e-05"/>
+    </inertial>
+    <!-- Part l_hip_mx28_block -->
+    <collision>
+      <origin xyz="-0.0017475 -0.0135 0.00373125" rpy="-1.5708 1.57028 -6.76328e-15"/>
+      <geometry>
+        <box size="0.0860053 0.0422632 0.051"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.000712109 0.012 0.02305" rpy="-1.5708 1.57028 -3.12948e-24"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/l_hip_mx28_block.stl"/>
+      </geometry>
+      <material name="l_hip_mx28_block_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link l_hip_to_knee -->
+  <link name="l_hip_to_knee">
+    <inertial>
+      <origin xyz="1.98601e-05 0.0761401 -0.0205254" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="5.82381e-05" ixy="4.39729e-08" ixz="-5.17675e-11" iyy="2.07531e-05" iyz="-3.32378e-07" izz="4.99882e-05"/>
+    </inertial>
+    <!-- Part l_hip_to_knee -->
+    <collision>
+      <origin xyz="-7.71454e-06 0.0518372 -0.0203334" rpy="-1.5708 0.000512983 -1.48817e-11"/>
+      <geometry>
+        <box size="0.0357598 0.0454412 0.108"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0.0494982 -0.0205" rpy="1.5708 0.000512983 2.35178e-27"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/l_hip_to_knee.stl"/>
+      </geometry>
+      <material name="l_hip_to_knee_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link tibia_2 -->
+  <link name="tibia_2">
+    <inertial>
+      <origin xyz="0.0358486 0.00695074 -0.0205" rpy="0 0 0"/>
+      <mass value="0.0331521"/>
+      <inertia ixx="1.77691e-05" ixy="5.4342e-06" ixz="1.7794e-11" iyy="3.96731e-05" iyz="-1.99428e-11" izz="3.15344e-05"/>
+    </inertial>
+    <!-- Part tibia_2 -->
+    <collision>
+      <origin xyz="0.042763 0.00188569 -0.0205" rpy="3.14159 -1.89243e-16 -7.02585e-28"/>
+      <geometry>
+        <box size="0.105526 0.0398408 0.045"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.01 0.0217982 -0.00108894" rpy="-2.22045e-16 -1.08499e-16 -7.0262e-28"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/tibia.stl"/>
+      </geometry>
+      <material name="tibia_2_material">
+        <color rgba="0.286275 0.286275 0.286275 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link l_ankle_mx28_block -->
+  <link name="l_ankle_mx28_block">
+    <inertial>
+      <origin xyz="0.0202313 -0.0113587 -0.0199638" rpy="0 0 0"/>
+      <mass value="0.171"/>
+      <inertia ixx="4.75178e-05" ixy="2.04125e-06" ixz="-4.79048e-08" iyy="0.000109219" iyz="-3.25087e-07" izz="0.000122128"/>
+    </inertial>
+    <!-- Part l_ankle_mx28_block -->
+    <collision>
+      <origin xyz="0.0204374 -0.0135 -0.018697" rpy="-1.5708 0.000512983 3.46945e-18"/>
+      <geometry>
+        <box size="0.0841545 0.043397 0.051"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-1.38778e-17 -0.033 -0.01995" rpy="1.5708 0.000512983 -7.66773e-28"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/l_ankle_mx28_block.stl"/>
+      </geometry>
+      <material name="l_ankle_mx28_block_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link l_foot -->
+  <link name="l_foot">
+    <inertial>
+      <origin xyz="0.00958302 -0.028072 0.0273224" rpy="0 0 0"/>
+      <mass value="0.068074"/>
+      <inertia ixx="7.24657e-05" ixy="3.0832e-06" ixz="1.35193e-06" iyy="9.321e-05" iyz="-3.97153e-06" izz="3.59097e-05"/>
+    </inertial>
+    <!-- Part l_foot -->
+    <collision>
+      <origin xyz="0.0130001 -0.0327982 0.0252388" rpy="-1.5708 1.57028 1.91073e-24"/>
+      <geometry>
+        <box size="0.119957 0.0800615 0.002"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-7.28813e-06 -0.00984316 0.027" rpy="-3.14159 1.28908e-10 -3.14159"/>
+      <geometry>
+        <box size="0.0271116 0.0438503 0.054"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.0130455 -0.0317982 0.02525" rpy="-1.5708 1.57028 1.91073e-24"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/l_foot.stl"/>
+      </geometry>
+      <material name="l_foot_material">
+        <color rgba="0.647059 0.647059 0.647059 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- Dummy joint -->
+  <joint name="base_to_body" type="fixed">
+    <parent link="base_link"/>
+    <child link="body"/>
+  </joint>
+
+  <!-- Joint from l_ankle_mx28_block to l_foot -->
+  <joint name="l_ankle_roll" type="revolute">
+    <origin xyz="0.02305 -3.39034e-14 -0.01995" rpy="-3.14159 1.5708 0"/>
+    <parent link="l_ankle_mx28_block"/>
+    <child link="l_foot"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.14159" upper="3.14159"/>
+  </joint>
+  <!-- Joint from tibia_2 to l_ankle_mx28_block -->
+  <joint name="l_ankle_pitch" type="revolute">
+    <origin xyz="0.093 3.46945e-18 -3.46945e-18" rpy="1.53445e-24 -6.12517e-17 -1.5708"/>
+    <parent link="tibia_2"/>
+    <child link="l_ankle_mx28_block"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.14159" upper="3.14159"/>
+  </joint>
+  <!-- Joint from l_hip_to_knee to tibia_2 -->
+  <joint name="l_knee" type="revolute">
+    <origin xyz="6.32584e-13 0.0938373 -0.000550036" rpy="7.6929e-14 1.35379e-14 1.5708"/>
+    <parent link="l_hip_to_knee"/>
+    <child link="tibia_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.14159" upper="3.14159"/>
+  </joint>
+  <!-- Joint from l_hip_mx28_block to l_hip_to_knee -->
+  <joint name="l_hip_pitch" type="revolute">
+    <origin xyz="-0.01995 -3.19242e-10 0.02305" rpy="3.14159 1.5708 0"/>
+    <parent link="l_hip_mx28_block"/>
+    <child link="l_hip_to_knee"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.14159" upper="3.14159"/>
+  </joint>
+  <!-- Joint from hip_connector_2 to l_hip_mx28_block -->
+  <joint name="l_hip_roll" type="revolute">
+    <origin xyz="-0.028 1.52656e-16 0.0317982" rpy="-1.5708 -2.9301e-15 -1.5708"/>
+    <parent link="hip_connector_2"/>
+    <child link="l_hip_mx28_block"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.14159" upper="3.14159"/>
+  </joint>
+  <!-- Joint from body to hip_connector_2 -->
+  <joint name="l_hip_yaw" type="revolute">
+    <origin xyz="0.0444 0.0225 0.250434" rpy="3.14159 2.23241e-25 -1.5708"/>
+    <parent link="body"/>
+    <child link="hip_connector_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.14159" upper="3.14159"/>
+  </joint>
+  <!-- Link r_shoulder_connector -->
+  <link name="r_shoulder_connector">
+    <inertial>
+      <origin xyz="0.00492402 0.00182592 0.00882478" rpy="0 0 0"/>
+      <mass value="0.0111142"/>
+      <inertia ixx="3.10963e-06" ixy="-1.67756e-07" ixz="-2.99732e-07" iyy="1.7787e-06" iyz="-2.9848e-07" izz="3.55567e-06"/>
+    </inertial>
+    <!-- Part r_shoulder_connector -->
+    <collision>
+      <origin xyz="0.00800655 -5.95e-06 0.0145" rpy="3.14159 -6.43441e-29 2.99178e-21"/>
+      <geometry>
+        <box size="0.0381521 0.0360597 0.029"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-5.55112e-17 0 6.93889e-18" rpy="-2.06574e-23 -6.43441e-29 2.99178e-21"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/r_shoulder_connector.stl"/>
+      </geometry>
+      <material name="r_shoulder_connector_material">
+        <color rgba="0.956863 0.956863 0.964706 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link r_arm_pitch -->
+  <link name="r_arm_pitch">
+    <inertial>
+      <origin xyz="-1.44794e-09 -0.00829041 -0.0145388" rpy="0 0 0"/>
+      <mass value="0.021"/>
+      <inertia ixx="3.33337e-06" ixy="3.23662e-13" ixz="2.11157e-13" iyy="1.97043e-06" iyz="-6.60017e-08" izz="2.9586e-06"/>
+    </inertial>
+    <!-- Part r_arm_pitch -->
+    <collision>
+      <origin xyz="3.745e-05 -0.00999997 -0.0142303" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <box size="0.0286122 0.0241427 0.038"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.0105 -0.00796647 -0.0139285" rpy="1.5708 1.5699 -1.5708"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/r_arm_pitch.stl"/>
+      </geometry>
+      <material name="r_arm_pitch_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link r_elbow_block -->
+  <link name="r_elbow_block">
+    <inertial>
+      <origin xyz="0.000187913 -0.00729419 -0.0276562" rpy="0 0 0"/>
+      <mass value="0.041"/>
+      <inertia ixx="1.17514e-05" ixy="1.55398e-08" ixz="9.53464e-08" iyy="1.01417e-05" iyz="-1.83184e-07" izz="5.62471e-06"/>
+    </inertial>
+    <!-- Part r_elbow_block -->
+    <collision>
+      <origin xyz="0.00117209 -0.0105 -0.0259947" rpy="-1.5708 0.000892489 -6.93942e-18"/>
+      <geometry>
+        <box size="0.0311226 0.0520685 0.039"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0.009 -0.015" rpy="-1.5708 0.000892489 -5.30537e-22"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/r_elbow_block.stl"/>
+      </geometry>
+      <material name="r_elbow_block_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link r_wrist_roll -->
+  <link name="r_wrist_roll">
+    <inertial>
+      <origin xyz="0.0244511 0.00421899 -0.0153151" rpy="0 0 0"/>
+      <mass value="0.024"/>
+      <inertia ixx="3.25385e-06" ixy="1.33849e-07" ixz="8.98504e-08" iyy="3.02331e-06" iyz="1.36622e-08" izz="3.92934e-06"/>
+    </inertial>
+    <!-- Part r_wrist_roll -->
+    <collision>
+      <origin xyz="0.015961 0.009 -0.015471" rpy="1.5708 1.5697 1.26491e-14"/>
+      <geometry>
+        <box size="0.0341979 0.050073 0.042"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.026 -0.012 -0.01545" rpy="1.5708 1.5697 4.67477e-19"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/r_wrist_roll.stl"/>
+      </geometry>
+      <material name="r_wrist_roll_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link r_wrist_pitch -->
+  <link name="r_wrist_pitch">
+    <inertial>
+      <origin xyz="-0.000562986 1.18408e-09 0.0208877" rpy="0 0 0"/>
+      <mass value="0.021"/>
+      <inertia ixx="2.94329e-06" ixy="2.33635e-13" ixz="3.69312e-08" iyy="3.38578e-06" iyz="-3.52795e-13" izz="2.02185e-06"/>
+    </inertial>
+    <!-- Part r_wrist_pitch -->
+    <collision>
+      <origin xyz="0.0002212 -1.185e-05 0.019" rpy="3.14159 5.42031e-09 2.90242e-22"/>
+      <geometry>
+        <box size="0.0313399 0.0243173 0.038"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.00157155 -0.0105 0.0210335" rpy="1.5708 -0.00109551 3.18065e-22"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/r_wrist_pitch.stl"/>
+      </geometry>
+      <material name="r_wrist_pitch_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link r_palm -->
+  <link name="r_palm">
+    <inertial>
+      <origin xyz="0.0324738 0.00342859 -0.0134642" rpy="0 0 0"/>
+      <mass value="0.027"/>
+      <inertia ixx="4.5206e-06" ixy="6.58745e-07" ixz="-2.42819e-07" iyy="1.18175e-05" iyz="-1.67967e-07" izz="9.92762e-06"/>
+    </inertial>
+    <!-- Part r_palm -->
+    <collision>
+      <origin xyz="0.034 0.00362248 -0.0156296" rpy="-1.97381e-13 -1.5708 0"/>
+      <geometry>
+        <box size="0.0370488 0.0352658 0.086"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.014247 -0.0135 -0.01545" rpy="1.5708 1.56976 -1.88016e-19"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/r_palm.stl"/>
+      </geometry>
+      <material name="r_palm_material">
+        <color rgba="0.952941 0.815686 0.705882 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Joint from r_wrist_pitch to r_palm -->
+  <joint name="r_hand_26" type="revolute">
+    <origin xyz="-0.0154 1.05818e-15 0.029" rpy="1.5708 -1.57079 -1.5708"/>
+    <parent link="r_wrist_pitch"/>
+    <child link="r_palm"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-1.74532" upper="1.74534"/>
+  </joint>
+  <!-- Joint from r_wrist_roll to r_wrist_pitch -->
+  <joint name="r_hand_25" type="revolute">
+    <origin xyz="0.041 -0.003 -0.01545" rpy="-5.86012e-22 1.5708 0"/>
+    <parent link="r_wrist_roll"/>
+    <child link="r_wrist_pitch"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.40339" upper="1.8326"/>
+  </joint>
+  <!-- Joint from r_elbow_block to r_wrist_roll -->
+  <joint name="r_hand_24" type="revolute">
+    <origin xyz="-0.0144 7.71258e-15 -0.04" rpy="-1.5708 1.57079 1.5708"/>
+    <parent link="r_elbow_block"/>
+    <child link="r_wrist_roll"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-1.74533" upper="4.19964e-06"/>
+  </joint>
+  <!-- Joint from r_arm_pitch to r_elbow_block -->
+  <joint name="r_hand_23" type="revolute">
+    <origin xyz="3.38618e-15 -0.029 -0.0145" rpy="1.5708 8.47445e-06 -3.14159"/>
+    <parent link="r_arm_pitch"/>
+    <child link="r_elbow_block"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-2.09439" upper="3.1416"/>
+  </joint>
+  <!-- Joint from r_shoulder_connector to r_arm_pitch -->
+  <joint name="r_hand_22" type="revolute">
+    <origin xyz="0.016 0.01595 0.018" rpy="-1.5708 0.776672 -9.454e-15"/>
+    <parent link="r_shoulder_connector"/>
+    <child link="r_arm_pitch"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.40339" upper="1.8326"/>
+  </joint>
+  <!-- Joint from body to r_shoulder_connector -->
+  <joint name="r_hand_21" type="revolute">
+    <origin xyz="-0.058987 0.0152644 0.365421" rpy="-1.5708 1.57078 1.5708"/>
+    <parent link="body"/>
+    <child link="r_shoulder_connector"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-1.57078" upper="3.49067"/>
+  </joint>
+  <!-- Link l_shoulder_connector -->
+  <link name="l_shoulder_connector">
+    <inertial>
+      <origin xyz="0.00492402 -0.00182592 0.00882478" rpy="0 0 0"/>
+      <mass value="0.0111142"/>
+      <inertia ixx="3.10963e-06" ixy="1.67756e-07" ixz="-2.99732e-07" iyy="1.7787e-06" iyz="2.9848e-07" izz="3.55567e-06"/>
+    </inertial>
+    <!-- Part l_shoulder_connector -->
+    <collision>
+      <origin xyz="0.0079919 4.7e-06 0.0145" rpy="3.14159 1.25349e-31 -7.52838e-26"/>
+      <geometry>
+        <box size="0.038113 0.0359998 0.029"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 -6.93889e-18" rpy="-3.906e-24 1.25349e-31 -7.52838e-26"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/l_shoulder_connector.stl"/>
+      </geometry>
+      <material name="l_shoulder_connector_material">
+        <color rgba="0.956863 0.956863 0.964706 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link l_arm_pitch -->
+  <link name="l_arm_pitch">
+    <inertial>
+      <origin xyz="0.00829041 -1.88353e-10 -0.0145388" rpy="0 0 0"/>
+      <mass value="0.021"/>
+      <inertia ixx="1.97043e-06" ixy="-4.58544e-14" ixz="6.60027e-08" iyy="3.33337e-06" iyz="2.91579e-14" izz="2.95861e-06"/>
+    </inertial>
+    <!-- Part l_arm_pitch -->
+    <collision>
+      <origin xyz="0.00999999 1.74e-06 -0.014211" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <box size="0.0286099 0.0240448 0.038"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.00796647 0.0105 -0.0139285" rpy="-1.5708 1.56923 -9.73603e-17"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/l_arm_pitch.stl"/>
+      </geometry>
+      <material name="l_arm_pitch_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link l_elbow_block -->
+  <link name="l_elbow_block">
+    <inertial>
+      <origin xyz="0.000187914 0.00729419 -0.0276562" rpy="0 0 0"/>
+      <mass value="0.041"/>
+      <inertia ixx="1.17514e-05" ixy="-1.55395e-08" ixz="9.53461e-08" iyy="1.01417e-05" iyz="1.83183e-07" izz="5.62471e-06"/>
+    </inertial>
+    <!-- Part l_elbow_block -->
+    <collision>
+      <origin xyz="0.00109686 0.0105 -0.0260383" rpy="1.5708 0.00156672 3.28675e-13"/>
+      <geometry>
+        <box size="0.0312457 0.0521967 0.039"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="5.55112e-17 -0.009 -0.015" rpy="1.5708 0.00156672 5.69396e-24"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/l_elbow_block.stl"/>
+      </geometry>
+      <material name="l_elbow_block_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link l_wrist_roll -->
+  <link name="l_wrist_roll">
+    <inertial>
+      <origin xyz="0.0221358 0.00422592 0.0168149" rpy="0 0 0"/>
+      <mass value="0.024"/>
+      <inertia ixx="3.25467e-06" ixy="1.31122e-07" ixz="-8.98834e-08" iyy="3.01902e-06" iyz="-1.36984e-08" izz="3.92472e-06"/>
+    </inertial>
+    <!-- Part l_wrist_roll -->
+    <collision>
+      <origin xyz="0.0136709 0.00899997 0.016925" rpy="1.5708 -1.56902 -3.08139e-13"/>
+      <geometry>
+        <box size="0.0340405 0.0500191 0.042"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.0237011 -0.012 0.01695" rpy="1.5708 -1.56902 -3.04222e-13"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/l_wrist_roll.stl"/>
+      </geometry>
+      <material name="l_wrist_roll_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link l_wrist_pitch -->
+  <link name="l_wrist_pitch">
+    <inertial>
+      <origin xyz="-0.000562985 1.95779e-10 0.0208877" rpy="0 0 0"/>
+      <mass value="0.021"/>
+      <inertia ixx="2.94329e-06" ixy="3.78283e-14" ixz="3.69321e-08" iyy="3.38578e-06" iyz="-3.71173e-14" izz="2.02185e-06"/>
+    </inertial>
+    <!-- Part l_wrist_pitch -->
+    <collision>
+      <origin xyz="0.0001983 -1.943e-05 0.019" rpy="-3.14159 4.71272e-09 1.78219e-23"/>
+      <geometry>
+        <box size="0.0313319 0.0241859 0.038"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.00157155 0.0105 0.0210335" rpy="-1.5708 -0.00176881 -5.42858e-24"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/l_wrist_pitch.stl"/>
+      </geometry>
+      <material name="l_wrist_pitch_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link l_palm -->
+  <link name="l_palm">
+    <inertial>
+      <origin xyz="0.0327282 -0.00344876 -0.0133785" rpy="0 0 0"/>
+      <mass value="0.027"/>
+      <inertia ixx="4.50317e-06" ixy="-6.89044e-07" ixz="-3.31517e-07" iyy="1.2318e-05" iyz="1.52921e-07" izz="1.04346e-05"/>
+    </inertial>
+    <!-- Part l_palm -->
+    <collision>
+      <origin xyz="0.034 -0.00364419 -0.0153821" rpy="3.14159 1.5708 0"/>
+      <geometry>
+        <box size="0.0373386 0.0354738 0.086"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.014247 0.0135 -0.01545" rpy="-1.5708 1.56909 4.24055e-21"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/l_palm.stl"/>
+      </geometry>
+      <material name="l_palm_material">
+        <color rgba="0.952941 0.815686 0.705882 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Joint from l_wrist_pitch to l_palm -->
+  <joint name="l_hand_36" type="revolute">
+    <origin xyz="-0.0154 -9.61037e-16 0.029" rpy="1.13408e-16 -1.5708 0"/>
+    <parent link="l_wrist_pitch"/>
+    <child link="l_palm"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-1.74533" upper="1.74533"/>
+  </joint>
+  <!-- Joint from l_wrist_roll to l_wrist_pitch -->
+  <joint name="l_hand_35" type="revolute">
+    <origin xyz="0.0386011 -0.00300003 0.01695" rpy="3.14159 -1.5708 0"/>
+    <parent link="l_wrist_roll"/>
+    <child link="l_wrist_pitch"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-1.8326" upper="3.40339"/>
+  </joint>
+  <!-- Joint from l_elbow_block to l_wrist_roll -->
+  <joint name="l_hand_34" type="revolute">
+    <origin xyz="-0.0144 -7.69003e-15 -0.04" rpy="-3.28224e-13 1.5708 0"/>
+    <parent link="l_elbow_block"/>
+    <child link="l_wrist_roll"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="0" upper="1.74533"/>
+  </joint>
+  <!-- Joint from l_arm_pitch to l_elbow_block -->
+  <joint name="l_hand_33" type="revolute">
+    <origin xyz="0.029 -4.38538e-15 -0.0145" rpy="-1.5708 -3.77924e-13 1.5708"/>
+    <parent link="l_arm_pitch"/>
+    <child link="l_elbow_block"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.14159" upper="2.0944"/>
+  </joint>
+  <!-- Joint from l_shoulder_connector to l_arm_pitch -->
+  <joint name="l_hand_32" type="revolute">
+    <origin xyz="0.016 -0.01595 0.018" rpy="1.5708 -0.776672 -2.06163e-16"/>
+    <parent link="l_shoulder_connector"/>
+    <child link="l_arm_pitch"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-1.8326" upper="3.40339"/>
+  </joint>
+  <!-- Joint from body to l_shoulder_connector -->
+  <joint name="l_hand_31" type="revolute">
+    <origin xyz="0.0589788 0.0152645 0.365421" rpy="-1.87514e-07 1.5708 0"/>
+    <parent link="body"/>
+    <child link="l_shoulder_connector"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.49066" upper="1.5708"/>
+  </joint>
+  <!-- Link neck -->
+  <link name="neck">
+    <inertial>
+      <origin xyz="0.000726822 1.05378e-09 0.0226572" rpy="0 0 0"/>
+      <mass value="0.025"/>
+      <inertia ixx="3.57611e-06" ixy="1.96264e-13" ixz="-2.63437e-08" iyy="4.36092e-06" iyz="-4.85258e-13" izz="2.59214e-06"/>
+    </inertial>
+    <!-- Part neck -->
+    <collision>
+      <origin xyz="-0.000500027 8.07323e-07 0.0199465" rpy="1.5708 -3.38694e-15 1.5708"/>
+      <geometry>
+        <box size="0.0240336 0.039947 0.029"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-6.93889e-18 -2.75794e-17 0.03992" rpy="3.35236e-15 4.63447e-16 -0.118375"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/neck.stl"/>
+      </geometry>
+      <material name="neck_material">
+        <color rgba="0.615686 0.811765 0.929412 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link head_to_face -->
+  <link name="head_to_face">
+    <inertial>
+      <origin xyz="-0.000291133 0.02378 -0.0219855" rpy="0 0 0"/>
+      <mass value="0.043"/>
+      <inertia ixx="1.07245e-05" ixy="9.0142e-09" ixz="1.46286e-07" iyy="1.01572e-05" iyz="6.88999e-09" izz="6.16174e-06"/>
+    </inertial>
+    <!-- Part head_to_face -->
+    <collision>
+      <origin xyz="1.56115e-05 0.01326 -0.022" rpy="7.73175e-19 -2.79721e-07 -8.28365e-15"/>
+      <geometry>
+        <box size="0.032099 0.0505201 0.044"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="3.14066e-16 0.0385 -0.019955" rpy="-1.5708 1.45242 -7.11399e-18"/>
+      <geometry>
+        <mesh filename="package://alfan_robot_description/meshes/head_to_face.stl"/>
+      </geometry>
+      <material name="head_to_face_material">
+        <color rgba="0.615686 0.811765 0.929412 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Joint from neck to head_to_face -->
+  <joint name="head_roll" type="revolute">
+    <origin xyz="-0.015 -2.87625e-09 0.03092" rpy="1.5708 3.20936e-15 -1.5708"/>
+    <parent link="neck"/>
+    <child link="head_to_face"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from body to neck -->
+  <joint name="head_yaw" type="revolute">
+    <origin xyz="8.10306e-05 0.0362866 0.390889" rpy="1.9557e-09 -0.0104304 1.5708"/>
+    <parent link="body"/>
+    <child link="neck"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10.0" velocity="10.0" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+</robot>
