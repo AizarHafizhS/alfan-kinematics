@@ -11,7 +11,7 @@ Kinematics engine and locomotion framework for Alfan humanoid robot's bipedal wa
 - [ROS 2 Humble Hawksbill](https://docs.ros.org/en/humble/index.html)
 - [Gazebo Fortress](https://gazebosim.org/docs/fortress/install/)
 - [MoveIt 2](https://moveit.picknik.ai/main/doc/tutorials/getting_started/getting_started.html)
-- Git (of course lah ya)
+- [Git](https://git-scm.com/)
 - *(Deprecated)* [Webots R2025a](https://cyberbotics.com/doc/guide/installing-webots) - if you still want to run the legacy simulation.
 
 ## 🧠 Reasoning of the Stack
@@ -22,9 +22,9 @@ Kinematics engine and locomotion framework for Alfan humanoid robot's bipedal wa
 
 ## ⚠️ Migration Considerations
 If you plan to migrate to another stack or physical hardware, consider these rules:
-- Gazebo Fortress simulation is bridged via [`ign_ros2_control`](https://index.ros.org/p/ign_ros2_control/). Changing simulators (e.g., to physical hardware) means you **must** rewrite the hardware interface tags in the URDF/XACRO config.
-- Validate hardware compatibility and control frequencies before physical deployment.
-- Ensure hardware middleware/API availability (e.g., RS485 communication limits).
+- Gazebo Fortress simulation is bridged via [`ign_ros2_control`](https://index.ros.org/p/ign_ros2_control/). Changing simulators (e.g., to physical hardware or to other Gazebo distro) means you **must** rewrite the hardware interface tags in the URDF/XACRO config.
+- Validate hardware compatibility before physical deployment.
+- Ensure hardware middleware/API availability (e.g. Dynamixel with DynamixelSDK).
 - **PLEASE! FEEL FREE UNTUK MENCOBA BERBAGAI HAL BARU. JANGAN STUCK DI SINI YA!**
 
 ## 🗑️ Deprecation List (Delete-Soon Packages)
@@ -40,17 +40,17 @@ If you plan to migrate to another stack or physical hardware, consider these rul
    cd ~/alfan_ros2_ws/
 ```
 
-1. **Clone this repository**
+2. **Clone this repository**
 ``` bash
     git clone https://github.com/AizarHafizhS/alfan-kinematics.git
 ```
-1. **Build the packages**
+3. **Build the packages**
 ``` bash
     colcon build --packages-select alfan_msgs alfan_walking alfan_webots_sim alfan_robot_description alfan_moveit_config
     source install/setup.bash
 ```
-1. **Launch the simulation**
-   Choose one of the environments below depending on your testing focus:
+4. **Launch the simulation**  
+   Choose one of the environments below depending on your testing focus:  
    **A. MoveIt 2 Demo (No Physics)**
     ``` bash
     ros2 launch alfan_moveit_config demo.launch.py
