@@ -9,6 +9,12 @@
     <xacro:include filename="alfan_2025.ros2_control.xacro" />
 
 
-    <xacro:alfan_2025_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/>
+    <xacro:alfan_2025_ros2_control name="GazeboROS2" initial_positions_file="$(arg initial_positions_file)"/>
+
+    <gazebo>
+        <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+            <parameters>$(find alfan_moveit_config)/config/ros2_controllers.yaml</parameters>
+        </plugin>
+    </gazebo>
 
 </robot>

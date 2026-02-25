@@ -1,0 +1,17 @@
+22 Feb 2026
+- Udah nyoba connect Webots, ROS2, dan MoveIt2. Full AI sih codenya hehe. Ini udah percobaan hari ke-3.
+- Hasilnya failed. Disebabkan karena controller_manager yang timeout terus ketika mau aktifkan semua controller lain
+- Udah nyoba banyak hal untuk fix, tapi gak ada yang works
+- Sedikit support community soal koneksi antara ketiga software ini.
+- Ada referensi dari github BitBots (github.com/bit-bots/bitbots_main/), tapi dia membuat drier webots_ros2 sendiri. agak ribet jadi skip aja deh.
+
+- Berencana untuk pindah dari WEbots ke Gazebo aja karena community support yang rame (banyak tutorialnya di youtube).
+
+- Semua rangkaian percobaannya aku buang karena banyak file yang diubah. Hanya menyisakan "webots_moveit.launch.py"
+
+23 Feb 2026
+- Gazebo bisa cuy. Jauh lebih aman dan reliable. Banyak community support juga.
+- Sekarang udah bisa connect ke Gazebo Fortress, RViz, ROS2, dan MoveIt2 secara bersamaan dan semua sinkron.
+- Udah bisa nerima state joint dan sensor (udah add IMU Sensor cuyy) dari simulasinya
+- Ada IMU sensor 9 axis juga. mantap
+- Next: buat program untuk gerak secara autonomus dan program jalan dengan quintic walk.

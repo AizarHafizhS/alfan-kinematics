@@ -2,6 +2,7 @@
 controller_manager:
   ros__parameters:
     update_rate: 100  # Hz
+    use_sim_time: true
 
     head_controller:
       type: joint_trajectory_controller/JointTrajectoryController
@@ -26,19 +27,25 @@ controller_manager:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
+    imu_broadcaster:
+      type: imu_sensor_broadcaster/IMUSensorBroadcaster
+
 head_controller:
   ros__parameters:
+    use_sim_time: true
     joints:
       - head_yaw
       - head_roll
     command_interfaces:
       - position
-      - velocity
     state_interfaces:
       - position
-      - velocity
+      # - velocity
+    allow_nonzero_velocity_at_trajectory_end: false
+
 right_arm_controller:
   ros__parameters:
+    use_sim_time: true
     joints:
       - r_hand_21
       - r_hand_22
@@ -48,12 +55,15 @@ right_arm_controller:
       - r_hand_26
     command_interfaces:
       - position
-      - velocity
+      # - velocity
     state_interfaces:
       - position
-      - velocity
+      # - velocity
+    allow_nonzero_velocity_at_trajectory_end: false
+
 left_arm_controller:
   ros__parameters:
+    use_sim_time: true
     joints:
       - l_hand_31
       - l_hand_32
@@ -63,12 +73,15 @@ left_arm_controller:
       - l_hand_36
     command_interfaces:
       - position
-      - velocity
+      # - velocity
     state_interfaces:
       - position
-      - velocity
+      # - velocity
+    allow_nonzero_velocity_at_trajectory_end: false
+
 right_leg_controller:
   ros__parameters:
+    use_sim_time: true
     joints:
       - r_hip_yaw
       - r_hip_roll
@@ -78,12 +91,15 @@ right_leg_controller:
       - r_ankle_roll
     command_interfaces:
       - position
-      - velocity
+      # - velocity
     state_interfaces:
       - position
-      - velocity
+      # - velocity
+    allow_nonzero_velocity_at_trajectory_end: false
+
 left_leg_controller:
   ros__parameters:
+    use_sim_time: true
     joints:
       - l_hip_yaw
       - l_hip_roll
@@ -93,7 +109,14 @@ left_leg_controller:
       - l_ankle_roll
     command_interfaces:
       - position
-      - velocity
+      # - velocity
     state_interfaces:
       - position
-      - velocity
+      # - velocity
+    allow_nonzero_velocity_at_trajectory_end: false
+
+imu_broadcaster:
+  ros__parameters:
+    use_sim_time: true
+    sensor_name: imu_sensor
+    frame_id: body
