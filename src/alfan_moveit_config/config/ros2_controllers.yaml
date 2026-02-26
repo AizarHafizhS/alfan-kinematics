@@ -1,7 +1,7 @@
 # This config file is used by ros2_control
 controller_manager:
   ros__parameters:
-    update_rate: 100  # Hz
+    update_rate: 1000  # Hz
     use_sim_time: true
 
     head_controller:
@@ -16,13 +16,15 @@ controller_manager:
       type: joint_trajectory_controller/JointTrajectoryController
 
 
-    right_leg_controller:
+    # right_leg_controller:
+    #   type: joint_trajectory_controller/JointTrajectoryController
+
+
+    # left_leg_controller:
+    #   type: joint_trajectory_controller/JointTrajectoryController
+
+    legs_controller:
       type: joint_trajectory_controller/JointTrajectoryController
-
-
-    left_leg_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
-
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -38,9 +40,10 @@ head_controller:
       - head_roll
     command_interfaces:
       - position
+      - velocity
     state_interfaces:
       - position
-      # - velocity
+      - velocity
     allow_nonzero_velocity_at_trajectory_end: false
 
 right_arm_controller:
@@ -55,10 +58,10 @@ right_arm_controller:
       - r_hand_26
     command_interfaces:
       - position
-      # - velocity
+      - velocity
     state_interfaces:
       - position
-      # - velocity
+      - velocity
     allow_nonzero_velocity_at_trajectory_end: false
 
 left_arm_controller:
@@ -73,15 +76,16 @@ left_arm_controller:
       - l_hand_36
     command_interfaces:
       - position
-      # - velocity
+      - velocity
     state_interfaces:
       - position
-      # - velocity
+      - velocity
     allow_nonzero_velocity_at_trajectory_end: false
 
-right_leg_controller:
+legs_controller:
   ros__parameters:
     use_sim_time: true
+    allow_partial_joints_goal: true
     joints:
       - r_hip_yaw
       - r_hip_roll
@@ -89,18 +93,6 @@ right_leg_controller:
       - r_knee
       - r_ankle_pitch
       - r_ankle_roll
-    command_interfaces:
-      - position
-      # - velocity
-    state_interfaces:
-      - position
-      # - velocity
-    allow_nonzero_velocity_at_trajectory_end: false
-
-left_leg_controller:
-  ros__parameters:
-    use_sim_time: true
-    joints:
       - l_hip_yaw
       - l_hip_roll
       - l_hip_pitch
@@ -109,14 +101,50 @@ left_leg_controller:
       - l_ankle_roll
     command_interfaces:
       - position
-      # - velocity
+      - velocity
     state_interfaces:
       - position
-      # - velocity
+      - velocity
     allow_nonzero_velocity_at_trajectory_end: false
-
+    
 imu_broadcaster:
   ros__parameters:
     use_sim_time: true
     sensor_name: imu_sensor
     frame_id: body
+
+# right_leg_controller:
+#   ros__parameters:
+#     use_sim_time: true
+#     joints:
+#       - r_hip_yaw
+#       - r_hip_roll
+#       - r_hip_pitch
+#       - r_knee
+#       - r_ankle_pitch
+#       - r_ankle_roll
+#     command_interfaces:
+#       - position
+#       - velocity
+#     state_interfaces:
+#       - position
+#       - velocity
+#     allow_nonzero_velocity_at_trajectory_end: false
+
+# left_leg_controller:
+#   ros__parameters:
+#     use_sim_time: true
+#     joints:
+#       - l_hip_yaw
+#       - l_hip_roll
+#       - l_hip_pitch
+#       - l_knee
+#       - l_ankle_pitch
+#       - l_ankle_roll
+#     command_interfaces:
+#       - position
+#       - velocity
+#     state_interfaces:
+#       - position
+#       - velocity
+#     allow_nonzero_velocity_at_trajectory_end: false

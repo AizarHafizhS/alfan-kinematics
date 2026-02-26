@@ -7,8 +7,7 @@ moveit_simple_controller_manager:
     - head_controller
     - right_arm_controller
     - left_arm_controller
-    - right_leg_controller
-    - left_leg_controller
+    - legs_controller
 
   head_controller:
     type: FollowJointTrajectory
@@ -39,7 +38,7 @@ moveit_simple_controller_manager:
       - l_hand_36
     action_ns: follow_joint_trajectory
     default: true
-  right_leg_controller:
+  legs_controller:
     type: FollowJointTrajectory
     joints:
       - r_hip_yaw
@@ -48,11 +47,6 @@ moveit_simple_controller_manager:
       - r_knee
       - r_ankle_pitch
       - r_ankle_roll
-    action_ns: follow_joint_trajectory
-    default: true
-  left_leg_controller:
-    type: FollowJointTrajectory
-    joints:
       - l_hip_yaw
       - l_hip_roll
       - l_hip_pitch

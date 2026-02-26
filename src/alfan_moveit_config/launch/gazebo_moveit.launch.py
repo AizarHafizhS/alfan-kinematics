@@ -53,14 +53,13 @@ def generate_launch_description():
     head_spawner = Node(package="controller_manager", executable="spawner", arguments=["head_controller"])
     l_arm_spawner = Node(package="controller_manager", executable="spawner", arguments=["left_arm_controller"])
     r_arm_spawner = Node(package="controller_manager", executable="spawner", arguments=["right_arm_controller"])
-    l_leg_spawner = Node(package="controller_manager", executable="spawner", arguments=["left_leg_controller"])
-    r_leg_spawner = Node(package="controller_manager", executable="spawner", arguments=["right_leg_controller"])
+    legs_spawner = Node(package="controller_manager", executable="spawner", arguments=["legs_controller"])
     imu_spawner = Node(package="controller_manager", executable="spawner", arguments=["imu_broadcaster"])
 
     # Beri masa 4 saat untuk Gazebo sedia sebelum memasukkan controller
     delay_spawners = TimerAction(
         period=4.0,
-        actions=[jsb_spawner, imu_spawner, head_spawner, l_arm_spawner, r_arm_spawner, l_leg_spawner, r_leg_spawner]
+        actions=[jsb_spawner, imu_spawner, head_spawner, l_arm_spawner, r_arm_spawner, legs_spawner]
     )
 
     return LaunchDescription([

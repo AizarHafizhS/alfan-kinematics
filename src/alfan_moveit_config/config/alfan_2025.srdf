@@ -14,40 +14,44 @@
         <joint name="head_roll"/>
     </group>
     <group name="right_arm">
-        <link name="r_palm"/>
+        <!-- <link name="r_palm"/>
         <joint name="r_hand_21"/>
         <joint name="r_hand_22"/>
         <joint name="r_hand_23"/>
         <joint name="r_hand_24"/>
         <joint name="r_hand_25"/>
-        <joint name="r_hand_26"/>
+        <joint name="r_hand_26"/> -->
+        <chain base_link="body" tip_link="r_palm"/>
     </group>
     <group name="left_arm">
-        <link name="l_palm"/>
+        <!-- <link name="l_palm"/>
         <joint name="l_hand_31"/>
         <joint name="l_hand_32"/>
         <joint name="l_hand_33"/>
         <joint name="l_hand_34"/>
         <joint name="l_hand_35"/>
-        <joint name="l_hand_36"/>
+        <joint name="l_hand_36"/> -->
+        <chain base_link="body" tip_link="l_palm"/>
     </group>
     <group name="right_leg">
-        <link name="r_foot"/>
+        <!-- <link name="r_foot"/>
         <joint name="r_hip_yaw"/>
         <joint name="r_hip_roll"/>
         <joint name="r_hip_pitch"/>
         <joint name="r_knee"/>
         <joint name="r_ankle_pitch"/>
-        <joint name="r_ankle_roll"/>
+        <joint name="r_ankle_roll"/> -->
+        <chain base_link="body" tip_link="r_foot"/>
     </group>
     <group name="left_leg">
-        <link name="l_foot"/>
+        <!-- <link name="l_foot"/>
         <joint name="l_hip_yaw"/>
         <joint name="l_hip_roll"/>
         <joint name="l_hip_pitch"/>
         <joint name="l_knee"/>
         <joint name="l_ankle_pitch"/>
-        <joint name="l_ankle_roll"/>
+        <joint name="l_ankle_roll"/> -->
+        <chain base_link="body" tip_link="l_foot"/>
     </group>
     <group name="legs">
         <group name="right_leg"/>

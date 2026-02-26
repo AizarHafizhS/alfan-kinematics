@@ -6,296 +6,91 @@
         <ros2_control name="${name}" type="system">
             <hardware>
                 <!-- By default, set up controllers for simulation. This won't work on real hardware -->
-                <plugin>ign_ros2_control/IgnitionSystem</plugin>
+                <plugin>gz_ros2_control/GazeboSimSystem</plugin>
             </hardware>
             <joint name="head_yaw">
                 <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['head_yaw']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
+                <command_interface name="velocity"/>
+                <state_interface name="position"><param name="initial_value">${initial_positions['head_yaw']}</param></state_interface>
+                <state_interface name="velocity"/>
+                <param name="p">15.0</param><param name="d">0.2</param><param name="max_effort">0.39</param>
             </joint>
             <joint name="head_roll">
                 <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['head_roll']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="r_hand_21">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['r_hand_21']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="r_hand_22">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['r_hand_22']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="r_hand_23">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['r_hand_23']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="r_hand_24">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['r_hand_24']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="r_hand_25">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['r_hand_25']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="r_hand_26">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['r_hand_26']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="l_hand_31">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['l_hand_31']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="l_hand_32">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['l_hand_32']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="l_hand_33">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['l_hand_33']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="l_hand_34">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['l_hand_34']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="l_hand_35">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['l_hand_35']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="l_hand_36">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['l_hand_36']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="r_hip_yaw">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['r_hip_yaw']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="r_hip_roll">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['r_hip_roll']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="r_hip_pitch">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['r_hip_pitch']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="r_knee">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['r_knee']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="r_ankle_pitch">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['r_ankle_pitch']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="r_ankle_roll">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['r_ankle_roll']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="l_hip_yaw">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['l_hip_yaw']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="l_hip_roll">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['l_hip_roll']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="l_hip_pitch">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['l_hip_pitch']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="l_knee">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['l_knee']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="l_ankle_pitch">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['l_ankle_pitch']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
-            </joint>
-            <joint name="l_ankle_roll">
-                <command_interface name="position"/>
-                <!-- <command_interface name="velocity"/> -->
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['l_ankle_roll']}</param>
-                </state_interface>
-                <!-- <state_interface name="velocity"/> -->
-                <param name="p">20.0</param>
-                <param name="d">0.5</param>
-                <param name="max_effort">2.5</param>
+                <command_interface name="velocity"/>
+                <state_interface name="position"><param name="initial_value">${initial_positions['head_roll']}</param></state_interface>
+                <state_interface name="velocity"/>
+                <param name="p">15.0</param><param name="d">0.2</param><param name="max_effort">0.39</param>
             </joint>
 
-            <!-- 6 Axis IMU Sensor -->
+            <joint name="r_hand_21">
+                <command_interface name="position"/>
+                <command_interface name="velocity"/>
+                <state_interface name="position"><param name="initial_value">${initial_positions['r_hand_21']}</param></state_interface>
+                <state_interface name="velocity"/>
+                <param name="p">60.0</param><param name="d">1.0</param><param name="max_effort">2.5</param>
+            </joint>
+            <xacro:macro name="xl320_r_arm_joint" params="joint_name">
+                <joint name="${joint_name}">
+                    <command_interface name="position"/>
+                    <command_interface name="velocity"/>
+                    <state_interface name="position"><param name="initial_value">${initial_positions[joint_name]}</param></state_interface>
+                    <state_interface name="velocity"/>
+                    <param name="p">15.0</param><param name="d">0.2</param><param name="max_effort">0.39</param>
+                </joint>
+            </xacro:macro>
+            <xacro:xl320_r_arm_joint joint_name="r_hand_22"/>
+            <xacro:xl320_r_arm_joint joint_name="r_hand_23"/>
+            <xacro:xl320_r_arm_joint joint_name="r_hand_24"/>
+            <xacro:xl320_r_arm_joint joint_name="r_hand_25"/>
+            <xacro:xl320_r_arm_joint joint_name="r_hand_26"/>
+
+            <joint name="l_hand_31">
+                <command_interface name="position"/>
+                <command_interface name="velocity"/>
+                <state_interface name="position"><param name="initial_value">${initial_positions['l_hand_31']}</param></state_interface>
+                <state_interface name="velocity"/>
+                <param name="p">60.0</param><param name="d">1.0</param><param name="max_effort">2.5</param>
+            </joint>
+            <xacro:macro name="xl320_l_arm_joint" params="joint_name">
+                <joint name="${joint_name}">
+                    <command_interface name="position"/>
+                    <command_interface name="velocity"/>
+                    <state_interface name="position"><param name="initial_value">${initial_positions[joint_name]}</param></state_interface>
+                    <state_interface name="velocity"/>
+                    <param name="p">15.0</param><param name="d">0.2</param><param name="max_effort">0.39</param>
+                </joint>
+            </xacro:macro>
+            <xacro:xl320_l_arm_joint joint_name="l_hand_32"/>
+            <xacro:xl320_l_arm_joint joint_name="l_hand_33"/>
+            <xacro:xl320_l_arm_joint joint_name="l_hand_34"/>
+            <xacro:xl320_l_arm_joint joint_name="l_hand_35"/>
+            <xacro:xl320_l_arm_joint joint_name="l_hand_36"/>
+
+            <xacro:macro name="mx28_leg_joint" params="joint_name">
+                <joint name="${joint_name}">
+                    <command_interface name="position"/>
+                    <command_interface name="velocity"/>
+                    <state_interface name="position"><param name="initial_value">${initial_positions[joint_name]}</param></state_interface>
+                    <state_interface name="velocity"/>
+                    <param name="p">150.0</param><param name="d">2.5</param><param name="max_effort">2.5</param>
+                </joint>
+            </xacro:macro>
+            
+            <xacro:mx28_leg_joint joint_name="r_hip_yaw"/>
+            <xacro:mx28_leg_joint joint_name="r_hip_roll"/>
+            <xacro:mx28_leg_joint joint_name="r_hip_pitch"/>
+            <xacro:mx28_leg_joint joint_name="r_knee"/>
+            <xacro:mx28_leg_joint joint_name="r_ankle_pitch"/>
+            <xacro:mx28_leg_joint joint_name="r_ankle_roll"/>
+
+            <xacro:mx28_leg_joint joint_name="l_hip_yaw"/>
+            <xacro:mx28_leg_joint joint_name="l_hip_roll"/>
+            <xacro:mx28_leg_joint joint_name="l_hip_pitch"/>
+            <xacro:mx28_leg_joint joint_name="l_knee"/>
+            <xacro:mx28_leg_joint joint_name="l_ankle_pitch"/>
+            <xacro:mx28_leg_joint joint_name="l_ankle_roll"/>
+
             <sensor name="imu_sensor">
               <state_interface name="orientation.x"/>
               <state_interface name="orientation.y"/>
@@ -307,7 +102,7 @@
               <state_interface name="linear_acceleration.x"/>
               <state_interface name="linear_acceleration.y"/>
               <state_interface name="linear_acceleration.z"/>
-            </sensor>  
+            </sensor>
         </ros2_control>
     </xacro:macro>
 </robot>
