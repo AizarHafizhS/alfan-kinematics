@@ -13,7 +13,7 @@
 
     <gazebo>
         <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
-            <parameters>$(find alfan_moveit_config)/config/ros2_controllers.yaml</parameters>
+            <parameters>$(find alfan_hardware)/config/ros2_controllers.yaml</parameters>
         </plugin>
     </gazebo>
 
