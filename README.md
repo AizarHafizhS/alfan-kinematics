@@ -4,6 +4,7 @@ Kinematics engine and locomotion framework for Alfan humanoid robot's bipedal wa
 ## 🚀 Progress
 - ✅ Simulation system active via Gazebo Fortress + ROS 2.
 - ✅ IMU sensor physically simulated and integrated via `ros2_control`.
+- ✅ Robot able to walk (open-loop) in Gazebo Simulation.
 - 📌 **Personal reminder**: *You are currently working on integrating **any algorithm/method** for humanoid robot locomotion*
 
 ## 🛠️ Requirements
@@ -53,6 +54,6 @@ source install/setup.bash
     ``` bash
     ros2 run alfan_walking walking_node
     ```
-    *Now robot will start squatting*
+    *Now robot will start WALKING!*
 
 

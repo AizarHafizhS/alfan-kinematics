@@ -19,3 +19,10 @@
 27 Feb 2026 @devel
 - Get rid of MoveIt2 karena kata Gemini ekosistemnya terlalu berat. Yang kita butuhkan cuma IK Solver, sedangkan MoveIt2 itu lebih ke planner secara luas.
 - Refactor repo
+
+12 Maret 2026 @devel
+- Robot sudah bisa berjalan di simulasi Gazebo
+- Metode walking ini masih open-loop, yang artinya belum menggunakan sensor untuk mengecek keseimbangan robot.
+- Metode quintic spline ini juga hanya meng-generate posisi-posisi end-effector (foot) berdasarkan perhitungan quintic tadi
+- Metode ini tidak memperhitungkan dynamics robot. Pure kinematics
+- Next, gunakan preview control sebagai metode dynamics utama agar algoritma walkingnya lebih robust.
