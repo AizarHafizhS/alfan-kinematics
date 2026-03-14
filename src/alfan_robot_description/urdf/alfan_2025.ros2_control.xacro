@@ -73,7 +73,7 @@
                     <command_interface name="velocity"/>
                     <state_interface name="position"><param name="initial_value">${initial_positions[joint_name]}</param></state_interface>
                     <state_interface name="velocity"/>
-                    <param name="p">150.0</param><param name="d">2.5</param><param name="max_effort">2.5</param>
+                    <param name="p">200.0</param><param name="d">5.0</param><param name="max_effort">15.0</param>
                 </joint>
             </xacro:macro>
             
