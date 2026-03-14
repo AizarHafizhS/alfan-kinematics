@@ -3,27 +3,27 @@
 initial_positions:
   head_roll: 0
   head_yaw: 0
-  l_ankle_pitch: 0
+  l_ankle_pitch: -0.577472
   l_ankle_roll: 0
   l_hand_31: 0
-  l_hand_32: 0
+  l_hand_32: -0.523598
   l_hand_33: 0
   l_hand_34: 0
   l_hand_35: 0
   l_hand_36: 0
-  l_hip_pitch: 0
+  l_hip_pitch: -0.571666
   l_hip_roll: 0
   l_hip_yaw: 0
-  l_knee: 0
-  r_ankle_pitch: 0
+  l_knee: 1.14914
+  r_ankle_pitch: -0.577472
   r_ankle_roll: 0
   r_hand_21: 0
-  r_hand_22: 0
+  r_hand_22: 0.523598
   r_hand_23: 0
   r_hand_24: 0
   r_hand_25: 0
   r_hand_26: 0
-  r_hip_pitch: 0
+  r_hip_pitch: -0.571666
   r_hip_roll: 0
   r_hip_yaw: 0
-  r_knee: 0
+  r_knee: 1.14914
