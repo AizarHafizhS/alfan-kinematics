@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="bioloid">
+    <xacro:arg name="initial_positions_file" default="$(find alfan_robot_description)/bioloid/config/initial_positions.yaml" />
+
+    <xacro:include filename="bioloid.urdf" />
+    <xacro:include filename="bioloid.ros2_control.xacro" />
+    
+    <xacro:bioloid_ros2_control name="GazeboROS2" initial_positions_file="$(arg initial_positions_file)"/>
+
+    <gazebo>
+        <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+            <parameters>$(find alfan_robot_description)/bioloid/config/ros2_controllers.yaml</parameters>
+        </plugin>
+    </gazebo>
+
+    <xacro:macro name="foot_friction" params="link_name">
+        <gazebo reference="${link_name}">
+            <mu1>100.0</mu1>
+            <mu2>100.0</mu2>
+            <kp>1000000.0</kp>
+            <kd>100.0</kd>
+            <minDepth>0.001</minDepth>
+        </gazebo>
+    </xacro:macro>
+
+    <xacro:foot_friction link_name="l_sole"/>
+    <xacro:foot_friction link_name="r_sole"/>
+</robot>

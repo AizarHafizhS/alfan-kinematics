@@ -1,0 +1,1070 @@
+<?xml version="1.0" ?>
+<robot name="typea" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <material name="robot_grey">
+    <color rgba="0.286275 0.286275 0.286275 1"/>
+  </material>
+
+  <link name="torso_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/CHEST_F.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="1.57079632679 0 1.57079632679"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/CHEST_B.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="1.57079632679 0 1.57079632679"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/CM530.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 3.14159265359 1.57079632679" xyz="-0.032 0 -0.015"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/HEAD.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="-1.57079632679 0 -1.57079632679" xyz="0 0 0.025"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/AX-12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 3.14159265359 3.14159265359" xyz="0 -0.0385 -0.0655"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/AX-12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 3.14159265359 0" xyz="0 0.0385 -0.0655"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="head_collision">
+      <origin xyz="-0.0122 0 0.035"/>
+      <geometry>
+        <box size="0.054 0.033 0.044"/>
+      </geometry>
+    </collision>
+    <collision name="torso_collision_top">
+      <origin xyz="-0.019 0 -0.015"/>
+      <geometry>
+        <box size="0.0905 0.103 0.0635"/>
+      </geometry>
+    </collision>
+    <collision name="torso_collision_bottom">
+      <origin xyz="-0.00625 0 -0.0648"/>
+      <geometry>
+        <box size="0.065 0.099 0.043"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="3.4770266466"/>
+      <origin xyz="0.0162019036 0.0049844800 0.0038595353"/>
+      <inertia ixx="0.9787053684" ixy="0.0543464614" ixz="-0.0262073548" iyy="0.9730952674" iyz="0.0198675713" izz="0.9352573858"/>
+    </inertial>
+  </link>
+
+  <link name="r_foot_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 1.57079632679 -1.57079632679" xyz="0.0235 0 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_foot_collision">
+      <origin xyz="0.0277 0 0"/>
+      <geometry>
+        <box size="0.009 0.061 0.101"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1867801099"/>
+      <origin xyz="-0.0055676472 0.0034398816 0.0028465215"/>
+      <inertia ixx="0.0123442309" ixy="-0.0013373380" ixz="-0.0014042040" iyy="0.0351609327" iyz="0.0011525105" izz="0.0411013075"/>
+    </inertial>
+  </link>
+
+  <link name="l_foot_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="3.14159265359 1.57079632679 -1.57079632679" xyz="-0.0235 0 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="l_foot_collision">
+      <origin xyz="-0.0277 0 0"/>
+      <geometry>
+        <box size="0.009 0.061 0.101"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1867801099"/>
+      <origin xyz="-0.0055676472 -0.0035014440 0.0028465215"/>
+      <inertia ixx="0.0123437897" ixy="0.0013329200" ixz="-0.0014042040" iyy="0.0351609292" iyz="-0.0011492661" izz="0.0411008628"/>
+    </inertial>
+  </link>
+
+  <joint name="base_to_torso_joint" type="fixed">
+    <parent link="base_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <child link="torso_link"/>
+  </joint>
+  <link name="base_link"/>
+
+  <joint name="imu_to_base_joint" type="fixed">
+    <axis xyz="1 0 0"/>
+    <origin rpy="0 0 0" xyz="0 0 -0.05"/>
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+  </joint>
+  <link name="imu_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.04 0.02 0.005"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0.0 1.0 1 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size=".01 .01 .01"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.001"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <joint name="r_shoulder_swing_joint" type="revolute">
+    <parent link="torso_link"/>
+    <origin rpy="1.57079632679 1.57079632679 0" xyz="0 -0.032 0"/>
+    <axis xyz="0 0 1"/>
+    <child link="r_shoulder_swing_link"/>
+    <limit effort="2.8" lower="-1.57079632679" upper="1.57079632679" velocity="1.0"/>
+  </joint>
+  <link name="r_shoulder_swing_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 3.14159265359 3.14159265359" xyz="0 0.014 0.044"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_shoulder_collision">
+      <origin xyz="0 0.006 0.0375"/>
+      <geometry>
+        <box size="0.052 0.039 0.036"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.0595945816"/>
+      <origin xyz="-0.0109359544 0.0123630374 -0.0000000007"/>
+      <inertia ixx="0.0069903407" ixy="-0.0020812370" ixz="0.0000000001" iyy="0.0067210939" iyz="-0.0000000002" izz="0.0054521983"/>
+    </inertial>
+  </link>
+
+  <joint name="r_shoulder_lateral_joint" type="revolute">
+    <parent link="r_shoulder_swing_link"/>
+    <origin rpy="0 -1.57079632679 0" xyz="0 0.014 0.044"/>
+    <axis xyz="0 0 1"/>
+    <child link="r_upper_arm_link"/>
+    <limit effort="2.8" lower="-1.57079632679" upper="1.57079632679" velocity="1.0"/>
+  </joint>
+  <link name="r_upper_arm_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/AX-12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 0 1.57079632679" xyz="0 0 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="-1.57079632679 1.57079632679 1.57079632679" xyz="0.0675 0 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_upper arm_collision_proximal">
+      <origin xyz="0.0148 0 0"/>
+      <geometry>
+        <box size="0.054 0.033 0.044"/>
+      </geometry>
+    </collision>
+    <collision name="r_upper arm_collision_distal">
+      <origin xyz="0.0555 0 0"/>
+      <geometry>
+        <box size="0.047 0.033 0.052"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.3822870734"/>
+      <origin xyz="-0.0000002032 -0.0068291604 -0.0006710552"/>
+      <inertia ixx="0.0274690892" ixy="0.0000004066" ixz="-0.0000000859" iyy="0.0077817002" iyz="0.0007139012" izz="0.0226034759"/>
+    </inertial>
+  </link>
+
+  <joint name="r_elbow_joint" type="revolute">
+    <parent link="r_upper_arm_link"/>
+    <origin rpy="0 0 0" xyz="0.0675 0 0"/>
+    <axis xyz="0 0 1"/>
+    <child link="r_lower_arm_link"/>
+    <limit effort="2.8" lower="-1.57079632679" upper="1.57079632679" velocity="1.0"/>
+  </joint>
+  <link name="r_lower_arm_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/AX-12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 0 1.57079632679" xyz="0 0 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_lower_arm_collision">
+      <origin xyz="0.017 0 0"/>
+      <geometry>
+        <box size="0.058 0.033 0.044"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.3833833954"/>
+      <origin xyz="-0.0009848283 -0.0081892817 -0.0005847510"/>
+      <inertia ixx="0.0336009689" ixy="0.0038318932" ixz="0.0000784112" iyy="0.0055167096" iyz="0.0008760966" izz="0.0319185839"/>
+    </inertial>
+  </link>
+
+  <joint name="r_hand_joint" type="fixed">
+    <parent link="r_lower_arm_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <child link="r_hand_link"/>
+  </joint>
+  <link name="r_hand_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F11.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="3.14159265359 -1.57079632679 0" xyz="0.0415 0 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_palm_collision">
+      <origin xyz="0.039 0 0"/>
+      <geometry>
+        <box size="0.0131 0.0265 0.044"/>
+      </geometry>
+    </collision>
+    <collision name="r_fingers_collision">
+      <origin xyz="0.0701 -0.0077 0"/>
+      <geometry>
+        <box size="0.0575 0.0175 0.035"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.0303003163"/>
+      <origin xyz="-0.0070414665 -0.0217364083 -0.0000000095"/>
+      <inertia ixx="0.0054448143" ixy="0.0011266691" ixz="0.0000000017" iyy="0.0013220979" iyz="-0.0000000025" izz="0.0053756998"/>
+    </inertial>
+  </link>
+
+  <joint name="l_shoulder_swing_joint" type="revolute">
+    <parent link="torso_link"/>
+    <origin rpy="-1.57079632679 -1.57079632679 0" xyz="0 0.032 0"/>
+    <axis xyz="0 0 1"/>
+    <child link="l_shoulder_swing_link"/>
+    <limit effort="2.8" lower="-1.57079632679" upper="1.57079632679" velocity="1.0"/>
+  </joint>
+  <link name="l_shoulder_swing_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 3.14159265359 3.14159265359" xyz="0 0.014 0.044"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="l_shoulder_collision">
+      <origin xyz="0 0.006 0.0375"/>
+      <geometry>
+        <box size="0.052 0.039 0.036"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.0595945816"/>
+      <origin xyz="-0.0109359544 -0.0123630374 0.0000000007"/>
+      <inertia ixx="0.0069903407" ixy="0.0020812370" ixz="-0.0000000001" iyy="0.0067210939" iyz="-0.0000000002" izz="0.0054521983"/>
+    </inertial>
+  </link>
+
+  <joint name="l_shoulder_lateral_joint" type="revolute">
+    <parent link="l_shoulder_swing_link"/>
+    <origin rpy="0 -1.57079632679 0" xyz="0 0.014 0.044"/>
+    <axis xyz="0 0 1"/>
+    <child link="l_upper_arm_link"/>
+    <limit effort="2.8" lower="-1.57079632679" upper="1.57079632679" velocity="1.0"/>
+  </joint>
+  <link name="l_upper_arm_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/AX-12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="3.14159265359 0 -1.57079632679" xyz="0 0 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="1.57079632679 1.57079632679 -1.57079632679" xyz="0.0675 0 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="l_upper arm_collision_proximal">
+      <origin xyz="0.0148 0 0"/>
+      <geometry>
+        <box size="0.054 0.033 0.044"/>
+      </geometry>
+    </collision>
+    <collision name="l_upper arm_collision_distal">
+      <origin xyz="0.0555 0 0"/>
+      <geometry>
+        <box size="0.047 0.033 0.052"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.3822870734"/>
+      <origin xyz="0.0000002032 0.0068291604 -0.0006710552"/>
+      <inertia ixx="0.0274690892" ixy="0.0000004066" ixz="0.0000000859" iyy="0.0077817002" iyz="-0.0007139012" izz="0.0226034759"/>
+    </inertial>
+  </link>
+
+  <joint name="l_elbow_joint" type="revolute">
+    <parent link="l_upper_arm_link"/>
+    <origin rpy="0 0 0" xyz="0.0675 0 0"/>
+    <axis xyz="0 0 1"/>
+    <child link="l_lower_arm_link"/>
+    <limit effort="2.8" lower="-1.57079632679" upper="1.57079632679" velocity="1.0"/>
+  </joint>
+  <link name="l_lower_arm_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/AX-12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="3.14159265359 0 -1.57079632679" xyz="0 0 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="l_lower_arm_collision">
+      <origin xyz="0.017 0 0"/>
+      <geometry>
+        <box size="0.058 0.033 0.044"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.3822870734"/>
+      <origin xyz="0.0000002032 0.0068291604 -0.0006710552"/>
+      <inertia ixx="0.0274690892" ixy="0.0000004066" ixz="0.0000000859" iyy="0.0077817002" iyz="-0.0007139012" izz="0.0226034759"/>
+    </inertial>
+  </link>
+
+  <joint name="l_hand_joint" type="fixed">
+    <parent link="l_lower_arm_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <child link="l_hand_link"/>
+  </joint>
+  <link name="l_hand_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F11.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 -1.57079632679 3.14159265359" xyz="0.0415 0 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="l_palm_collision">
+      <origin xyz="0.039 0 0"/>
+      <geometry>
+        <box size="0.0131 0.0265 0.044"/>
+      </geometry>
+    </collision>
+    <collision name="l_fingers_collision">
+      <origin xyz="0.0701 -0.0077 0"/>
+      <geometry>
+        <box size="0.0575 0.0175 0.035"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.0303003163"/>
+      <origin xyz="-0.0070414665 0.0217364083 0.0000000095"/>
+      <inertia ixx="0.0054448143" ixy="-0.0011266691" ixz="-0.0000000017" iyy="0.0013220979" iyz="-0.0000000025" izz="0.0053756998"/>
+    </inertial>
+  </link>
+
+  <joint name="r_hip_twist_joint" type="revolute">
+    <parent link="torso_link"/>
+    <origin rpy="0 3.14159265359 1.57079632679" xyz="0 -0.0385 -0.0655"/>
+    <axis xyz="0 0 1"/>
+    <child link="r_hip_twist_link"/>
+    <limit effort="10" lower="-1.57079632679" upper="1.57079632679" velocity="5.6548668"/>
+  </joint>
+  <link name="r_hip_twist_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F5.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="3.14159265359 0 3.14159265359" xyz="0 0.02 0.05"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_hip_twist_collision">
+      <origin xyz="0.0008 0.02 0.041"/>
+      <geometry>
+        <box size="0.029 0.083 0.0405"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.0755193623"/>
+      <origin xyz="0.0005416307 -0.0000009200 0.0190685105"/>
+      <inertia ixx="0.0082750315" ixy="-0.0000001051" ixz="0.0002681193" iyy="0.0194814984" iyz="-0.0000005502" izz="0.0133677616"/>
+    </inertial>
+  </link>
+
+  <joint name="r_hip_lateral_joint" type="revolute">
+    <parent link="r_hip_twist_link"/>
+    <origin rpy="-1.57079632679 0 0" xyz="0 0 0.05"/>
+    <axis xyz="0 0 1"/>
+    <child link="r_hip_lateral_link"/>
+    <limit effort="10" lower="-1.57079632679" upper="1.57079632679" velocity="5.6548668"/>
+  </joint>
+  <link name="r_hip_lateral_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/AX-12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 0 -0.0" xyz="0 0 0.0353"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F6.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 -1.57079632679 -1.57079632679" xyz="-0.019 -0.0145 0.0513"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F6.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 -1.57079632679 1.57079632679" xyz="0.019 -0.0145 0.0513"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/AX-12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="-0.0 -1.57079632679 0" xyz="0 0 0.0033"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F7.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="1.57079632679 -0.0 1.57079632679" xyz="0 -0.0145 -0.0157"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_hip_lateral_collision">
+      <origin xyz="0 -0.0135 0.02"/>
+      <geometry>
+        <box size="0.04 0.051 0.0721"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.6852429363"/>
+      <origin xyz="0.0167509278 -0.0033519500 0.0035241956"/>
+      <inertia ixx="0.0160687475" ixy="-0.0135264586" ixz="0.0142999521" iyy="0.0903445586" iyz="-0.0025649497" izz="0.0920435080"/>
+    </inertial>
+  </link>
+
+  <joint name="r_hip_swing_joint" type="revolute">
+    <parent link="r_hip_lateral_link"/>
+    <origin rpy="1.57079632679 0 -1.57079632679" xyz="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <child link="r_upper_leg_link"/>
+    <limit effort="10" lower="-1.57079632679" upper="1.57079632679" velocity="5.6548668"/>
+  </joint>
+  <link name="r_upper_leg_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F4.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="-1.57079632679 -1.57079632679 -1.57079632679" xyz="0.02 0 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="1.57079632679 1.57079632679 -1.57079632679" xyz="0.075 0.0145 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_upper_leg_proximal_collision">
+      <origin xyz="0.0214 0 0"/>
+      <geometry>
+        <box size="0.065 0.03 0.049"/>
+      </geometry>
+    </collision>
+    <collision name="r_upper_leg_distal_collision">
+      <origin xyz="0.0675 0.0065 0"/>
+      <geometry>
+        <box size="0.04 0.0371 0.049"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1557654222"/>
+      <origin xyz="-0.0012110096 0.0000000568 -0.0444074895"/>
+      <inertia ixx="0.0867975538" ixy="-0.0000000255" ixz="0.0030686267" iyy="0.0784005596" iyz="-0.0000000875" izz="0.0138679533"/>
+    </inertial>
+  </link>
+
+  <joint name="r_knee_joint" type="revolute">
+    <parent link="r_upper_leg_link"/>
+    <origin rpy="0 0 0" xyz="0.075 0.0145 0"/>
+    <axis xyz="0 0 -1"/>
+    <child link="r_lower_leg_link"/>
+    <limit effort="10" lower="-1.57079632679" upper="1.57079632679" velocity="5.6548668"/>
+  </joint>
+  <link name="r_lower_leg_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/AX-12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F4.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="1.57079632679 1.57079632679 -1.57079632679" xyz="0.041 -0.0145 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_lower_leg_proximal_collision">
+      <origin xyz="0 -0.0135 0"/>
+      <geometry>
+        <box size="0.033 0.051 0.044"/>
+      </geometry>
+    </collision>
+    <collision name="r_lower_leg_distal_collision">
+      <origin xyz="0.0492 -0.0145 0"/>
+      <geometry>
+        <box size="0.067 0.03 0.049"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.4326089335"/>
+      <origin xyz="-0.0010052500 -0.0012675002 -0.0110864377"/>
+      <inertia ixx="0.0542924849" ixy="0.0002115982" ixz="0.0010887655" iyy="0.0479327441" iyz="0.0019185952" izz="0.0137425373"/>
+    </inertial>
+  </link>
+
+  <joint name="r_ankle_swing_joint" type="revolute">
+    <parent link="r_lower_leg_link"/>
+    <origin rpy="3.14159265359 0 0" xyz="0.071 -0.0145 0"/>
+    <axis xyz="0 0 1"/>
+    <child link="r_ankle_swing_link"/>
+    <limit effort="10" lower="-1.57079632679" upper="1.57079632679" velocity="5.6548668"/>
+  </joint>
+  <link name="r_ankle_swing_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/AX-12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy=" -0.0  3.14159265359 -1.57079632679" xyz="0 0 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F7.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="3.14159265359 -0.0 0" xyz="-0.0145 0.019 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/AX-12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 1.57079632679 -1.57079632679" xyz="0 -0.032 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F6.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="-1.57079632679 0 -1.57079632679" xyz="-0.0145 -0.048 0.019"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F6.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="1.57079632679 0 -1.57079632679" xyz="-0.0145 -0.048 -0.019"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_ankle_swing_collision">
+      <origin xyz="-0.0135 -0.0167 0"/>
+      <geometry>
+        <box size="0.051 0.0721 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.6852429363"/>
+      <origin xyz="0.0183499039 -0.0023512250 -0.0035241953"/>
+      <inertia ixx="0.0152904078" ixy="-0.0125481783" ixz="-0.0156374248" iyy="0.1050267499" iyz="0.0020800084" izz="0.1059474294"/>
+    </inertial>
+  </link>
+
+  <joint name="r_ankle_lateral_joint" type="revolute">
+    <parent link="r_ankle_swing_link"/>
+    <origin rpy="-1.57079632679 0 0" xyz="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <child link="r_ankle_lateral_link"/>
+    <limit effort="10" lower="-1.57079632679" upper="1.57079632679" velocity="5.6548668"/>
+  </joint>
+  <link name="r_ankle_lateral_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F5.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="-1.57079632679 -0.0  -1.57079632679" xyz="0 0 -0.0155"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_ankle_lateral_collision">
+      <origin xyz="0.009 0 -0.016"/>
+      <geometry>
+        <box size="0.0405 0.029 0.083"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1867801099"/>
+      <origin xyz="-0.0055676472 0.0034398816 0.0028465215"/>
+      <inertia ixx="0.0123442309" ixy="-0.0013373380" ixz="-0.0014042040" iyy="0.0351609327" iyz="0.0011525105" izz="0.0411013075"/>
+    </inertial>
+  </link>
+
+  <joint name="r_foot_joint" type="fixed">
+    <parent link="r_ankle_lateral_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <child link="r_foot_link"/>
+  </joint>
+
+  <joint name="l_hip_twist_joint" type="revolute">
+    <parent link="torso_link"/>
+    <origin rpy="0 3.14159265359 -1.57079632679" xyz="0 0.0385 -0.0655"/>
+    <axis xyz="0 0 1"/>
+    <child link="l_hip_twist_link"/>
+    <limit effort="10" lower="-1.57079632679" upper="1.57079632679" velocity="5.6548668"/>
+  </joint>
+  <link name="l_hip_twist_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F5.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="3.14159265359 0 0.0" xyz="0 -0.02 0.05"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_hip_twist_collision">
+      <origin xyz="0.0008 -0.02 0.041"/>
+      <geometry>
+        <box size="0.029 0.083 0.0405"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.0755193623"/>
+      <origin xyz="0.0005416307 -0.0000009200 0.0190685105"/>
+      <inertia ixx="0.0082750315" ixy="-0.0000001051" ixz="0.0002681193" iyy="0.0194814984" iyz="-0.0000005502" izz="0.0133677616"/>
+    </inertial>
+  </link>
+
+  <joint name="l_hip_lateral_joint" type="revolute">
+    <parent link="l_hip_twist_link"/>
+    <origin rpy="1.57079632679 0 0" xyz="0 0 0.05"/>
+    <axis xyz="0 0 1"/>
+    <child link="l_hip_lateral_link"/>
+    <limit effort="10" lower="-1.57079632679" upper="1.57079632679" velocity="5.6548668"/>
+  </joint>
+  <link name="l_hip_lateral_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/AX-12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 0 3.14159265359" xyz="0 0 0.0353"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F6.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 -1.57079632679 1.57079632679" xyz="0.019 0.0145 0.0513"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F6.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 -1.57079632679 -1.57079632679" xyz="-0.019 0.0145 0.0513"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/AX-12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="3.14159265359 1.57079632679 0" xyz="0 0 0.0033"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F7.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="-1.57079632679 3.14159265359 1.57079632679" xyz="0 0.0145 -0.0157"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_hip_lateral_collision">
+      <origin xyz="0 0.0135 0.02"/>
+      <geometry>
+        <box size="0.04 0.051 0.0721"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.6852429363"/>
+      <origin xyz="0.0183499039 0.0023512250 0.0035241953"/>
+      <inertia ixx="0.0152904078" ixy="0.0125481783" ixz="0.0156374248" iyy="0.1050267499" iyz="0.0020800084" izz="0.1059474294"/>
+    </inertial>
+  </link>
+
+  <joint name="l_hip_swing_joint" type="revolute">
+    <parent link="l_hip_lateral_link"/>
+    <origin rpy="1.57079632679 0 -1.57079632679" xyz="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <child link="l_upper_leg_link"/>
+    <limit effort="10" lower="-1.57079632679" upper="1.57079632679" velocity="5.6548668"/>
+  </joint>
+  <link name="l_upper_leg_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F4.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="1.57079632679 1.57079632679 -1.57079632679" xyz="-0.02 0 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="1.57079632679 -1.57079632679 1.57079632679" xyz="-0.075 0.0145 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_upper_leg_proximal_collision">
+      <origin xyz="-0.0214 0 0"/>
+      <geometry>
+        <box size="0.065 0.03 0.049"/>
+      </geometry>
+    </collision>
+    <collision name="r_upper_leg_distal_collision">
+      <origin xyz="-0.0675 0.0065 0"/>
+      <geometry>
+        <box size="0.04 0.0371 0.049"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1557654222"/>
+      <origin xyz="-0.0012110096 0.0000000568 -0.0444074895"/>
+      <inertia ixx="0.0867975538" ixy="-0.0000000255" ixz="0.0030686267" iyy="0.0784005596" iyz="-0.0000000875" izz="0.0138679533"/>
+    </inertial>
+  </link>
+
+  <joint name="l_knee_joint" type="revolute">
+    <parent link="l_upper_leg_link"/>
+    <origin rpy="0 0 0" xyz="-0.075 0.0145 0"/>
+    <axis xyz="0 0 -1"/>
+    <child link="l_lower_leg_link"/>
+    <limit effort="10" lower="-1.57079632679" upper="1.57079632679" velocity="5.6548668"/>
+  </joint>
+  <link name="l_lower_leg_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/AX-12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F4.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="-1.57079632679 -1.57079632679 -1.57079632679" xyz="-0.041 -0.0145 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_lower_leg_proximal_collision">
+      <origin xyz="0 -0.0135 0"/>
+      <geometry>
+        <box size="0.033 0.051 0.044"/>
+      </geometry>
+    </collision>
+    <collision name="r_lower_leg_distal_collision">
+      <origin xyz="-0.0492 -0.0145 0"/>
+      <geometry>
+        <box size="0.067 0.03 0.049"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.4326089335"/>
+      <origin xyz="-0.0010052500 0.0002674591 -0.0110862203"/>
+      <inertia ixx="0.0541596500" ixy="-0.0001245680" ixz="0.0010887872" iyy="0.0479327482" iyz="-0.0009590411" izz="0.0136097320"/>
+    </inertial>
+  </link>
+
+  <joint name="l_ankle_swing_joint" type="revolute">
+    <parent link="l_lower_leg_link"/>
+    <origin rpy="3.14159265359 0 0" xyz="-0.071 -0.0145 0"/>
+    <axis xyz="0 0 1"/>
+    <child link="l_ankle_swing_link"/>
+    <limit effort="10" lower="-1.57079632679" upper="1.57079632679" velocity="5.6548668"/>
+  </joint>
+  <link name="l_ankle_swing_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/AX-12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy=" 3.14159265359 0.0 -1.57079632679" xyz="0 0 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F7.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="3.14159265359 3.14159265359 0" xyz="0.0145 0.019 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/AX-12.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="0 -1.57079632679 1.57079632679" xyz="0 -0.032 0"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F6.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="1.57079632679 0 -1.57079632679" xyz="0.0145 -0.048 -0.019"/>
+      <material name="robot_grey"/>
+    </visual>
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F6.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="-1.57079632679 0 -1.57079632679" xyz="0.0145 -0.048 0.019"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_ankle_swing_collision">
+      <origin xyz="0.0135 -0.0167 0"/>
+      <geometry>
+        <box size="0.051 0.0721 0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.6852429363"/>
+      <origin xyz="0.0167509278 0.0033519500 -0.0035241956"/>
+      <inertia ixx="0.0160687475" ixy="0.0135264586" ixz="-0.0142999521" iyy="0.0903445586" iyz="-0.0025649497" izz="0.0920435080"/>
+    </inertial>
+  </link>
+
+  <joint name="l_ankle_lateral_joint" type="revolute">
+    <parent link="l_ankle_swing_link"/>
+    <origin rpy="-1.57079632679 0 0" xyz="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <child link="l_ankle_lateral_link"/>
+    <limit effort="10" lower="-1.57079632679" upper="1.57079632679" velocity="5.6548668"/>
+  </joint>
+  <link name="l_ankle_lateral_link">
+    <visual>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/F5.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin rpy="1.57079632679 3.14159265359 -1.57079632679" xyz="0 0 -0.0155"/>
+      <material name="robot_grey"/>
+    </visual>
+    <collision name="r_ankle_lateral_collision">
+      <origin xyz="-0.009 0 -0.016"/>
+      <geometry>
+        <box size="0.0405 0.029 0.083"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1867801099"/>
+      <origin xyz="-0.0055676472 -0.0035014440 0.0028465215"/>
+      <inertia ixx="0.0123437897" ixy="0.0013329200" ixz="-0.0014042040" iyy="0.0351609292" iyz="-0.0011492661" izz="0.0411008628"/>
+    </inertial>
+  </link>
+
+  <joint name="l_foot_joint" type="fixed">
+    <parent link="l_ankle_lateral_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <child link="l_foot_link"/>
+  </joint>
+
+  <gazebo reference="imu_link">
+    <sensor name="imu_sensor" type="imu">
+      <always_on>1</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>imu</topic>
+    </sensor>
+  </gazebo>
+
+  <gazebo>
+    <plugin filename="ignition-gazebo-imu-system" name="ignition::gazebo::systems::Imu"/>
+  </gazebo>
+
+  <gazebo reference="torso_link"><material>Gazebo/DarkGrey</material></gazebo>
+  
+  <gazebo reference="r_shoulder_swing_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="r_upper_arm_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="r_lower_arm_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="r_hand_link"><material>Gazebo/DarkGrey</material></gazebo>
+  
+  <gazebo reference="l_shoulder_swing_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="l_upper_arm_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="l_lower_arm_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="l_hand_link"><material>Gazebo/DarkGrey</material></gazebo>
+  
+  <gazebo reference="r_hip_twist_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="r_hip_lateral_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="r_upper_leg_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="r_lower_leg_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="r_ankle_swing_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="r_ankle_lateral_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="r_foot_link"><material>Gazebo/DarkGrey</material></gazebo>
+  
+  <gazebo reference="l_hip_twist_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="l_hip_lateral_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="l_upper_leg_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="l_lower_leg_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="l_ankle_swing_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="l_ankle_lateral_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="l_foot_link"><material>Gazebo/DarkGrey</material></gazebo>
+
+  <ros2_control name="IgnitionSystem" type="system">
+    <hardware>
+      <plugin>ign_ros2_control/IgnitionSystem</plugin>
+    </hardware>
+
+    <joint name="r_shoulder_swing_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">100.0</param><param name="d">1.0</param><param name="max_effort">10.0</param>
+    </joint>
+    <joint name="r_shoulder_lateral_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">100.0</param><param name="d">1.0</param><param name="max_effort">10.0</param>
+    </joint>
+    <joint name="r_elbow_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">100.0</param><param name="d">1.0</param><param name="max_effort">10.0</param>
+    </joint>
+
+    <joint name="l_shoulder_swing_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">100.0</param><param name="d">1.0</param><param name="max_effort">10.0</param>
+    </joint>
+    <joint name="l_shoulder_lateral_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">100.0</param><param name="d">1.0</param><param name="max_effort">10.0</param>
+    </joint>
+    <joint name="l_elbow_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">100.0</param><param name="d">1.0</param><param name="max_effort">10.0</param>
+    </joint>
+
+    <joint name="r_hip_twist_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">2000.0</param><param name="d">20.0</param><param name="max_effort">100.0</param>
+    </joint>
+    <joint name="r_hip_lateral_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">2000.0</param><param name="d">20.0</param><param name="max_effort">100.0</param>
+    </joint>
+    <joint name="r_hip_swing_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">2000.0</param><param name="d">20.0</param><param name="max_effort">100.0</param>
+    </joint>
+    <joint name="r_knee_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">2000.0</param><param name="d">20.0</param><param name="max_effort">100.0</param>
+    </joint>
+    <joint name="r_ankle_swing_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">2000.0</param><param name="d">20.0</param><param name="max_effort">100.0</param>
+    </joint>
+    <joint name="r_ankle_lateral_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">2000.0</param><param name="d">20.0</param><param name="max_effort">100.0</param>
+    </joint>
+
+    <joint name="l_hip_twist_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">2000.0</param><param name="d">20.0</param><param name="max_effort">100.0</param>
+    </joint>
+    <joint name="l_hip_lateral_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">2000.0</param><param name="d">20.0</param><param name="max_effort">100.0</param>
+    </joint>
+    <joint name="l_hip_swing_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">2000.0</param><param name="d">20.0</param><param name="max_effort">100.0</param>
+    </joint>
+    <joint name="l_knee_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">2000.0</param><param name="d">20.0</param><param name="max_effort">100.0</param>
+    </joint>
+    <joint name="l_ankle_swing_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">2000.0</param><param name="d">20.0</param><param name="max_effort">100.0</param>
+    </joint>
+    <joint name="l_ankle_lateral_joint">
+      <command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/>
+      <param name="p">2000.0</param><param name="d">20.0</param><param name="max_effort">100.0</param>
+    </joint>
+  </ros2_control>
+
+  <gazebo>
+    <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+      <parameters>$(find alfan_robot_description)/bioloid/config/ros2_controllers.yaml</parameters>
+    </plugin>
+  </gazebo>
+</robot>

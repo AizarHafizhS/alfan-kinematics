@@ -1,0 +1,845 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape https://cad.onshape.com/documents/1c182306dbc4101e18ae5ca0/w/b74496f5b7503cb5494d98c0/e/4ab3c407fbcfb1f86902050d -->
+<robot name="bioloid">
+  <!-- Dummy base link -->
+  <link name="base_link"></link>
+
+  <joint name="base_link_to_body" type="fixed">
+    <parent link="base_link"/>
+    <child link="body"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Link body -->
+  <link name="body">
+    <inertial>
+      <origin xyz="-0.00120188 -4.0722e-07 0.266324" rpy="0 0 0"/>
+      <mass value="0.303775"/>
+      <inertia ixx="0.000572103" ixy="-1.63329e-07" ixz="2.25209e-06" iyy="0.000354825" iyz="-4.256e-09" izz="0.000287296"/>
+    </inertial>
+    <!-- Part body_parts -->
+    <collision>
+      <origin xyz="-0.00111963 0.0289345 0.28962" rpy="0 0 3.14159"/>
+      <geometry>
+        <box size="0.0320858 0.0399725 0.0485"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.00113443 -0.0289345 0.28962" rpy="-0 -0 -0"/>
+      <geometry>
+        <box size="0.0320858 0.0399725 0.0485"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.015627 -0 0.231855" rpy="-1.5708 0 1.5708"/>
+      <geometry>
+        <box size="0.025 0.0381517 0.009"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.013373 -0 0.231885" rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <box size="0.025 0.0381517 0.009"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.00188943 4.025e-05 0.31937" rpy="-0 0 1.5708"/>
+      <geometry>
+        <box size="0.0901071 0.042557 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.021627 -1.65e-06 0.287876" rpy="1.5708 -0 -1.5708"/>
+      <geometry>
+        <box size="0.0900599 0.0660896 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.015627 0.0280155 0.28787" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <box size="0.025 0.0381517 0.009"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.00111963 0.02575 0.230935" rpy="1.5708 0 3.14159"/>
+      <geometry>
+        <box size="0.0320858 0.0399725 0.0485"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.00161443 -1.3e-05 0.33987" rpy="-3.14159 0 3.14159"/>
+      <geometry>
+        <box size="0.0241194 0.0240894 0.03"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.015627 -0.0279846 0.28787" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <box size="0.025 0.0381517 0.009"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.013373 -0.0280155 0.28787" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <box size="0.025 0.0381517 0.009"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.00113443 -0.02575 0.230935" rpy="1.5708 -0 -0"/>
+      <geometry>
+        <box size="0.0320858 0.0399725 0.0485"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.00116153 1.5e-06 0.25637" rpy="3.14159 0 1.5708"/>
+      <geometry>
+        <box size="0.0900476 0.0440744 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.019373 -9.6e-06 0.28788" rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <box size="0.0900478 0.0660478 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.013373 0.0279846 0.28787" rpy="3.14159 -1.5708 0"/>
+      <geometry>
+        <box size="0.025 0.0381517 0.009"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.00120188 -4.0722e-07 0.266324" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/body_visual.stl"/>
+      </geometry>
+      <material name="body_parts_material">
+        <color rgba="0.745822 0.387408 0.72454 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link fp04_f5x -->
+  <link name="fp04_f5x">
+    <inertial>
+      <origin xyz="-0.0164849 -2.32967e-06 -0.010064" rpy="0 0 0"/>
+      <mass value="0.0119051"/>
+      <inertia ixx="2.25504e-06" ixy="-3.9e-11" ixz="-8.4526e-08" iyy="1.1241e-05" iyz="1.57e-10" izz="1.07465e-05"/>
+    </inertial>
+    <!-- Part fp04_f5x_parts -->
+    <collision>
+      <origin xyz="-0.05475 -0.0004626 -0.028525" rpy="-1.5708 0 1.5708"/>
+      <geometry>
+        <box size="0.0270748 0.0230499 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.02075 -0 -0.0284861" rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <box size="0.028 0.0229723 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0170048 -8.4e-06 -0.0085" rpy="0 0 1.5708"/>
+      <geometry>
+        <box size="0.0281538 0.0785552 0.017"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.0164849 -2.32967e-06 -0.010064" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/fp04_f5x_visual.stl"/>
+      </geometry>
+      <material name="fp04_f5x_parts_material">
+        <color rgba="0.32549 0.529412 0.752941 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link l_hip_block -->
+  <link name="l_hip_block">
+    <inertial>
+      <origin xyz="-0.000453911 -0.0127839 0.0365969" rpy="0 0 0"/>
+      <mass value="0.121692"/>
+      <inertia ixx="6.79791e-05" ixy="1.59902e-07" ixz="9.53699e-07" iyy="5.80918e-05" iyz="-4.02641e-07" izz="3.26705e-05"/>
+    </inertial>
+    <!-- Part l_hip_block_parts -->
+    <collision>
+      <origin xyz="-0.00093455 -0.01275 0.0528626" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <box size="0.0320858 0.0399725 0.0485"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="7.4e-06 -0.01275 0.0199355" rpy="1.5708 0 3.14159"/>
+      <geometry>
+        <box size="0.0320858 0.0399725 0.0485"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.000453911 -0.0127839 0.0365969" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/l_hip_block_visual.stl"/>
+      </geometry>
+      <material name="l_hip_block_parts_material">
+        <color rgba="0.850118 0.352173 0.717493 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link l_hip_to_knee -->
+  <link name="l_hip_to_knee">
+    <inertial>
+      <origin xyz="-0.0433631 -0.00102425 0.0210296" rpy="0 0 0"/>
+      <mass value="0.0231462"/>
+      <inertia ixx="1.05716e-05" ixy="-9.76682e-07" ixz="2.1584e-08" iyy="1.91767e-05" iyz="9.213e-09" izz="1.27012e-05"/>
+    </inertial>
+    <!-- Part l_hip_to_knee_parts -->
+    <collision>
+      <origin xyz="-0.0213674 2.325e-05 -0.0015" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <box size="0.0647975 0.0291169 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0213559 4.28e-05 0.0435" rpy="0 -0 0"/>
+      <geometry>
+        <box size="0.0648201 0.0290856 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.04585 -3.085e-05 0.0210432" rpy="0 -1.5708 0"/>
+      <geometry>
+        <box size="0.0480903 0.0290617 0.0157"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0545 -0.0013278 0.0209309" rpy="-3.14159 -1.5708 0"/>
+      <geometry>
+        <box size="0.0483203 0.0276556 0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0715293 -0.0065266 -0.0015" rpy="-3.14159 0 -3.14159"/>
+      <geometry>
+        <box size="0.0290586 0.0380532 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.071555 -0.006504 0.0435" rpy="0 0 -3.14159"/>
+      <geometry>
+        <box size="0.0291101 0.038008 0.003"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.0433631 -0.00102425 0.0210296" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/l_hip_to_knee_visual.stl"/>
+      </geometry>
+      <material name="l_hip_to_knee_parts_material">
+        <color rgba="0.32549 0.529412 0.752941 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link l_tibia -->
+  <link name="l_tibia">
+    <inertial>
+      <origin xyz="-0.00969738 0.0133445 0.0201093" rpy="0 0 0"/>
+      <mass value="0.0748651"/>
+      <inertia ixx="2.35681e-05" ixy="1.14448e-06" ixz="5.48612e-07" iyy="4.15403e-05" iyz="-1.7789e-07" izz="4.13557e-05"/>
+    </inertial>
+    <!-- Part l_tibia_parts -->
+    <collision>
+      <origin xyz="-7.4e-06 0.01275 0.0199355" rpy="1.5708 0 -0"/>
+      <geometry>
+        <box size="0.0320858 0.0399725 0.0485"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0536326 0.0145232 0.04337" rpy="0 0 -3.14159"/>
+      <geometry>
+        <box size="0.0647975 0.0291169 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.053644 0.0145428 -0.00163" rpy="-3.14159 0 -3.14159"/>
+      <geometry>
+        <box size="0.0648201 0.0290856 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.02915 0.0144692 0.0208269" rpy="-0 1.5708 0"/>
+      <geometry>
+        <box size="0.0480903 0.0290617 0.0157"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0145 0.0145 0.0208854" rpy="1.5708 -0 -1.5708"/>
+      <geometry>
+        <box size="0.025 0.0381517 0.009"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.00969738 0.0133445 0.0201093" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/l_tibia_visual.stl"/>
+      </geometry>
+      <material name="l_tibia_parts_material">
+        <color rgba="0.751878 0.385362 0.724131 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link l_ankle_block -->
+  <link name="l_ankle_block">
+    <inertial>
+      <origin xyz="0.0127839 -0.0162449 0.0203879" rpy="0 0 0"/>
+      <mass value="0.121692"/>
+      <inertia ixx="5.82e-05" ixy="3.74759e-07" ixz="-1.3202e-07" iyy="3.26673e-05" iyz="8.98168e-07" izz="6.80905e-05"/>
+    </inertial>
+    <!-- Part l_ankle_block_parts -->
+    <collision>
+      <origin xyz="0.01275 7.4e-06 0.0199355" rpy="1.5708 -0 -1.5708"/>
+      <geometry>
+        <box size="0.0320858 0.0399725 0.0485"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.01275 -0.0329345 0.0208626" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <box size="0.0320858 0.0399725 0.0485"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.0127839 -0.0162449 0.0203879" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/l_ankle_block_visual.stl"/>
+      </geometry>
+      <material name="l_ankle_block_parts_material">
+        <color rgba="0.850118 0.352173 0.717493 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link l_sole -->
+  <link name="l_sole">
+    <inertial>
+      <origin xyz="8.12943e-07 -0.0258295 0.0485395" rpy="0 0 0"/>
+      <mass value="0.033975"/>
+      <inertia ixx="3.30012e-05" ixy="2e-12" ixz="3.78e-10" iyy="3.93212e-05" iyz="1.50405e-06" izz="1.09902e-05"/>
+    </inertial>
+    <!-- Part l_sole_parts -->
+    <collision>
+      <origin xyz="0.0004626 -0.00047505 -0.0015" rpy="3.14159 -0 -3.14159"/>
+      <geometry>
+        <box size="0.0270748 0.0230499 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 -0.00051385 0.074" rpy="-0 -0 -3.14159"/>
+      <geometry>
+        <box size="0.028 0.0229723 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="8.4e-06 -0.0205 0.0362452" rpy="-1.5708 -0 -3.14159"/>
+      <geometry>
+        <box size="0.0281538 0.0785552 0.017"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-1.42e-05 -0.02775 0.0532916" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <box size="0.100134 0.0602914 0.0085"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="8.12943e-07 -0.0258295 0.0485395" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/l_sole_visual.stl"/>
+      </geometry>
+      <material name="l_sole_parts_material">
+        <color rgba="0.32549 0.529412 0.752941 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Joint from l_ankle_block to l_sole -->
+  <joint name="l_ankle_roll" type="revolute">
+    <origin xyz="-0 -0.05287 0.02087" rpy="-1.5708 -1.5708 0"/>
+    <parent link="l_ankle_block"/>
+    <child link="l_sole"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.01229" upper="1.01229"/>
+  </joint>
+  <!-- Joint from l_tibia to l_ankle_block -->
+  <joint name="l_ankle_pitch" type="revolute">
+    <origin xyz="-0.075 0.0145 -0.00013" rpy="-0 -0 -0"/>
+    <parent link="l_tibia"/>
+    <child link="l_ankle_block"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.5708" upper="0.436332"/>
+  </joint>
+  <!-- Joint from l_hip_to_knee to l_tibia -->
+  <joint name="l_knee" type="revolute">
+    <origin xyz="-0.075 -0.0145 -0" rpy="-0 0 -0"/>
+    <parent link="l_hip_to_knee"/>
+    <child link="l_tibia"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="0" upper="2.61799"/>
+  </joint>
+  <!-- Joint from l_hip_block to l_hip_to_knee -->
+  <joint name="l_hip_pitch" type="revolute">
+    <origin xyz="-0.02087 0 0.05287" rpy="1.5708 0 1.5708"/>
+    <parent link="l_hip_block"/>
+    <child link="l_hip_to_knee"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-2.35619" upper="0.436332"/>
+  </joint>
+  <!-- Joint from fp04_f5x to l_hip_block -->
+  <joint name="l_hip_roll" type="revolute">
+    <origin xyz="-0.05325 -0 -0.029" rpy="1.5708 4e-12 1.5708"/>
+    <parent link="fp04_f5x"/>
+    <child link="l_hip_block"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.01229" upper="1.01229"/>
+  </joint>
+  <!-- Joint from body to fp04_f5x -->
+  <joint name="l_hip_yaw" type="revolute">
+    <origin xyz="-0.00112703 0.0385 0.211" rpy="0 -0 -0"/>
+    <parent link="body"/>
+    <child link="fp04_f5x"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.5708" upper="0.959931"/>
+  </joint>
+  <!-- Link fp04_f5x_2 -->
+  <link name="fp04_f5x_2">
+    <inertial>
+      <origin xyz="-0.0164849 -2.32967e-06 -0.010064" rpy="0 0 0"/>
+      <mass value="0.0119051"/>
+      <inertia ixx="2.25504e-06" ixy="-3.9e-11" ixz="-8.4526e-08" iyy="1.1241e-05" iyz="1.57e-10" izz="1.07465e-05"/>
+    </inertial>
+    <!-- Part fp04_f5x_2_parts -->
+    <collision>
+      <origin xyz="-0.05475 -0.0004626 -0.028525" rpy="-1.5708 0 1.5708"/>
+      <geometry>
+        <box size="0.0270748 0.0230499 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.02075 0 -0.0284861" rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <box size="0.028 0.0229723 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0170048 -8.4e-06 -0.0085" rpy="-0 0 1.5708"/>
+      <geometry>
+        <box size="0.0281538 0.0785552 0.017"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.0164849 -2.32967e-06 -0.010064" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/fp04_f5x_2_visual.stl"/>
+      </geometry>
+      <material name="fp04_f5x_2_parts_material">
+        <color rgba="0.32549 0.529412 0.752941 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link r_hip_block -->
+  <link name="r_hip_block">
+    <inertial>
+      <origin xyz="0.000482063 -0.0127839 0.0366251" rpy="0 0 0"/>
+      <mass value="0.121692"/>
+      <inertia ixx="6.80905e-05" ixy="-1.3202e-07" ixz="-8.98168e-07" iyy="5.82e-05" iyz="-3.74759e-07" izz="3.26673e-05"/>
+    </inertial>
+    <!-- Part r_hip_block_parts -->
+    <collision>
+      <origin xyz="0.00093455 -0.01275 0.0528774" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <box size="0.0320858 0.0399725 0.0485"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="7.4e-06 -0.01275 0.0199355" rpy="1.5708 0 3.14159"/>
+      <geometry>
+        <box size="0.0320858 0.0399725 0.0485"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.000482063 -0.0127839 0.0366251" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/r_hip_block_visual.stl"/>
+      </geometry>
+      <material name="r_hip_block_parts_material">
+        <color rgba="0.850118 0.352173 0.717493 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link r_hip_to_knee -->
+  <link name="r_hip_to_knee">
+    <inertial>
+      <origin xyz="-0.0433631 -0.00102425 -0.0209704" rpy="0 0 0"/>
+      <mass value="0.0231462"/>
+      <inertia ixx="1.05716e-05" ixy="-9.76682e-07" ixz="2.1584e-08" iyy="1.91767e-05" iyz="9.213e-09" izz="1.27012e-05"/>
+    </inertial>
+    <!-- Part r_hip_to_knee_parts -->
+    <collision>
+      <origin xyz="-0.0213674 2.325e-05 -0.0435" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <box size="0.0647975 0.0291169 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0213559 4.28e-05 0.0015" rpy="0 -0 -0"/>
+      <geometry>
+        <box size="0.0648201 0.0290856 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.04585 -3.085e-05 -0.0209568" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <box size="0.0480903 0.0290617 0.0157"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0545 -0.0013278 -0.0210691" rpy="-3.14159 -1.5708 0"/>
+      <geometry>
+        <box size="0.0483203 0.0276556 0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0715293 -0.0065266 -0.0435" rpy="3.14159 0 -3.14159"/>
+      <geometry>
+        <box size="0.0290586 0.0380532 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.071555 -0.006504 0.0015" rpy="-0 0 -3.14159"/>
+      <geometry>
+        <box size="0.0291101 0.038008 0.003"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.0433631 -0.00102425 -0.0209704" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/r_hip_to_knee_visual.stl"/>
+      </geometry>
+      <material name="r_hip_to_knee_parts_material">
+        <color rgba="0.32549 0.529412 0.752941 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link r_tibia -->
+  <link name="r_tibia">
+    <inertial>
+      <origin xyz="-0.00965162 0.0133445 -0.0201093" rpy="0 0 0"/>
+      <mass value="0.0748651"/>
+      <inertia ixx="2.35681e-05" ixy="1.11852e-06" ixz="-5.5332e-07" iyy="4.16065e-05" iyz="1.77886e-07" izz="4.14219e-05"/>
+    </inertial>
+    <!-- Part r_tibia_parts -->
+    <collision>
+      <origin xyz="7.4e-06 0.01275 -0.0199355" rpy="-1.5708 0 -3.14159"/>
+      <geometry>
+        <box size="0.0320858 0.0399725 0.0485"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0145 0.0145 -0.0208545" rpy="1.5708 -0 -1.5708"/>
+      <geometry>
+        <box size="0.025 0.0381517 0.009"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0536326 0.0145232 0.00163" rpy="-0 -0 3.14159"/>
+      <geometry>
+        <box size="0.0647975 0.0291169 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.053644 0.0145428 -0.04337" rpy="3.14159 -0 3.14159"/>
+      <geometry>
+        <box size="0.0648201 0.0290856 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.02915 0.0144692 -0.0209131" rpy="0 1.5708 0"/>
+      <geometry>
+        <box size="0.0480903 0.0290617 0.0157"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.00965162 0.0133445 -0.0201093" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/r_tibia_visual.stl"/>
+      </geometry>
+      <material name="r_tibia_parts_material">
+        <color rgba="0.751878 0.385362 0.724131 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link r_ankle_block -->
+  <link name="r_ankle_block">
+    <inertial>
+      <origin xyz="0.0127839 -0.0162731 -0.0204161" rpy="0 0 0"/>
+      <mass value="0.121692"/>
+      <inertia ixx="5.80918e-05" ixy="4.02641e-07" ixz="1.59902e-07" iyy="3.26705e-05" iyz="-9.53699e-07" izz="6.79791e-05"/>
+    </inertial>
+    <!-- Part r_ankle_block_parts -->
+    <collision>
+      <origin xyz="0.01275 -7.4e-06 -0.0199355" rpy="-1.5708 -0 1.5708"/>
+      <geometry>
+        <box size="0.0320858 0.0399725 0.0485"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.01275 -0.0329345 -0.0208774" rpy="-0 -1.5708 0"/>
+      <geometry>
+        <box size="0.0320858 0.0399725 0.0485"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.0127839 -0.0162731 -0.0204161" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/r_ankle_block_visual.stl"/>
+      </geometry>
+      <material name="r_ankle_block_parts_material">
+        <color rgba="0.850118 0.352173 0.717493 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link r_sole -->
+  <link name="r_sole">
+    <inertial>
+      <origin xyz="8.12943e-07 0.0258295 -0.0485395" rpy="0 0 0"/>
+      <mass value="0.033975"/>
+      <inertia ixx="3.30012e-05" ixy="-2e-12" ixz="-3.78e-10" iyy="3.93212e-05" iyz="1.50405e-06" izz="1.09902e-05"/>
+    </inertial>
+    <!-- Part r_sole_parts -->
+    <collision>
+      <origin xyz="0.0004626 0.00047505 0.0015" rpy="-0 -0 3.14159"/>
+      <geometry>
+        <box size="0.0270748 0.0230499 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0 0.00051385 -0.074" rpy="3.14159 -0 3.14159"/>
+      <geometry>
+        <box size="0.028 0.0229723 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="8.4e-06 0.0205 -0.0362452" rpy="1.5708 -0 3.14159"/>
+      <geometry>
+        <box size="0.0281538 0.0785552 0.017"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-1.42e-05 0.02775 -0.0532916" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <box size="0.100134 0.0602914 0.0085"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="8.12943e-07 0.0258295 -0.0485395" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/r_sole_visual.stl"/>
+      </geometry>
+      <material name="r_sole_parts_material">
+        <color rgba="0.32549 0.529412 0.752941 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Joint from r_ankle_block to r_sole -->
+  <joint name="r_ankle_roll" type="revolute">
+    <origin xyz="0 -0.05287 -0.02087" rpy="1.5708 -1.5708 0"/>
+    <parent link="r_ankle_block"/>
+    <child link="r_sole"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.01229" upper="1.01229"/>
+  </joint>
+  <!-- Joint from r_tibia to r_ankle_block -->
+  <joint name="r_ankle_pitch" type="revolute">
+    <origin xyz="-0.075 0.0145 0.00013" rpy="0 -0 -0"/>
+    <parent link="r_tibia"/>
+    <child link="r_ankle_block"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.5708" upper="0.436332"/>
+  </joint>
+  <!-- Joint from r_hip_to_knee to r_tibia -->
+  <joint name="r_knee" type="revolute">
+    <origin xyz="-0.075 -0.0145 -0" rpy="0 -0 0"/>
+    <parent link="r_hip_to_knee"/>
+    <child link="r_tibia"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="0" upper="2.61799"/>
+  </joint>
+  <!-- Joint from r_hip_block to r_hip_to_knee -->
+  <joint name="r_hip_pitch" type="revolute">
+    <origin xyz="0.02087 -0 0.05287" rpy="1.5708 0 1.5708"/>
+    <parent link="r_hip_block"/>
+    <child link="r_hip_to_knee"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-2.35619" upper="0.436332"/>
+  </joint>
+  <!-- Joint from fp04_f5x_2 to r_hip_block -->
+  <joint name="r_hip_roll" type="revolute">
+    <origin xyz="-0.05325 -0 -0.029" rpy="1.5708 -0 1.5708"/>
+    <parent link="fp04_f5x_2"/>
+    <child link="r_hip_block"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.01229" upper="1.01229"/>
+  </joint>
+  <!-- Joint from body to fp04_f5x_2 -->
+  <joint name="r_hip_yaw" type="revolute">
+    <origin xyz="-0.00112703 -0.0385 0.211" rpy="-0 -0 -0"/>
+    <parent link="body"/>
+    <child link="fp04_f5x_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.959931" upper="1.5708"/>
+  </joint>
+  <!-- Link r_hand_roll -->
+  <link name="r_hand">
+    <inertial>
+      <origin xyz="-0.0320422 0.00101658 -0.0213463" rpy="0 0 0"/>
+      <mass value="0.0637274"/>
+      <inertia ixx="1.37323e-05" ixy="5.5159e-08" ixz="-2.52724e-06" iyy="2.02241e-05" iyz="1.10957e-07" izz="2.38959e-05"/>
+    </inertial>
+    <!-- Part r_hand_roll_parts -->
+    <collision>
+      <origin xyz="-0.03525 0.00106455 -0.0230074" rpy="-3.14159 -1.5708 0"/>
+      <geometry>
+        <box size="0.0320858 0.0399725 0.0485"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0093278 -6.915e-05 -0.0025" rpy="0 0 1.5708"/>
+      <geometry>
+        <box size="0.0483203 0.0276556 0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0145266 -0.0225 -0.0195293" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <box size="0.0290586 0.0380532 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.014504 0.0225 -0.0195551" rpy="-1.5708 1.5708 0"/>
+      <geometry>
+        <box size="0.0291101 0.038008 0.003"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.0320422 0.00101658 -0.0213463" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/r_hand_roll_visual.stl"/>
+      </geometry>
+      <material name="r_hand_roll_parts_material">
+        <color rgba="0.826398 0.360186 0.719096 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Joint from body to r_hand_roll -->
+  <joint name="r_hand_roll" type="revolute">
+    <origin xyz="-0.00112703 -0.04887 0.30237" rpy="-1.5708 -1.5708 0"/>
+    <parent link="body"/>
+    <child link="r_hand"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159" upper="3.14159"/>
+  </joint>
+  <!-- Link l_hand_roll -->
+  <link name="l_hand">
+    <inertial>
+      <origin xyz="-0.0320422 0.000995128 0.0212925" rpy="0 0 0"/>
+      <mass value="0.0637274"/>
+      <inertia ixx="1.37235e-05" ixy="6.8204e-08" ixz="2.48825e-06" iyy="2.02126e-05" iyz="-1.04464e-07" izz="2.38987e-05"/>
+    </inertial>
+    <!-- Part l_hand_roll_parts -->
+    <collision>
+      <origin xyz="-0.03525 0.00106455 0.0229926" rpy="-3.14159 -1.5708 0"/>
+      <geometry>
+        <box size="0.0320858 0.0399725 0.0485"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0093278 6.915e-05 0.0025" rpy="3.14159 -0 -1.5708"/>
+      <geometry>
+        <box size="0.0483203 0.0276556 0.005"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.0145266 0.0225 0.0195293" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <box size="0.0290586 0.0380532 0.003"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.014504 -0.0225 0.0195551" rpy="1.5708 -1.5708 0"/>
+      <geometry>
+        <box size="0.0291101 0.038008 0.003"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="-0.0320422 0.000995128 0.0212925" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="file://$(find alfan_robot_description)/bioloid/mesh/l_hand_roll_visual.stl"/>
+      </geometry>
+      <material name="l_hand_roll_parts_material">
+        <color rgba="0.826398 0.360186 0.719096 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Joint from body to l_hand_roll -->
+  <joint name="l_hand_roll" type="revolute">
+    <origin xyz="-0.00112703 0.04887 0.30237" rpy="-1.5708 -1.5708 0"/>
+    <parent link="body"/>
+    <child link="l_hand"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.14159" upper="3.14159"/>
+  </joint>
+
+  <!-- 6 Axis IMU Sensor Link -->
+  <link name="imu_link">
+    <inertial>
+      <mass value="0.001"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-09" ixy="0.0" ixz="0.0" iyy="1e-09" iyz="0.0" izz="1e-09"/>
+    </inertial>
+  </link>
+
+  <joint name="imu_joint" type="fixed">
+    <parent link="body"/>
+    <child link="imu_link"/>
+    <origin xyz="0.0 0.0 -0.0580833" rpy="0 0 1.5708"/> 
+  </joint>
+
+  <gazebo reference="body">
+    <sensor name="imu_sensor" type="imu">
+      <pose>0.0 0.0 -0.0580833 0 0 1.5708</pose>
+      <always_on>1</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>imu</topic>
+    </sensor>
+  </gazebo>
+
+  <gazebo>
+    <plugin filename="ignition-gazebo-imu-system" name="ignition::gazebo::systems::Imu"/>
+  </gazebo>
+
+  <gazebo reference="l_sole">
+  <mu1>1.5</mu1>
+  <mu2>1.5</mu2>
+  <kp>1000000.0</kp>
+  <kd>100.0</kd>
+  <minDepth>0.001</minDepth>
+  <maxVel>0.1</maxVel>
+</gazebo>
+
+<gazebo reference="r_sole">
+  <mu1>1.5</mu1>
+  <mu2>1.5</mu2>
+  <kp>1000000.0</kp>
+  <kd>100.0</kd>
+  <minDepth>0.001</minDepth>
+  <maxVel>0.1</maxVel>
+</gazebo>
+</robot>
